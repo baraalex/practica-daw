@@ -1,0 +1,116 @@
+#+TITLE: Práctica de Diseño de Aplicaciones Web
+#+AUTHOR: Grupo DAW15
+#+EMAIL: sconde@dilmun.ls.fi.upm.es
+#+DATE: Curso 2014/2015
+#+LANGUAGE: es
+#+OPTIONS: ^:{}
+#+STARTUP: showall
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,hidelinks]
+#+LATEX_HEADER: \usepackage{fullpage}
+#+LATEX_HEADER: \usepackage[spanish, es-noshorthands]{babel}
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \setlength{\parindent}{15pt}
+
+#+BEGIN_LaTeX
+\vfill
+#+END_LaTeX
+
+|--------------+----------------------------------------------------------------------|
+| Alumnos:     | Alejandro Barahona Álvarez                                           |
+|              | Sergio Conde Gómez                                                   |
+|              | Dan Huang                                                            |
+|              | Ismael Vázquez Fernández                                             |
+|              | Yixuan Wu                                                            |
+|--------------+----------------------------------------------------------------------|
+| Contacto:    | \href{mailto:sconde@dilmun.ls.fi.upm.es}{sconde@dilmun.ls.fi.upm.es} |
+| Repositorio: | https://github.com/skgsergio/practica-daw                            |
+| Bitácora:    | https://github.com/skgsergio/practica-daw/wiki                       |
+|--------------+----------------------------------------------------------------------|
+
+#+BEGIN_LaTeX
+\newpage
+#+END_LaTeX
+
+* Especificaciones de la práctica
+  Nuestra idea es crear un sistema de gestión y administración de ligas y copas de fútbol.
+  Tendremos información sobre clasificaciones, resultados, sanciones, goles, ... de cada una de
+  las competiciones. También se almacenará información acerca de los distintos clubes que participan
+  en las competiciones.
+
+  El sistema distinguirá entre usuarios administradores y usuarios registrados que podrán acceder a
+  competiciones privadas a las que un administrador le invite.
+
+** Definición preliminar de vistas
+   * *Pantalla de inicio:* Información general donde podrá verse las competiciones públicas (o
+     privadas si el usuario está identificado y está invitado a alguna) en curso o futuras (se
+     planteará la aparición de un calendario con los próximos eventos).
+
+   * *Información de competición:* Se mostrarán estadísticas de la competición, clasificación,
+     encuentros, ...
+
+   * *Información de club:* Se mostrarán sus estadísticas, próximos encuentros, últimos resultados,
+     ...
+
+   * *Información de jugador:* Se mostrarán los datos del jugador (foto, nombre, dorsal, ...),
+     estadísticas de juego (goles, amonestaciones, ...).
+
+   En las todas las vistas de información, si el usuario es administrador, se ofrecerá la
+   posibilidad de editar los datos. Además para las competiciones se ofrecerá el acceso a un panel
+   para la introducción de resultados.
+
+** Funcionalidades
+   La aplicación contara con un sistema de usuarios registrados para la participación directa en
+   el sitio pero a su vez permitirá el acceso anónimo para que los visitantes puedan consultar los
+   datos de las competiciones publicas.
+
+   Los administradores son el principal proveedor de contenidos del sistema realizando todas las
+   tareas de introducción de datos, edición de datos, generación de competiciones, etc...
+
+   Nuestra idea es afrontar la parte del visionado de datos como una parte sencilla donde la
+   carga se encuentra en la consulta de datos en el servidor y centrar los esfuerzos en la parte
+   de creación y administración de competiciones, equipos y plantillas de forma que sea un proceso
+   rápido, intuitivo y guiado para el usuario con una carga importante en la parte cliente.
+
+** Tecnologías
+*** Parte servidor
+    * *PHP 5*
+    * *SQL*
+
+    Se valorará el uso de frameworks y librerías como Symfony, Doctrine, ...
+
+    El requisito mínimo será un servidor web estándar con soporte para PHP y una instalación de
+    un servidor SQL compatible con MySQL (MariaDB, Percona, ...).
+
+*** Parte cliente
+    * *HTML 5*
+    * *CSS 3*
+    * *JavaScript:* Con uso del framework jQuery
+
+    Se valorará el uso de frameworks y librerías como Boostrap, Bootbox, Font Awesome, ...
+
+*** Entornos de programación
+    Debido a la costumbre de cada uno en su entorno de trabajo usaremos distintos entornos. Por
+    detallar ligeramente vamos a mencionar los principales entornos que cada uno de los miembros
+    usará para desarrollar la práctica:
+
+    * *Emacs* con html5-el, web-mode y emmet
+    * *InteliJ IDEA*
+    * *Eclipse* con WTP (Web Tools Platform)
+
+** Reparto de responsabilidades
+   Hemos decidido que todos vamos a intentar colaborar en todas las partes que conformarán la
+   práctica, sin embargo a continuación detallamos los principales responsables de cada parte a
+   modo de reparto:
+
+   * *Parte servidor (PHP y SQL):* Sergio Conde
+   * *Parte cliente:* Alejandro Barahona, Dan Huang, Ismael Vázquez y Yixuan Wu
+     * *Maquetación (HTML y CSS)*
+     * *Funcionalidad (JavaScript)*
+
+   Las siguientes partes se desarrollarán en común:
+
+   * *Diseño de la base de datos*
+   * *Diseño de la interfaz*
+   * *Diseño de pruebas*
+   * *Documentación*
