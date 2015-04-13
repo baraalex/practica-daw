@@ -1,0 +1,4 @@
+services:
+#    grupo15_web.example:
+#        class: Grupo15\WebBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
