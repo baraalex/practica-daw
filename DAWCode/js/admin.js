@@ -28,7 +28,8 @@ function addEquipo() {
 
 function addLiga() {
     var msg =
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea id='Name' style=\"min-height:60px;max-width:100%;min-width:100%;\" placeholder=\"Enter name\"></textarea>";
+        "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea id='Name' style=\"min-height:60px;max-width:100%;min-width:100%;\" " +
+        "placeholder=\"Enter name\"></textarea>";
 
     bootbox.dialog({
         closeButton: false,
