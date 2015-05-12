@@ -1,3 +1,0 @@
-grupo15_web_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: Grupo15WebBundle:Default:index }
