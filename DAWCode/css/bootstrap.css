@@ -8008,26 +8008,35 @@ button.close {
     }
 }
 
-.navbar-login
-{
+.navbar-login {
     width: 305px;
     padding: 10px;
     padding-bottom: 0px;
 }
 
-.navbar-login-session
-{
+.navbar-login-session {
     padding: 10px;
     padding-bottom: 0px;
     padding-top: 0px;
 }
 
-.icon-size
-{
+.icon-size {
     font-size: 87px;
 }
 
-
-.col-auto{
+.col-auto {
     width: auto;
+}
+
+.name {
+    min-height: 3em;
+    max-height: 7em;
+    max-width: 100%;
+    min-width: 100%;
+    resize: vertical;
+}
+
+.imagePrev{
+    max-height: 10em;
+    margin: 1em;
 }
