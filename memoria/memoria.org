@@ -5,32 +5,35 @@
 #+LANGUAGE: es
 #+OPTIONS: ^:{}
 #+STARTUP: showall
-#+LATEX_CLASS: article
-#+LATEX_CLASS_OPTIONS: [a4paper,hidelinks]
-#+LATEX_HEADER: \usepackage{fullpage}
-#+LATEX_HEADER: \usepackage[spanish, es-noshorthands]{babel}
-#+LATEX_HEADER: \usepackage{parskip}
-#+LATEX_HEADER: \setlength{\parindent}{15pt}
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper,hidelinks]
+#+LaTeX_HEADER: \usepackage{fullpage}
+#+LaTeX_HEADER: \usepackage[spanish, es-noshorthands]{babel}
+#+LaTeX_HEADER: \usepackage{parskip}
+#+LaTeX_HEADER: \setlength{\parindent}{15pt}
+
+#+LaTeX: \vfill
+
+|--------------+------------------------------------------------|
+| Alumnos:     | Alejandro Barahona Álvarez                     |
+|              | Sergio Conde Gómez                             |
+|              | Dan Huang                                      |
+|              | Ismael Vázquez Fernández                       |
+|              | Yixuan Wu                                      |
+|--------------+------------------------------------------------|
+| Contacto:    | sconde@dilmun.ls.fi.upm.es                     |
+| Repositorio: | https://github.com/skgsergio/practica-daw      |
+| Bitácora:    | https://github.com/skgsergio/practica-daw/wiki |
+|--------------+------------------------------------------------|
 
 #+BEGIN_LaTeX
-\vfill
+\begin{center}
+{\em Última modificación: \\
+\today}
+\end{center}
 #+END_LaTeX
 
-|--------------+----------------------------------------------------------------------|
-| Alumnos:     | Alejandro Barahona Álvarez                                           |
-|              | Sergio Conde Gómez                                                   |
-|              | Dan Huang                                                            |
-|              | Ismael Vázquez Fernández                                             |
-|              | Yixuan Wu                                                            |
-|--------------+----------------------------------------------------------------------|
-| Contacto:    | \href{mailto:sconde@dilmun.ls.fi.upm.es}{sconde@dilmun.ls.fi.upm.es} |
-| Repositorio: | https://github.com/skgsergio/practica-daw                            |
-| Bitácora:    | https://github.com/skgsergio/practica-daw/wiki                       |
-|--------------+----------------------------------------------------------------------|
-
-#+BEGIN_LaTeX
-\newpage
-#+END_LaTeX
+#+LaTeX: \newpage
 
 * Especificaciones de la práctica
   Nuestra idea es crear un sistema de gestión y administración de ligas y copas de fútbol.
@@ -103,10 +106,10 @@
    práctica, sin embargo a continuación detallamos los principales responsables de cada parte a
    modo de reparto:
 
-   * *Parte servidor (PHP y SQL):* Sergio Conde
+   * *Parte servidor:* Sergio Conde
    * *Parte cliente:* Alejandro Barahona, Dan Huang, Ismael Vázquez y Yixuan Wu
-     * *Maquetación (HTML y CSS)*
-     * *Funcionalidad (JavaScript)*
+     * *Maquetación*
+     * *Funcionalidad*
 
    Las siguientes partes se desarrollarán en común:
 
@@ -114,3 +117,17 @@
    * *Diseño de la interfaz*
    * *Diseño de pruebas*
    * *Documentación*
+
+* Problemas durante el desarrollo de la práctica
+** Cambio de tecnología para la parte del servidor
+  Llegado el momento de desarrollar la parte servidora nos hemos encontrado con dificultades
+  en el aprendizaje del uso de Symfony. Ante tal problema y viendo que no íbamos a llegar a
+  tiempo de tener la practica finalizada hemos solicitado al tutor el cambio de esta tecnología
+  por Django y Python ya que nos ha sido más fácil su aprendizaje.
+
+  Finalmente las tecnologías usadas en la parte del servidor son Python, haciendo uso del
+  framework Django en su versión 1.8.
+
+** TODO Problemas internos del grupo
+
+** TODO Reparto real de las tareas realizadas
