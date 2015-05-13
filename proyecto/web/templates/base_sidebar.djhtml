@@ -1,0 +1,35 @@
+{% extends 'base.djhtml' %}
+{% block contenido_base %}
+<div class="container-fluid row">
+  <nav class='col-sm-3 col-md-2 sidebar sidebar-menu-collapsed'>
+    {% block navegacion %}{% endblock %}
+    <!--
+    <a href='#' id='justify-icon'>
+      <span class='fa fa-soccer-ball-o'></span>
+      <span class='expanded-element'>DAW</span>
+    </a>
+
+    <ul class='level1'>
+      <li class='active'><a class='expandable' href='competicion.html' title='Dashboard'>
+        <span class='fa fa-trophy'></span>
+        <span class='expanded-element'>Competiciones</span>
+      </a>
+      </li>
+      <li><a class='expandable' href='equipos.html' title='APIs'>
+        <span class='fa fa-group'></span>
+        <span class='expanded-element'>Equipos</span>
+      </a>
+      </li>
+      <li><a class='expandable' href='jugadores.html' title='APIs'>
+        <span class='fa fa-user'></span>
+        <span class='expanded-element'>Jugadores</span>
+      </a>
+      </li>
+    </ul>
+    -->
+  </nav>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    {% block contenido %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

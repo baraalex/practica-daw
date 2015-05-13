@@ -1,0 +1,4 @@
+{% extends 'base.djhtml' %}
+{% block contenido_base %}
+  {% block contenido %}{% endblock %}
+{% endblock %}
