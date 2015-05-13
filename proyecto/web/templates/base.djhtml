@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>DAW | {{ title }}</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-theme.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/bootbox.js' %}"></script>
+    {% block scripts %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'web:home' %}">DAW</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li{% if view == 'competiciones' %} class="active"{% endif %}><a href="{% url 'web:competiciones' %}">Competiciones</a></li>
+            <li{% if view == 'equipos' %} class="active"{% endif %}><a href="{% url 'web:equipos' %}">Equipos</a></li>
+            <li{% if view == 'jugadores' %} class="active"{% endif %}><a href="{% url 'web:jugadores' %}">Jugadores</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle name" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-user"></span>
+                  {{ user.username }}
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div class="navbar-login">
+                      <p class="text-left name" id="realName">{{ user.first_name }} {{ user.last_name }}</p>
+                      <p class="text-left small" id="email">{{ user.email }}</p>
+                      <div class="row">
+                        <div class="col-md-6"><p class="text-left">
+                          <a href="#" class="btn btn-primary btn-block btn-sm" onclick="editUserData(0);">Actualizar Datos</a>
+                        </p></div>
+                        <div class="col-md-6"><p class="text-left">
+                          <a href="perfiluser.html" class="btn btn-info btn-block btn-sm">Administracion</a>
+                        </p></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <div class="navbar-login navbar-login-session">
+                      <p>
+                        <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            {% else %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle name" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-user"></span>
+                  Iniciar sesión
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <div class="navbar-login">
+                      <form id="logIn">
+                        <div class="input-group">
+                          <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                          <input type="text" id="usrName" name="userName" class="form-control" placeholder="Username" required="" value="">
+                        </div>
+                        <div class="input-group" style="padding-top: 1%">
+                          <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+                          <input id="psswd" type="password" name="password" placeholder="Password" class="form-control" required="" value="">
+                        </div>
+                        <div style="padding-top: 1%">
+                          <button type="submit" class="btn btn-success btn-block">
+                            <i class="fa fa-sign-in"></i> Iniciar sesión
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <div class="navbar-login navbar-login-session">
+                      <p>
+                        <a href="#" class="btn btn-primary btn-block" onclick="window.location = 'registro.html'"><span class="fa fa-pencil" aria-hidden="true"></span> Registrar</a>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block contenido %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.djhtml' %}
+{% block contenido %}
+  <div id="tabla">
+    {% if jugadores %}
+      <table class="table table-striped">
+        <thead>
+          <th style="width: 50px;"></th>
+          <th>Nombre</th>
+          <th>Equipo</th>
+          <th>Dorsal</th>
+          <th>Posición</th>
+        </thead>
+        <tbody>
+          {% for jugador in jugadores %}
+            <tr>
+              <td><img src="{{ jugador.foto.url }}" style="height: 50px;" /></td>
+              <td><a href="{% url 'web:jugador' jugador.id %}">{{ jugador.nombre }}</a></td>
+              <td><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></td>
+              <td>{{ jugador.dorsal }}</td>
+              <td>{{ jugador.get_posicion_display }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="paginacion">
+        {% if pagina != 1 %}<a class="float-left" href="{% url 'web:jugadores' pagina|add:-1 %}">< Página {{ pagina|add:-1 }}</a>{% endif %}
+        {% if pagina > 1 and pagina != pagina_max %} - {% endif %}
+        {% if pagina != pagina_max %}<a href="{% url 'web:jugadores' pagina|add:1 %}">Página {{ pagina|add:1 }} ></a>{% endif %}
+      </div>
+    {% else %}
+      <p>No hay jugadores.</p>
+    {% endif %}
+  </div>
+{% endblock %}

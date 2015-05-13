@@ -1,0 +1,32 @@
+{% extends 'base.djhtml' %}
+{% block contenido %}
+  <div id="tabla">
+    {% if competiciones %}
+      <table class="table table-striped">
+        <thead>
+          <th style="width: 50px;"></th>
+          <th>Competición</th>
+          <th>Temporada</th>
+          <th>Participantes</th>
+        </thead>
+        <tbody>
+          {% for competicion in competiciones %}
+            <tr>
+              <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
+              <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
+              <td>{{ competicion.temporada }}</td>
+              <td>{{ competicion.participantes.count }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="paginacion">
+        {% if pagina != 1 %}<a class="float-left" href="{% url 'web:competiciones' pagina|add:-1 %}">< Página {{ pagina|add:-1 }}</a>{% endif %}
+        {% if pagina > 1 and pagina != pagina_max %} - {% endif %}
+        {% if pagina != pagina_max %}<a href="{% url 'web:competiciones' pagina|add:1 %}">Página {{ pagina|add:1 }} ></a>{% endif %}
+      </div>
+    {% else %}
+      <p>No hay competiciones.</p>
+    {% endif %}
+  </div>
+{% endblock %}
