@@ -1,4 +1,4 @@
-{% extends 'base.djhtml' %}
+{% extends 'base_simple.djhtml' %}
 {% block contenido %}
   {% if ultimas_competiciones %}
     <ul>
