@@ -8,6 +8,7 @@
           <th>Competición</th>
           <th>Temporada</th>
           <th>Participantes</th>
+          {% if user.is_authenticated %}<th>Administrador</th>{% endif %}
         </thead>
         <tbody>
           {% for competicion in competiciones %}
@@ -16,15 +17,26 @@
               <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
               <td>{{ competicion.temporada }}</td>
               <td>{{ competicion.participantes.count }}</td>
+              {% if user.is_authenticated %}
+                {% if user.id == competicion.administrador.id %}
+                  <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                {% else %}
+                  <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                {% endif %}
+              {% endif %}
             </tr>
           {% endfor %}
         </tbody>
       </table>
-      <div id="paginacion">
-        {% if pagina != 1 %}<a class="float-left" href="{% url 'web:competiciones' pagina|add:-1 %}">< Página {{ pagina|add:-1 }}</a>{% endif %}
-        {% if pagina > 1 and pagina != pagina_max %} - {% endif %}
-        {% if pagina != pagina_max %}<a href="{% url 'web:competiciones' pagina|add:1 %}">Página {{ pagina|add:1 }} ></a>{% endif %}
-      </div>
+      <ul class="pager">
+        <li class="previous{% if pagina == 1 %} disabled{% endif %}">
+          <a href="{% if pagina != 1 %}{% url 'web:jugadores' pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
+        </li>
+        <li>Página {{ pagina }}/{{ pagina_max }}</li>
+        <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
+          <a href="{% if pagina != pagina_max %}{% url 'web:jugadores' pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
+        </li>
+      </ul>
     {% else %}
       <p>No hay competiciones.</p>
     {% endif %}

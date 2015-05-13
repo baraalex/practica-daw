@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.http import require_http_methods
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Competicion, Equipo, Jugador
 
@@ -24,7 +25,7 @@ def competiciones(request, pagina=1):
     if pagina == 0:
         return redirect('web:competiciones')
 
-    total = Competicion.objects.count()
+    total = Competicion.objects.filter(privada=False).count()
     muestra = 10
 
     pagina_max = math.ceil(total / muestra)
@@ -46,7 +47,49 @@ def competiciones(request, pagina=1):
         'total': total,
         'inicio': inicio,
         'fin': fin,
-        'competiciones': Competicion.objects.order_by('-id')[inicio:fin],
+        'competiciones': Competicion.objects.filter(privada=False)
+        .order_by('-id')[inicio:fin],
+    }
+
+    return render(request, 'competiciones.djhtml', context)
+
+
+@require_GET
+def competiciones_privadas(request, pagina=1):
+    if not request.user.is_authenticated():
+        return redirect('web:competiciones')  # TBD Ir al login
+
+    pagina = int(pagina)
+
+    if pagina == 0:
+        return redirect('web:competiciones_privadas')
+
+    total = Competicion.objects.filter(
+        privada=True, administrador__id=request.user.id).count()
+    muestra = 10
+
+    pagina_max = math.ceil(total / muestra)
+
+    inicio = (pagina - 1) * muestra
+
+    if inicio > total:
+        return redirect('web:competiciones_privadas', pagina=pagina_max)
+
+    fin = inicio + muestra
+    if fin > total:
+        fin = total
+
+    context = {
+        'view': 'competiciones',
+        'title': 'Competiciones privadas | Página ' + str(pagina),
+        'pagina': pagina,
+        'pagina_max': pagina_max,
+        'total': total,
+        'inicio': inicio,
+        'fin': fin,
+        'competiciones': Competicion.objects
+        .filter(privada=True, administrador__id=request.user.id)
+        .order_by('-id')[inicio:fin],
     }
 
     return render(request, 'competiciones.djhtml', context)
@@ -54,13 +97,30 @@ def competiciones(request, pagina=1):
 
 @require_GET
 def competicion(request, id_competicion):
-    comp = Competicion.objects.get(id=id_competicion)
-    context = {
-        'view': 'competiciones',
-        'title': comp.nombre,
-        'competicion': comp,
-    }
-    return render(request, 'competicion.djhtml', context)
+    try:
+        comp = Competicion.objects.get(id=id_competicion)
+    except ObjectDoesNotExist:
+        comp = None
+
+    if comp is None or (
+            comp.privada and (
+                request.user.is_authenticated() and
+                request.user.id is not comp.administrador.id
+            ) or (
+                not request.user.is_authenticated()
+            )):
+        context = {
+            'view': 'competiciones',
+            'title': 'No se puede mostrar la competición',
+        }
+    else:
+        context = {
+            'view': 'competiciones',
+            'title': 'Competición: ' + comp.nombre,
+            'competicion': comp,
+        }
+
+    return render(request, 'competiciones.djhtml', context)
 
 
 @require_GET
