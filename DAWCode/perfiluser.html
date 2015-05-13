@@ -7,14 +7,15 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
     <link href="fonts/football.png" rel="icon"/>
 
     <script src="js/jquery/jquery-1.11.1.js"></script>
     <script src="js/jquery-ui/jquery-ui.js"></script>
     <script src="js/bootstrap/bootstrap.js"></script>
     <script src="js/bootstrap/bootbox.js"></script>
+    <script src="js/generalFunctions.js"></script>
     <script src="js/admin.js"></script>
-
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,33 +40,38 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle name" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
-                        <strong>Log In</strong>
+                        UserName
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="navbar-login">
-                                <p class="text-left"><strong>Nombre Apellido</strong></p>
 
-                                <p class="text-left small">correoElectronico@email.com</p>
+                                <p class="text-left name" id="realName">Nombre Apellido</p>
 
-                                <p class="text-left">
-                                    <a href="#" class="btn btn-primary btn-block btn-sm">Actualizar Datos</a>
-                                </p>
+                                <p class="text-left small" id="email">correoElectronico@email.com</p>
+
+                                <div class="row">
+                                    <div class="col-md-6"><p class="text-left">
+                                        <a href="#" class="btn btn-primary btn-block btn-sm" onclick="editUserData(0);">Actualizar
+                                            Datos</a>
+                                    </p></div>
+                                    <div class="col-md-6"><p class="text-left">
+                                        <a href="#" class="btn btn-info btn-block btn-sm">Administracion</a>
+                                    </p></div>
+                                </div>
+
                             </div>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <div class="navbar-login navbar-login-session">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <p>
-                                            <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
-                                        </p>
-                                    </div>
-                                </div>
+
+                                <p>
+                                    <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
+                                </p>
                             </div>
                         </li>
                     </ul>
@@ -106,14 +112,14 @@
             <div class="col-md-6">
                 <h2 class="sub-header">Informacion</h2>
                 <ul class='level1'>
+                    <li><h3>Usuario:</h3>
+                        UserName
+                    </li>
                     <li><h3>Nombre:</h3>
                         Nombre Real
                     </li>
                     <li><h3>Email:</h3>
                         ejemplo@mail.com
-                    </li>
-                    <li><h3>Nombre:</h3>
-                        Jug 1
                     </li>
                 </ul>
             </div>
@@ -121,11 +127,7 @@
                 <h2>Informacion de la app</h2>
                 <ul class='level1'>
                     <li>
-                        <h3>Equipos
-                            <button type="button" class="btn btn-success" onclick="addEquipo();"><span
-                                    class="fa fa-plus"
-                                    aria-hidden="true"></span></button>
-                        </h3>
+                        <h3>Equipos</h3>
                         <ul class='level2'>
                             <li><a class='expandable' href='equipoej.html' title='Dashboard'><span
                                     class='expanded-element'>Equipo 1</span></a></li>
@@ -136,9 +138,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h3>Competiciones Publicas
-
-                        </h3>
+                        <h3>Competiciones Publicas</h3>
                         <ul class='level2'>
                             <li><a class='expandable' href='Liga.html' title='Dashboard'><span
                                     class='expanded-element'>Liga 1</span></a></li>
@@ -149,8 +149,7 @@
                         </ul>
                     </li>
                     <li>
-                        <h3>Competiciones Privadas
-                        </h3>
+                        <h3>Competiciones Privadas</h3>
                         <ul class='level2'>
                             <li><a class='expandable' href='#' title='Dashboard'><span
                                     class='expanded-element'>P1</span></a></li>
@@ -170,7 +169,7 @@
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="group1" checked>
+                        <input type="radio" name="group1" onclick="change(false)" checked>
                     </span>
                     <span class="form-control label label-primary" style="font-size: large;">Equipos</span>
                 </div>
@@ -178,7 +177,7 @@
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="group1">
+                        <input type="radio" name="group1" onclick="change(true)">
                     </span>
                     <span class="form-control label label-primary" style="font-size: large;">Competicion</span>
                 </div>
@@ -200,15 +199,24 @@
                 </div>
             </div>
             <div class="col-auto col-lg-2" id="addbtt">
-
                 <div class="input-group">
-                    <button id="addbttt" type="button" class="btn btn-success" onclick="addLiga();"><span
+                    <button type="button" class="btn btn-success" onclick="addEquipo();" title=" Add equipo"><span
                             class="fa fa-plus" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
-
         </div>
+
+        <div class="row" id="admindiv">
+            <div class="col-md-4">
+                <h3 class="sub-header">Jugadores</h3>
+            </div>
+            <div class="col-md-4">
+                <h3 class="sub-header">Datos del club</h3>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
     </div>
 </div>
 

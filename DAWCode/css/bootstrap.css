@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=fa5c32c264a22ee1b435)
- * Config saved to config.json and https://gist.github.com/fa5c32c264a22ee1b435
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=8d21a0b4af36a74c77bc)
+ * Config saved to config.json and https://gist.github.com/8d21a0b4af36a74c77bc
  */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
@@ -2024,7 +2024,6 @@ pre code {
 }
 
 .row {
-    max-width: 100%;
     margin-left: -15px;
     margin-right: -15px;
 }
@@ -7062,22 +7061,13 @@ button.close {
     filter: alpha(opacity=50);
 }
 
-.modal-header-inverse {
-    background-color: #222222;
-    min-height: 16.42857143px;
-    padding: 15px;
-    border-bottom: 1px solid #E5E5E5;
-    border-radiust: 6px;
-    color: #FFFFFF;
-}
-
 .modal-header {
     padding: 15px;
     border-bottom: 1px solid #e5e5e5;
     min-height: 16.42857143px;
 }
 
-.modal-header .modal-header-inverse .close {
+.modal-header .close {
     margin-top: -2px;
 }
 
@@ -8006,37 +7996,4 @@ button.close {
     .hidden-print {
         display: none !important;
     }
-}
-
-.navbar-login {
-    width: 305px;
-    padding: 10px;
-    padding-bottom: 0px;
-}
-
-.navbar-login-session {
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-}
-
-.icon-size {
-    font-size: 87px;
-}
-
-.col-auto {
-    width: auto;
-}
-
-.name {
-    min-height: 3em;
-    max-height: 7em;
-    max-width: 100%;
-    min-width: 100%;
-    resize: vertical;
-}
-
-.imagePrev{
-    max-height: 10em;
-    margin: 1em;
 }
