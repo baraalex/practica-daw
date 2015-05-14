@@ -49,6 +49,12 @@
     margin-top: -2px;
 }
 
+.jornada {
+    max-height: 20em;
+    overflow: auto;
+    max-width: 100%;
+}
+
 .jornada table {
     width: 100%;
     margin: 0;
@@ -99,7 +105,7 @@
     background-color: #468c46;
 }
 
-.datepicker {
+.jornadapicker {
     top: 0;
     left: 0;
     padding: 4px;
@@ -107,19 +113,23 @@
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    max-height: 20em;
+    overflow: auto;
 }
 
-.datepicker > div {
+.jornadapicker > div {
     display: none;
+    max-height: 20em;
+    overflow: auto;
 }
 
-.datepicker table {
+.jornadapicker table {
     width: 100%;
     margin: 0;
 }
 
-.datepicker td,
-.datepicker th {
+.jornadapicker td,
+.jornadapicker th {
     text-align: center;
     width: 20px;
     height: 20px;
@@ -128,22 +138,22 @@
     border-radius: 4px;
 }
 
-.datepicker td.day:hover {
+.jornadapicker td.day:hover {
     background: #eeeeee;
     cursor: pointer;
 }
 
-.datepicker td.day.disabled {
+.jornadapicker td.day.disabled {
     color: #eeeeee;
 }
 
-.datepicker td.old,
-.datepicker td.new {
+.jornadapicker td.old,
+.jornadapicker td.new {
     color: #999999;
 }
 
-.datepicker td.active,
-.datepicker td.active:hover {
+.jornadapicker td.active,
+.jornadapicker td.active:hover {
     color: #ffffff;
     background-color: #006dcc;
     background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
@@ -163,31 +173,31 @@
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-.datepicker td.active:hover,
-.datepicker td.active:hover:hover,
-.datepicker td.active:focus,
-.datepicker td.active:hover:focus,
-.datepicker td.active:active,
-.datepicker td.active:hover:active,
-.datepicker td.active.active,
-.datepicker td.active:hover.active,
-.datepicker td.active.disabled,
-.datepicker td.active:hover.disabled,
-.datepicker td.active[disabled],
-.datepicker td.active:hover[disabled] {
+.jornadapicker td.active:hover,
+.jornadapicker td.active:hover:hover,
+.jornadapicker td.active:focus,
+.jornadapicker td.active:hover:focus,
+.jornadapicker td.active:active,
+.jornadapicker td.active:hover:active,
+.jornadapicker td.active.active,
+.jornadapicker td.active:hover.active,
+.jornadapicker td.active.disabled,
+.jornadapicker td.active:hover.disabled,
+.jornadapicker td.active[disabled],
+.jornadapicker td.active:hover[disabled] {
     color: #ffffff;
     background-color: #0044cc;
     *background-color: #003bb3;
 }
 
-.datepicker td.active:active,
-.datepicker td.active:hover:active,
-.datepicker td.active.active,
-.datepicker td.active:hover.active {
+.jornadapicker td.active:active,
+.jornadapicker td.active:hover:active,
+.jornadapicker td.active.active,
+.jornadapicker td.active:hover.active {
     background-color: #003399 \9;
 }
 
-.datepicker td span {
+.jornadapicker td span {
     display: block;
     width: 47px;
     height: 54px;
@@ -200,11 +210,11 @@
     border-radius: 4px;
 }
 
-.datepicker td span:hover {
+.jornadapicker td span:hover {
     background: #eeeeee;
 }
 
-.datepicker td span.active {
+.jornadapicker td span.active {
     color: #ffffff;
     background-color: #006dcc;
     background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
@@ -224,40 +234,40 @@
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-.datepicker td span.active:hover,
-.datepicker td span.active:focus,
-.datepicker td span.active:active,
-.datepicker td span.active.active,
-.datepicker td span.active.disabled,
-.datepicker td span.active[disabled] {
+.jornadapicker td span.active:hover,
+.jornadapicker td span.active:focus,
+.jornadapicker td span.active:active,
+.jornadapicker td span.active.active,
+.jornadapicker td span.active.disabled,
+.jornadapicker td span.active[disabled] {
     color: #ffffff;
     background-color: #0044cc;
     *background-color: #003bb3;
 }
 
-.datepicker td span.active:active,
-.datepicker td span.active.active {
+.jornadapicker td span.active:active,
+.jornadapicker td span.active.active {
     background-color: #003399 \9;
 }
 
-.datepicker td span.old {
+.jornadapicker td span.old {
     color: #999999;
 }
 
-.datepicker th.switch {
+.jornadapicker th.switch {
     width: 145px;
 }
 
-.datepicker th.next,
-.datepicker th.prev {
+.jornadapicker th.next,
+.jornadapicker th.prev {
     font-size: 21px;
 }
 
-.datepicker thead tr:first-child th {
+.jornadapicker thead tr:first-child th {
     cursor: pointer;
 }
 
-.datepicker thead tr:first-child th:hover {
+.jornadapicker thead tr:first-child th:hover {
     background: #eeeeee;
 }
 
@@ -275,4 +285,8 @@
 
 .part-width > .modal-dialog {
     width: 70em !important;
+}
+
+.row-right {
+    margin-right: auto;
 }
