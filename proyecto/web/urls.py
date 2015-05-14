@@ -33,6 +33,9 @@ urlpatterns = [
     url(r'^equipo/(?P<id_equipo>[0-9]+)/$',
         views.equipo,
         name='equipo'),
+    url(r'^equipo/(?P<id_equipo>[0-9]+)/(?P<pagina>[0-9]+)/$',
+        views.equipo,
+        name='equipo'),
     # Jugadores
     url(r'^jugadores/$',
         views.jugadores,
