@@ -162,7 +162,14 @@ function change(bool) {
         $("#addbtt").html('<div class="input-group"><button type="button" class="btn btn-success" title=" Add liga" ' +
             'onclick="addLiga();"><span class="fa fa-plus" aria-hidden="true"></span></button></div>');
         $("#admindiv").empty();
-        $("#admindiv").html('<div class="col-md-4"><h3 class="sub-header">Equipos</h3></div><div class="col-md-4">' +
+        $("#admindiv").html('<div class="col-md-4"><h3 class="sub-header">Tabla</h3> <div class="table-responsive">' +
+            '<table id="tabla" class="table table-striped table-bordered dataTable sortable-theme-bootstrap" data-sortable data-sortable-initialized>' +
+            '<thead><tr><th>Pos</th><th>Nombre</th><th>Puntos</th><th>Jugado</th><th>Ganado</th>' +
+            '<th>Empatado</th><th>Perdido</th><th>GF</th><th>GC</th></tr></thead><tbody><tr><td>1</td><td>' +
+            '<a href="equipoej.html">Lorem</a></td><td>10</td><td>5</td><td>3</td><td>1</td><td>1</td><td>25</td>' +
+            '<td>8</td></tr><tr><td>2</td><td><a href="">Lorem 2</a></td><td>120</td><td>55</td><td>8</td><td>6</td>' +
+            '<td>4</td><td>8</td><td>2</td></tr><tr><td>3</td><td><a href="">Lorem 3</a></td><td>1560</td><td>6</td>' +
+            '<td>4</td><td>2</td><td>3</td><td>7</td><td>6</td></tr></tbody></table></div></div><div class="col-md-4">' +
             '<h3 class="sub-header">Datos de la competicion<div class="input-group" style="float: right;">' +
             '<button type="button" class="btn btn-primary" onclick="modifyComp();" title="Add equipo">' +
             '<span class="fa fa-pencil" aria-hidden="true"></span></button></div></h3><div class="row row-right">' +
@@ -174,6 +181,7 @@ function change(bool) {
             '<th colspan="5" class="text-center name">Jornadas</th></tr></thead><tbody id="jornadastable">' +
             '<tr><td class="day">5</td><td class="day">6</td><td class="day">7</td><td class="day">8</td>' +
             '<td class="day">9</td></tr></tbody> </table></div>');
+        Sortable.init();
         $(".day").click(function () {
             $('.day').removeClass('active');
             $(this).addClass('active');
@@ -187,7 +195,7 @@ function change(bool) {
         $("#admindiv").empty();
         $("#admindiv").html('<div class="col-md-6"><h3 class="sub-header">Jugadores<div class="input-group" ' +
             'style="float: right;"><button type="button" class="btn btn-primary" onclick="addJugador();" ' +
-            'title="Add equipo"><span    class="fa fa-plus" aria-hidden="true"></span></button></div></h3>' +
+            'title="Add equipo"><span class="fa fa-plus" aria-hidden="true"></span></button></div></h3>' +
             '<div class="jornada"><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Posicion</th></tr></thead>' +
             '<tbody><tr><td>Jugador</td><td>15</td><td>MC</td></tr></tbody></table></div></div><div class="col-md-6">' +
             '<h3 class="sub-header">Datos del club        <div class="input-group" style="float: right;">' +
