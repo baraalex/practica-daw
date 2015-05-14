@@ -36,12 +36,13 @@ class Jugador(models.Model):
 
 
 class Competicion(models.Model):
-    nombre = models.CharField(max_length=140, unique=True)
+    nombre = models.CharField(max_length=140, null=False)
     foto = models.ImageField()
     temporada = models.CharField(max_length=9, null=False)
     participantes = models.ManyToManyField(Equipo)
     administrador = models.ForeignKey(User, null=False)
     privada = models.BooleanField(default=False)
+    formada = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.nombre

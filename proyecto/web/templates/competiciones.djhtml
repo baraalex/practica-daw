@@ -1,4 +1,23 @@
 {% extends 'base_sidebar.djhtml' %}
+{% block navegacion %}
+  <ul class="nav nav-pills nav-stacked">
+    <li{% if tipo == 'pub' %} class="active"{% endif %}>
+      <a href="{% url 'web:competiciones' %}">
+        <span class="fa fa-trophy"></span> Públicas
+      </a
+    </li>
+    <li{% if not user.is_authenticated %} class="disabled"{% elif tipo == 'prv' %} class="active"{% endif %}>
+      <a href="{% if user.is_authenticated %}{% url 'web:competiciones_privadas' %}{% else %}#{% endif %}">
+        <span class="fa fa-trophy"></span> Privadas
+      </a>
+    </li>
+    <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
+      <a{% if user.is_authenticated %} id="addCompeticion"{% endif %} href="#">
+        <span class="fa fa-plus-circle"></span> Crear competición
+      </a>
+    </li>
+  </ul>
+{% endblock %}
 {% block contenido %}
   <div id="tabla">
     {% if competiciones %}
@@ -19,11 +38,11 @@
               <td>{{ competicion.participantes.count }}</td>
               {% if user.is_authenticated %}
                 <td class="admin">
-                {% if user.id == competicion.administrador.id %}
-                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                {% else %}
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                {% endif %}
+                  {% if user.id == competicion.administrador.id %}
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                  {% else %}
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  {% endif %}
                 </td>
               {% endif %}
             </tr>

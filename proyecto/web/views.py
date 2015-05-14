@@ -46,6 +46,7 @@ def competiciones(request, pagina=1):
         'total': total,
         'inicio': inicio,
         'fin': fin,
+        'tipo': 'pub',
         'competiciones': Competicion.objects.filter(privada=False)
         .order_by('-id')[inicio:fin],
     }
@@ -86,6 +87,7 @@ def competiciones_privadas(request, pagina=1):
         'total': total,
         'inicio': inicio,
         'fin': fin,
+        'tipo': 'prv',
         'competiciones': Competicion.objects
         .filter(privada=True, administrador__id=request.user.id)
         .order_by('-id')[inicio:fin],
@@ -169,13 +171,20 @@ def equipo(request, id_equipo):
 
 
 @require_GET
-def jugadores(request, pagina=1):
+def jugadores(request, pagina=1, posicion=None):
     pagina = int(pagina)
 
     if pagina == 0:
-        return redirect('web:jugadores')
+        if posicion:
+            return redirect('web:jugadores', posicion=posicion)
+        else:
+            return redirect('web:jugadores')
 
-    total = Jugador.objects.count()
+    if posicion:
+        total = Jugador.objects.filter(posicion=posicion).count()
+    else:
+        total = Jugador.objects.count()
+
     muestra = 10
 
     pagina_max = math.ceil(total / muestra)
@@ -183,7 +192,11 @@ def jugadores(request, pagina=1):
     inicio = (pagina - 1) * muestra
 
     if inicio > total:
-        return redirect('web:jugadores', pagina=pagina_max)
+        if posicion:
+            return redirect('web:jugadores', pagina=pagina_max,
+                            posicion=posicion)
+        else:
+            return redirect('web:jugadores', pagina=pagina_max)
 
     fin = inicio + muestra
     if fin > total:
@@ -197,8 +210,14 @@ def jugadores(request, pagina=1):
         'total': total,
         'inicio': inicio,
         'fin': fin,
-        'jugadores': Jugador.objects.order_by('nombre')[inicio:fin],
+        'posicion': posicion,
     }
+
+    if posicion:
+        context['jugadores'] = Jugador.objects.filter(posicion=posicion) \
+                                              .order_by('nombre')[inicio:fin]
+    else:
+        context['jugadores'] = Jugador.objects.order_by('nombre')[inicio:fin]
 
     return render(request, 'jugadores.djhtml', context)
 
