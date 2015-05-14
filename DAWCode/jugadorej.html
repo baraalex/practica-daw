@@ -29,46 +29,56 @@
             </button>
             <a class="navbar-brand" href="index.html">DAW</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle name" data-toggle="dropdown">
-                    <span class="fa fa-user"></span>
-                    UserName
-                    <span class="fa fa-chevron-down"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <div class="navbar-login">
+        <div id="navbar" class="navbar-collapse collapse">
 
+            <ul class="nav navbar-nav">
+                <li><a href="competicion.html">Competiciones</a></li>
+                <li><a href="equipos.html">Equipos</a></li>
+                <li class="active"><a href="#">Jugadores</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle name" data-toggle="dropdown">
+                        <span class="fa fa-user"></span>
+                        UserName
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login">
 
-                            <p class="text-left name" id="realName">Nombre Apellido</p>
+                                <p class="text-left name" id="realName">Nombre Apellido</p>
 
-                            <p class="text-left small" id="email">correoElectronico@email.com</p>
+                                <p class="text-left small" id="email">correoElectronico@email.com</p>
 
-                            <div class="row row-right">
-                                <div class="col-md-6"><p class="text-left">
-                                    <a href="#" class="btn btn-primary btn-block btn-sm" onclick="editUserData(0);">Actualizar
-                                        Datos</a>
-                                </p></div>
-                                <div class="col-md-6"><p class="text-left">
-                                    <a href="perfiluser.html" class="btn btn-info btn-block btn-sm">Administracion</a>
-                                </p></div>
+                                <div class="row row-right">
+                                    <div class="col-md-6"><p class="text-left">
+                                        <a href="#" class="btn btn-primary btn-block btn-sm" onclick="editUserData(0);">Actualizar
+                                            Datos</a>
+                                    </p></div>
+                                    <div class="col-md-6"><p class="text-left">
+                                        <a href="perfiluser.html"
+                                           class="btn btn-info btn-block btn-sm">Administracion</a>
+                                    </p></div>
+                                </div>
+
                             </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="navbar-login navbar-login-session">
 
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <div class="navbar-login navbar-login-session">
-
-                            <p>
-                                <a href="#" class="btn btn-danger btn-block"><span class="fa fa-sign-out"></span>  Cerrar Sesion</a>
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+                                <p>
+                                    <a href="#" class="btn btn-danger btn-block"><span class="fa fa-sign-out"></span>
+                                        Cerrar Sesion</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.navbar-collapse -->
     </div>
 </nav>
 
@@ -151,12 +161,9 @@
 
             <div class="media-right">
                 <a href="Imgs/jugadores/footballer-5871193.jpg" target="_blank">
-                    <img data-holder-rendered="true"
-                         src="Imgs/jugadores/footballer-5871193.jpg" style="max-height: 25em;"
-                         class="media-object" data-src="holder.js/64x64"
-                         alt="64x64">
+                    <img data-holder-rendered="true" src="Imgs/jugadores/footballer-5871193.jpg"
+                         class="media-object imageBig" data-src="holder.js/64x64" alt="64x64">
                 </a>
-
             </div>
         </div>
 

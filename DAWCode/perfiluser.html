@@ -172,7 +172,7 @@
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="group1" onclick="change(false)" checked>
+                        <input type="radio" class="selectable" name="group1" onclick="change(false)" checked>
                     </span>
                     <span class="form-control label label-primary" style="font-size: large;">Equipos</span>
                 </div>
@@ -180,14 +180,14 @@
             <div class="col-lg-2">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <input type="radio" name="group1" onclick="change(true)">
+                        <input type="radio" class="selectable" name="group1" onclick="change(true)">
                     </span>
                     <span class="form-control label label-primary" style="font-size: large;">Competicion</span>
                 </div>
             </div>
             <div class="col-auto col-lg-2">
                 <div class="input-group">
-                    <select id="projUrl" class="form-control">
+                    <select id="projUrl" class="form-control selectable">
                         <option value="" selected="">Seleccciona equipo</option>
                         <option value="E1">
                             Equipo 1
@@ -219,8 +219,8 @@
                         </button>
                     </div>
                 </h3>
-                <div class="jornada">
-                    <table>
+                <div cclass="table-responsive">
+                    <table class="table table-striped table-bordered dataTable sortable-theme-bootstrap" data-sortable>
                         <thead>
                         <tr>
                             <th>Nombre</th>
@@ -253,8 +253,8 @@
                         <div class="media-right">
                             <a href="Imgs/Escudos/Ej1.png" target="_blank">
                                 <img data-holder-rendered="true"
-                                     src="Imgs/Escudos/Ej1.png"
-                                     style="max-height: 10em;" class="media-object" data-src="holder.js/64x64"
+                                     src="Imgs/Escudos/Ej1.png" class="media-object imagePrev"
+                                     data-src="holder.js/64x64"
                                      alt="64x64">
                             </a>
                         </div>
