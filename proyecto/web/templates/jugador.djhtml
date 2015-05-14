@@ -1,0 +1,80 @@
+{% extends 'base_sidebar.djhtml' %}
+{% block navegacion %}
+  <ul class="nav nav-pills nav-stacked">
+    <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
+      <a{% if user.is_authenticated %} id="editJugador"{% endif %} href="#">
+        <span class="fa fa-plus-circle"></span> Editar jugador
+      </a>
+    </li>
+  </ul>
+{% endblock %}
+{% block contenido %}
+  <div id="tabla">
+    {% if jugador %}
+      <div class="well well-lg media">
+        <div class="media-body">
+          <h2 id="media-heading" class="media-heading">{{ jugador.nombre }}</h2>
+          <hr>
+          <h4>Equipo actual:</h4>
+          <span class="informacion"><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></span>
+          <h4>Posición:</h4>
+          <span class="informacion">{{ jugador.get_posicion_display }}</span>
+          <h4>Dorsal:</h4>
+          <span class="informacion">{{ jugador.dorsal }}</span>
+        </div>
+        <div class="media-right">
+          <a href="{{ jugador.foto.url }}" target="_blank">
+            <img src="{{ jugador.foto.url }}" class="media-object imageBig" />
+          </a>
+        </div>
+      </div>
+      <h3>Partidos jugados</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Competición</th>
+          <th>Equipo</th>
+          <th>Titular</th>
+          <th>Amarillas</th>
+          <th>Roja</th>
+          <th>Goles</th>
+          <th>Goles P.P.</th>
+        </thead>
+        <tbody>
+          {% for partido in partidos %}
+            <tr>
+              {% if not partido.partido.competicion.privada or user.is_authenticated and user.id == partido.partido.competicion.administrador.id %}
+                <td><a href="{% url 'web:competicion' partido.partido.competicion.id %}">{{ partido.partido.competicion.nombre }}</a></td>
+                <td><a href="{% url 'web:equipo' partido.equipo.id %}">{{ partido.equipo.nombre }}</a></td>
+                <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td>
+                <td>{{ partido.amarillas }}</td>
+                <td>{% if partido.roja %}Sí{% else %}No{% endif %}</td>
+                <td>{{ partido.goles }}</td>
+                <td>{{ partido.goles_pp }}</td>
+              {% else %}
+                <td class="privado" colspan="7">Partido disputado en competición privada.</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <ul class="pager">
+        <li class="previous{% if pagina == 1 %} disabled{% endif %}">
+          <a href="{% if pagina != 1 %}{% url 'web:jugador' jugador.id pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
+        </li>
+        <li>Página {{ pagina }}/{{ pagina_max }}</li>
+        <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
+          <a href="{% if pagina != pagina_max %}{% url 'web:jugador' jugador.id pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
+        </li>
+      </ul>
+    {% else %}
+      <div class="aviso panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title">Aviso</h3>
+        </div>
+        <div class="panel-body">
+          No se han encontrado el jugador
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

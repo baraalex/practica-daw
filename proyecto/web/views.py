@@ -3,7 +3,7 @@ from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Competicion, Equipo, Jugador
+from .models import Competicion, Equipo, Jugador, Participante
 
 import math
 
@@ -43,12 +43,9 @@ def competiciones(request, pagina=1):
         'title': 'Competiciones | Página ' + str(pagina),
         'pagina': pagina,
         'pagina_max': pagina_max,
-        'total': total,
-        'inicio': inicio,
-        'fin': fin,
         'tipo': 'pub',
         'competiciones': Competicion.objects.filter(privada=False)
-        .order_by('-id')[inicio:fin],
+        .order_by('-temporada')[inicio:fin],
     }
 
     return render(request, 'competiciones.djhtml', context)
@@ -84,13 +81,10 @@ def competiciones_privadas(request, pagina=1):
         'title': 'Competiciones privadas | Página ' + str(pagina),
         'pagina': pagina,
         'pagina_max': pagina_max,
-        'total': total,
-        'inicio': inicio,
-        'fin': fin,
         'tipo': 'prv',
         'competiciones': Competicion.objects
         .filter(privada=True, administrador__id=request.user.id)
-        .order_by('-id')[inicio:fin],
+        .order_by('-temporada')[inicio:fin],
     }
 
     return render(request, 'competiciones.djhtml', context)
@@ -121,7 +115,7 @@ def competicion(request, id_competicion):
             'competicion': comp,
         }
 
-    return render(request, 'competiciones.djhtml', context)
+    return render(request, 'competicion.djhtml', context)
 
 
 @require_GET
@@ -150,9 +144,6 @@ def equipos(request, pagina=1):
         'title': 'Equipos | Página ' + str(pagina),
         'pagina': pagina,
         'pagina_max': pagina_max,
-        'total': total,
-        'inicio': inicio,
-        'fin': fin,
         'equipos': Equipo.objects.order_by('nombre')[inicio:fin],
     }
 
@@ -160,13 +151,52 @@ def equipos(request, pagina=1):
 
 
 @require_GET
-def equipo(request, id_equipo):
-    equi = Equipo.objects.get(id=id_equipo)
-    context = {
-        'view': 'equipos',
-        'title': equi.nombre,
-        'equipo': equi,
-    }
+def equipo(request, id_equipo, pagina=1):
+    try:
+        equi = Equipo.objects.get(id=id_equipo)
+    except ObjectDoesNotExist:
+        equi = None
+
+    if not equi:
+        context = {
+            'view': 'jugadores',
+            'title': 'No se puede mostrar el jugador',
+        }
+    else:
+        pagina = int(pagina)
+
+        if pagina == 0:
+            return redirect('web:equipo', id_equipo=id_equipo)
+
+        total = Competicion.objects.filter(participantes__id=id_equipo) \
+                                   .count()
+
+        muestra = 10
+
+        pagina_max = math.ceil(total / muestra)
+
+        inicio = (pagina - 1) * muestra
+
+        if inicio > total:
+            return redirect('web:equipo', id_equipo=id_equipo,
+                            pagina=pagina_max)
+
+        fin = inicio + muestra
+        if fin > total:
+            fin = total
+
+        context = {
+            'view': 'equipos',
+            'title': 'Equipo: ' + equi.nombre,
+            'equipo': equi,
+            'pagina': pagina,
+            'pagina_max': pagina_max,
+            'jugadores': Jugador.objects.filter(equipo__id=id_equipo),
+            'competiciones': Competicion.objects
+            .filter(participantes__id=id_equipo)
+            .order_by('-temporada')[inicio:fin]
+        }
+
     return render(request, 'equipo.djhtml', context)
 
 
@@ -207,9 +237,6 @@ def jugadores(request, pagina=1, posicion=None):
         'title': 'Jugadores | Página ' + str(pagina),
         'pagina': pagina,
         'pagina_max': pagina_max,
-        'total': total,
-        'inicio': inicio,
-        'fin': fin,
         'posicion': posicion,
     }
 
@@ -223,11 +250,48 @@ def jugadores(request, pagina=1, posicion=None):
 
 
 @require_GET
-def jugador(request, id_jugador):
-    jug = Jugador.objects.get(id=id_jugador)
-    context = {
-        'view': 'jugadores',
-        'title': jug.nombre,
-        'jugador': jug,
-    }
+def jugador(request, id_jugador, pagina=1):
+    try:
+        jug = Jugador.objects.get(id=id_jugador)
+    except ObjectDoesNotExist:
+        jug = None
+
+    if not jug:
+        context = {
+            'view': 'jugadores',
+            'title': 'No se puede mostrar el jugador',
+        }
+    else:
+        pagina = int(pagina)
+
+        if pagina == 0:
+            return redirect('web:jugador', id_jugador=id_jugador)
+
+        total = Participante.objects.filter(jugador__id=id_jugador) \
+                                    .count()
+
+        muestra = 10
+
+        pagina_max = math.ceil(total / muestra)
+
+        inicio = (pagina - 1) * muestra
+
+        if inicio > total:
+            return redirect('web:jugador', id_jugador=id_jugador,
+                            pagina=pagina_max)
+
+        fin = inicio + muestra
+        if fin > total:
+            fin = total
+
+        context = {
+            'view': 'jugadores',
+            'title': 'Jugador: ' + jug.nombre,
+            'jugador': jug,
+            'pagina': pagina,
+            'pagina_max': pagina_max,
+            'partidos': Participante.objects.filter(jugador__id=id_jugador)
+            .order_by('partido__fecha')[inicio:fin]
+        }
+
     return render(request, 'jugador.djhtml', context)

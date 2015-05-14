@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Equipo(models.Model):
@@ -57,6 +58,8 @@ class Partido(models.Model):
                                    related_name='equipo_loc')
     equipo_vis = models.ForeignKey(Equipo, null=False,
                                    related_name='equipo_vis')
+    fecha = models.DateField(default=timezone.now, null=False)
+    celebrado = models.BooleanField(default=False, null=False)
     goles_loc = models.PositiveSmallIntegerField(null=False)
     goles_vis = models.PositiveSmallIntegerField(null=False)
     amarillas_loc = models.PositiveSmallIntegerField(null=False)
