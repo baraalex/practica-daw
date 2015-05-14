@@ -19,6 +19,9 @@ urlpatterns = [
     url(r'^competicion/(?P<id_competicion>[0-9]+)/$',
         views.competicion,
         name='competicion'),
+    url(r'^competicion/(?P<id_competicion>[0-9]+)/(?P<pagina>[0-9]+)/$',
+        views.competicion,
+        name='competicion'),
     # Equipos
     url(r'^equipos/$',
         views.equipos,

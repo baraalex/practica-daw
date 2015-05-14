@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_GET, require_POST
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_GET  # , require_POST
+# from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Competicion, Equipo, Jugador, Participante
+from .models import Competicion, Equipo, Jugador, Participante, Partido
 
 import math
 
@@ -91,28 +91,58 @@ def competiciones_privadas(request, pagina=1):
 
 
 @require_GET
-def competicion(request, id_competicion):
+def competicion(request, id_competicion, pagina=1):
     try:
         comp = Competicion.objects.get(id=id_competicion)
     except ObjectDoesNotExist:
         comp = None
 
-    if comp is None or (
-            comp.privada and (
-                request.user.is_authenticated() and
-                request.user.id is not comp.administrador.id
-            ) or (
-                not request.user.is_authenticated()
-            )):
+    if comp is None:
         context = {
             'view': 'competiciones',
+            'title': 'No existe la competición',
+        }
+    elif comp.privada and not request.user.is_authenticated():
+        return redirect('web:competiciones')  # TBD Ir al login
+    elif (comp.privada and (
+            request.user.is_authenticated() and
+            request.user.id is not comp.administrador.id
+    )):
+        context = {
+            'views': 'competiciones',
+            'noperm': True,
             'title': 'No se puede mostrar la competición',
         }
     else:
+        pagina = int(pagina)
+
+        if pagina == 0:
+            return redirect('web:competicion', id_competicion=id_competicion)
+
+        total = Partido.objects.filter(competicion__id=id_competicion).count()
+
+        muestra = 10
+
+        pagina_max = math.ceil(total / muestra)
+
+        inicio = (pagina - 1) * muestra
+
+        if inicio > total:
+            return redirect('web:competicion', id_competicion=id_competicion,
+                            pagina=pagina_max)
+
+        fin = inicio + muestra
+        if fin > total:
+            fin = total
+
         context = {
             'view': 'competiciones',
             'title': 'Competición: ' + comp.nombre,
             'competicion': comp,
+            'pagina': pagina,
+            'pagina_max': pagina_max,
+            'partidos': Partido.objects.filter(competicion__id=id_competicion)
+            .order_by('jornada')[inicio:fin]
         }
 
     return render(request, 'competicion.djhtml', context)
@@ -168,8 +198,7 @@ def equipo(request, id_equipo, pagina=1):
         if pagina == 0:
             return redirect('web:equipo', id_equipo=id_equipo)
 
-        total = Competicion.objects.filter(participantes__id=id_equipo) \
-                                   .count()
+        total = Competicion.objects.filter(participantes__id=id_equipo).count()
 
         muestra = 10
 
@@ -267,8 +296,7 @@ def jugador(request, id_jugador, pagina=1):
         if pagina == 0:
             return redirect('web:jugador', id_jugador=id_jugador)
 
-        total = Participante.objects.filter(jugador__id=id_jugador) \
-                                    .count()
+        total = Participante.objects.filter(jugador__id=id_jugador).count()
 
         muestra = 10
 
@@ -291,7 +319,7 @@ def jugador(request, id_jugador, pagina=1):
             'pagina': pagina,
             'pagina_max': pagina_max,
             'partidos': Participante.objects.filter(jugador__id=id_jugador)
-            .order_by('partido__fecha')[inicio:fin]
+            .order_by('partido__jornada')[inicio:fin]
         }
 
     return render(request, 'jugador.djhtml', context)

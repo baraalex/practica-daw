@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 
 class Equipo(models.Model):
@@ -58,14 +57,14 @@ class Partido(models.Model):
                                    related_name='equipo_loc')
     equipo_vis = models.ForeignKey(Equipo, null=False,
                                    related_name='equipo_vis')
-    fecha = models.DateField(default=timezone.now, null=False)
+    jornada = models.PositiveSmallIntegerField(null=False)
     celebrado = models.BooleanField(default=False, null=False)
-    goles_loc = models.PositiveSmallIntegerField(null=False)
-    goles_vis = models.PositiveSmallIntegerField(null=False)
-    amarillas_loc = models.PositiveSmallIntegerField(null=False)
-    amarillas_vis = models.PositiveSmallIntegerField(null=False)
-    rojas_loc = models.PositiveSmallIntegerField(null=False)
-    rojas_vis = models.PositiveSmallIntegerField(null=False)
+    goles_loc = models.PositiveSmallIntegerField(default=0, null=False)
+    goles_vis = models.PositiveSmallIntegerField(default=0, null=False)
+    amarillas_loc = models.PositiveSmallIntegerField(default=0, null=False)
+    amarillas_vis = models.PositiveSmallIntegerField(default=0, null=False)
+    rojas_loc = models.PositiveSmallIntegerField(default=0, null=False)
+    rojas_vis = models.PositiveSmallIntegerField(default=0, null=False)
 
     def __unicode__(self):
         return "%s - %s [%s - %s] (Competición: %s)" % (
