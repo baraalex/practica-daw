@@ -4,27 +4,27 @@
     <li{% if not posicion %} class="active"{% endif %}>
       <a href="{% url 'web:jugadores' %}">
         <span class="fa fa-futbol-o"></span> Todos
-      </a
+      </a>
     </li>
     <li{% if posicion == 'po' %} class="active"{% endif %}>
       <a href="{% url 'web:jugadores' 'po' %}">
         <span class="fa fa-futbol-o"></span> Porteros
-      </a
+      </a>
     </li>
     <li{% if posicion == 'df' %} class="active"{% endif %}>
       <a href="{% url 'web:jugadores' 'df' %}">
         <span class="fa fa-futbol-o"></span> Defensas
-      </a
+      </a>
     </li>
     <li{% if posicion == 'ce' %} class="active"{% endif %}>
       <a href="{% url 'web:jugadores' 'ce' %}">
         <span class="fa fa-futbol-o"></span> Centrocampistas
-      </a
+      </a>
     </li>
     <li{% if posicion == 'dl' %} class="active"{% endif %}>
       <a href="{% url 'web:jugadores' 'dl' %}">
         <span class="fa fa-futbol-o"></span> Delanteros
-      </a
+      </a>
     </li>
     <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
       <a{% if user.is_authenticated %} id="addJugador"{% endif %} href="#">
@@ -38,11 +38,13 @@
     {% if jugadores %}
       <table class="table table-striped">
         <thead>
-          <th style="width: 50px;"></th>
-          <th>Nombre</th>
-          <th>Equipo</th>
-          <th>Dorsal</th>
-          <th>Posición</th>
+          <tr>
+            <th style="width: 50px;"></th>
+            <th>Nombre</th>
+            <th>Equipo</th>
+            <th>Dorsal</th>
+            <th>Posición</th>
+          </tr>
         </thead>
         <tbody>
           {% for jugador in jugadores %}

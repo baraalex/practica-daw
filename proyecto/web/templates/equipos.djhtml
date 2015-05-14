@@ -13,9 +13,11 @@
     {% if equipos %}
       <table class="table table-striped">
         <thead>
-          <th style="width: 50px;"></th>
-          <th>Equipo</th>
-          <th>Campo</th>
+          <tr>
+            <th style="width: 50px;"></th>
+            <th>Equipo</th>
+            <th>Campo</th>
+          </tr>
         </thead>
         <tbody>
           {% for equipo in equipos %}

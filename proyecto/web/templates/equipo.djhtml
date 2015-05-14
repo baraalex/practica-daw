@@ -19,26 +19,28 @@
           <span class="informacion">{{ equipo.campo }}</span>
           <h4>Jugadores:</h4>
           <div class="panel panel-default">
-              <table class="table table-striped">
-                <thead>
+            <table class="table table-striped">
+              <thead>
+                <tr>
                   <th style="width: 50px;"></th>
                   <th>Nombre</th>
                   <th>Equipo</th>
                   <th>Dorsal</th>
                   <th>Posición</th>
-                </thead>
-                <tbody>
-                  {% for jugador in jugadores %}
-                    <tr>
-                      <td><img src="{{ jugador.foto.url }}" style="height: 50px;" /></td>
-                      <td><a href="{% url 'web:jugador' jugador.id %}">{{ jugador.nombre }}</a></td>
-                      <td><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></td>
-                      <td>{{ jugador.dorsal }}</td>
-                      <td>{{ jugador.get_posicion_display }}</td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+                </tr>
+              </thead>
+              <tbody>
+                {% for jugador in jugadores %}
+                  <tr>
+                    <td><img src="{{ jugador.foto.url }}" style="height: 50px;" /></td>
+                    <td><a href="{% url 'web:jugador' jugador.id %}">{{ jugador.nombre }}</a></td>
+                    <td><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></td>
+                    <td>{{ jugador.dorsal }}</td>
+                    <td>{{ jugador.get_posicion_display }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="media-right">
@@ -50,10 +52,12 @@
       <h3>Competiciones</h3>
       <table class="table table-striped">
         <thead>
-          <th style="width: 50px;"></th>
-          <th>Competición</th>
-          <th>Temporada</th>
-          <th>Participantes</th>
+          <tr>
+            <th style="width: 50px;"></th>
+            <th>Competición</th>
+            <th>Temporada</th>
+            <th>Participantes</th>
+          </tr>
         </thead>
         <tbody>
           {% for competicion in competiciones %}

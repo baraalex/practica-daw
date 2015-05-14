@@ -4,7 +4,7 @@
     <li{% if tipo == 'pub' %} class="active"{% endif %}>
       <a href="{% url 'web:competiciones' %}">
         <span class="fa fa-trophy"></span> Públicas
-      </a
+      </a>
     </li>
     <li{% if not user.is_authenticated %} class="disabled"{% elif tipo == 'prv' %} class="active"{% endif %}>
       <a href="{% if user.is_authenticated %}{% url 'web:competiciones_privadas' %}{% else %}#{% endif %}">
@@ -23,11 +23,13 @@
     {% if competiciones %}
       <table class="table table-striped">
         <thead>
-          <th style="width: 50px;"></th>
-          <th>Competición</th>
-          <th>Temporada</th>
-          <th>Participantes</th>
-          {% if user.is_authenticated %}<th class="admin">Administrador</th>{% endif %}
+          <tr>
+            <th style="width: 50px;"></th>
+            <th>Competición</th>
+            <th>Temporada</th>
+            <th>Participantes</th>
+            {% if user.is_authenticated %}<th class="admin">Administrador</th>{% endif %}
+          </tr>
         </thead>
         <tbody>
           {% for competicion in competiciones %}

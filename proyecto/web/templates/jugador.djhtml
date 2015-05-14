@@ -31,13 +31,15 @@
       <h3>Partidos jugados</h3>
       <table class="table table-striped">
         <thead>
-          <th>Competición</th>
-          <th>Equipo</th>
-          <th>Titular</th>
-          <th>Amarillas</th>
-          <th>Roja</th>
-          <th>Goles</th>
-          <th>Goles P.P.</th>
+          <tr>
+            <th>Competición</th>
+            <th>Equipo</th>
+            <th>Titular</th>
+            <th>Amarillas</th>
+            <th>Roja</th>
+            <th>Goles</th>
+            <th>Goles P.P.</th>
+          </tr>
         </thead>
         <tbody>
           {% for partido in partidos %}
