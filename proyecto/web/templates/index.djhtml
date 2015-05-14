@@ -1,12 +1,3 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
-  {% if ultimas_competiciones %}
-    <ul>
-      {% for competicion in ultimas_competiciones %}
-        <li><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No hay competiciones.</p>
-  {% endif %}
 {% endblock %}

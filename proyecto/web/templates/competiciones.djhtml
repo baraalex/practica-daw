@@ -8,7 +8,7 @@
           <th>Competición</th>
           <th>Temporada</th>
           <th>Participantes</th>
-          {% if user.is_authenticated %}<th>Administrador</th>{% endif %}
+          {% if user.is_authenticated %}<th class="admin">Administrador</th>{% endif %}
         </thead>
         <tbody>
           {% for competicion in competiciones %}
@@ -18,11 +18,13 @@
               <td>{{ competicion.temporada }}</td>
               <td>{{ competicion.participantes.count }}</td>
               {% if user.is_authenticated %}
+                <td class="admin">
                 {% if user.id == competicion.administrador.id %}
-                  <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 {% else %}
-                  <td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 {% endif %}
+                </td>
               {% endif %}
             </tr>
           {% endfor %}

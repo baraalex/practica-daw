@@ -283,5 +283,14 @@
 }
 
 #tabla td {
-  vertical-align: text-bottom;
+  vertical-align: middle;
+}
+
+#tabla .admin {
+  width: 150px;
+  text-align: center;
+}
+
+#logIn .input-group-addon .fa {
+  width: 12px;
 }

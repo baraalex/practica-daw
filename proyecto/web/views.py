@@ -12,7 +12,6 @@ import math
 def home(request):
     context = {
         'title': 'Inicio',
-        'ultimas_competiciones': Competicion.objects.order_by('-id')[:5],
     }
 
     return render(request, 'index.djhtml', context)
