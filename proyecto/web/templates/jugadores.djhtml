@@ -66,7 +66,14 @@
         </li>
       </ul>
     {% else %}
-      <p>No hay jugadores.</p>
+      <div class="aviso panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title">Aviso</h3>
+        </div>
+        <div class="panel-body">
+          No se han encontrado jugadores del tipo seleccionado.
+        </div>
+      </div>
     {% endif %}
   </div>
 {% endblock %}
