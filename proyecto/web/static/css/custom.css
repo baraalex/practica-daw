@@ -278,7 +278,7 @@
 }
 
 #tabla {
-  width: 75%;
+  max-width: 90%;
   margin: 5px auto;
 }
 
