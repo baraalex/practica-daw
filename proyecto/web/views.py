@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET  # , require_POST
 # from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate
@@ -99,7 +100,7 @@ def competicion(request, id_competicion, pagina=1):
             'noperm': True,
             'title': 'No se puede mostrar la competición',
         }
-    else:
+    elif True is False:
         pagina = int(pagina)
 
         if pagina == 0:
@@ -121,6 +122,62 @@ def competicion(request, id_competicion, pagina=1):
             'pagina_max': pagina_max,
             'partidos': Partido.objects.filter(competicion__id=id_competicion)
             .order_by('jornada')[inicio:fin]
+        }
+
+    else:
+        clasificacion = []
+
+        for equipo in comp.participantes.all():
+            puntos = 0
+            jugados = 0
+            ganados = 0
+            empatados = 0
+            perdidos = 0
+            goles_favor = 0
+            goles_contra = 0
+
+            partidos = Partido.objects.filter(Q(equipo_loc=equipo) |
+                                              Q(equipo_vis=equipo),
+                                              competicion__id=id_competicion,
+                                              celebrado=True)
+
+            for partido in partidos:
+                # Calculo de los partidos
+                if partido.goles_loc == partido.goles_vis:
+                    empatados += 1
+                elif (
+                        (
+                            equipo == partido.equipo_loc and
+                            partido.goles_loc > partido.goles_vis
+                        ) or (
+                            equipo == partido.equipo_vis and
+                            partido.goles_vis > partido.goles_loc
+                        )
+                ):
+                    ganados += 1
+                else:
+                    perdidos += 1
+
+                # Calculo de goles
+                if equipo == partido.equipo_loc:
+                    goles_favor += partido.goles_loc
+                    goles_contra += partido.goles_vis
+                else:
+                    goles_favor += partido.goles_vis
+                    goles_contra += partido.goles_loc
+
+            jugados = empatados + ganados + perdidos
+            puntos = ganados*3 + empatados
+
+            clasificacion.append((equipo, puntos, jugados,
+                                  ganados, empatados, perdidos,
+                                  goles_favor, goles_contra))
+
+        context = {
+            'view': 'competiciones',
+            'title': 'Competición: ' + comp.nombre,
+            'competicion': comp,
+            'clasificacion': clasificacion,
         }
 
     return render(request, 'competicion.djhtml', context)

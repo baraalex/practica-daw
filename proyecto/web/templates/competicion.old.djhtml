@@ -1,0 +1,107 @@
+{% extends 'base_sidebar.djhtml' %}
+{% block navegacion %}
+  <ul class="nav nav-pills nav-stacked">
+    <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
+      <a{% if user.is_authenticated %} id="editJugador"{% endif %} href="#">
+        <span class="fa fa-plus-circle"></span> Editar liga
+      </a>
+    </li>
+  </ul>
+{% endblock %}
+{% block contenido %}
+  <div id="tabla">
+    {% if competicion %}
+      <div class="well well-lg media">
+        <div class="media-body">
+          <h2 id="media-heading" class="media-heading">{{ competicion.nombre }}</h2>
+          <hr>
+          <h4>Temporada:</h4>
+          <span class="informacion">{{ competicion.temporada }}</span>
+          <h4>Administrador:</h4>
+          <span class="informacion">{{ competicion.administrador.first_name }} {{ competicion.administrador.last_name }}</span>
+          <h4>Privada:</h4>
+          <span class="informacion">{% if competicion.privada %}Sí{% else %}No{% endif %}</span>
+        </div>
+        <div class="media-right">
+          <a href="{{ competicion.foto.url }}" target="_blank">
+            <img src="{{ competicion.foto.url }}" class="media-object imageBig" />
+          </a>
+        </div>
+      </div>
+      <h3>Partidos</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2">Equipo</th>
+            <th colspan="2">Goles</th>
+            <th colspan="2">Amarillas</th>
+            <th colspan="2">Rojas</th>
+          </tr>
+          <tr>
+            <th>Jornada</th>
+            <th>Local</th>
+            <th>Visitante</th>
+            <th>Local</th>
+            <th>Visitante</th>
+            <th>Local</th>
+            <th>Visitante</th>
+            <th>Local</th>
+            <th>Visitante</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for partido in partidos %}
+            <tr>
+              <td>{{ partido.jornada }}</td>
+              <td><a href="{% url 'web:equipo' partido.equipo_loc.id %}">{{ partido.equipo_loc.nombre }}</a></td>
+              <td><a href="{% url 'web:equipo' partido.equipo_vis.id %}">{{ partido.equipo_vis.nombre }}</a></td>
+              {% if partido.celebrado %}
+                <td>{{ partido.goles_loc }}</td>
+                <td>{{ partido.goles_vis }}</td>
+                <td>{{ partido.amarillas_loc }}</td>
+                <td>{{ partido.amarillas_vis }}</td>
+                <td>{{ partido.rojas_loc }}</td>
+                <td>{{ partido.rojas_vis }}</td>
+              {% else %}
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <ul class="pager">
+        <li class="previous{% if pagina == 1 %} disabled{% endif %}">
+          <a href="{% if pagina != 1 %}{% url 'web:competicion' competicion.id pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
+        </li>
+        <li>Página {{ pagina }}/{{ pagina_max }}</li>
+        <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
+          <a href="{% if pagina != pagina_max %}{% url 'web:competicion' competicion.id pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
+        </li>
+      </ul>
+    {% elif noperm %}
+      <div class="aviso panel panel-error">
+        <div class="panel-heading">
+          <h3 class="panel-title">Error</h3>
+        </div>
+        <div class="panel-body">
+          No tienes permisos para ver esta competición
+        </div>
+      </div>
+    {% else %}
+      <div class="aviso panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title">Aviso</h3>
+        </div>
+        <div class="panel-body">
+          No se ha encontrado la competición
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

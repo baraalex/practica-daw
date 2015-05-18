@@ -29,61 +29,38 @@
         </div>
       </div>
       <h3>Partidos</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th colspan="2">Equipo</th>
-            <th colspan="2">Goles</th>
-            <th colspan="2">Amarillas</th>
-            <th colspan="2">Rojas</th>
-          </tr>
-          <tr>
-            <th>Jornada</th>
-            <th>Local</th>
-            <th>Visitante</th>
-            <th>Local</th>
-            <th>Visitante</th>
-            <th>Local</th>
-            <th>Visitante</th>
-            <th>Local</th>
-            <th>Visitante</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for partido in partidos %}
+      <div class="table-responsive">
+        <table class="table table-striped sortable-theme-bootstrap" data-sortable>
+          <thead>
             <tr>
-              <td>{{ partido.jornada }}</td>
-              <td><a href="{% url 'web:equipo' partido.equipo_loc.id %}">{{ partido.equipo_loc.nombre }}</a></td>
-              <td><a href="{% url 'web:equipo' partido.equipo_vis.id %}">{{ partido.equipo_vis.nombre }}</a></td>
-              {% if partido.celebrado %}
-                <td>{{ partido.goles_loc }}</td>
-                <td>{{ partido.goles_vis }}</td>
-                <td>{{ partido.amarillas_loc }}</td>
-                <td>{{ partido.amarillas_vis }}</td>
-                <td>{{ partido.rojas_loc }}</td>
-                <td>{{ partido.rojas_vis }}</td>
-              {% else %}
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-              {% endif %}
+              <th>#</th>
+              <th>Equipo</th>
+              <th>Puntos</th>
+              <th>Jugados</th>
+              <th>Ganados</th>
+              <th>Empatados</th>
+              <th>Perdidos</th>
+              <th>G.F.</th>
+              <th>G.C.</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <ul class="pager">
-        <li class="previous{% if pagina == 1 %} disabled{% endif %}">
-          <a href="{% if pagina != 1 %}{% url 'web:competicion' competicion.id pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
-        </li>
-        <li>Página {{ pagina }}/{{ pagina_max }}</li>
-        <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
-          <a href="{% if pagina != pagina_max %}{% url 'web:competicion' competicion.id pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
-        </li>
-      </ul>
+          </thead>
+          <tbody>
+            {% for equipo in clasificacion %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'web:equipo' equipo.0.id %}">{{ equipo.0.nombre }}</a></td>
+                <td>{{ equipo.1 }}</td>
+                <td>{{ equipo.2 }}</td>
+                <td>{{ equipo.3 }}</td>
+                <td>{{ equipo.4 }}</td>
+                <td>{{ equipo.5 }}</td>
+                <td>{{ equipo.6 }}</td>
+                <td>{{ equipo.7 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     {% elif noperm %}
       <div class="aviso panel panel-error">
         <div class="panel-heading">
