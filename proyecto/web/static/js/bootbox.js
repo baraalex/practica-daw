@@ -29,15 +29,15 @@
     // the base DOM structure needed to create a modal
     var templates = {
         dialog: "<div class='bootbox modal' tabindex='-1' role='dialog'>" +
-                "<div class='modal-dialog'>" +
-                "<div class='modal-content'>" +
-                "<div class='modal-body'><div class='bootbox-body'></div></div>" +
-                "</div>" +
-                "</div>" +
-                "</div>",
+        "<div class='modal-dialog'>" +
+        "<div class='modal-content'>" +
+        "<div class='modal-body'><div class='bootbox-body'></div></div>" +
+        "</div>" +
+        "</div>" +
+        "</div>",
         header: "<div class='modal-header-inverse'>" +
-                "<h4 class='modal-title'></h4>" +
-                "</div>",
+        "<h4 class='modal-title'></h4>" +
+        "</div>",
         footer: "<div class='modal-footer'></div>",
         closeButton: "<button type='button' class='bootbox-close-button close' data-dismiss='modal' aria-hidden='true'>&times;</button>",
         form: "<form class='bootbox-form'></form>",
@@ -567,7 +567,7 @@
             // can we just build up button elements instead? slower but neater. Then button
             // can just become a template too
             buttonStr +=
-            "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
+                "<button data-bb-handler='" + key + "' type='button' class='btn " + button.className + "'>" + button.label + "</button>";
             callbacks[key] = button.callback;
         });
 

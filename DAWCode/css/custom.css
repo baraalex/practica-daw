@@ -316,3 +316,49 @@
 .gol {
     font-size: medium;
 }
+
+#tabla {
+  max-width: 90%;
+  margin: 5px auto;
+}
+
+#tabla td {
+  vertical-align: middle;
+}
+
+#tabla .admin {
+  width: 150px;
+  text-align: center;
+}
+
+#tabla .privado {
+  text-align: center;
+  font-style: italic;
+}
+
+#logIn .input-group-addon .fa {
+  width: 12px;
+}
+
+.aviso {
+  max-width: 500px;
+  margin: 5px auto;
+}
+
+.well h4 {
+  margin-top: 25px;
+}
+
+.well .informacion {
+  margin-left: 20px;
+}
+
+.well .panel {
+  max-height: 300px;
+  width: 90%;
+  overflow-y: auto;
+}
+
+.imageBig {
+  max-width: 10em;
+}

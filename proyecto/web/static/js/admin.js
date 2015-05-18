@@ -20,7 +20,7 @@ function addEquipo() {
                 className: "btn-success",
                 callback: function () {
                     addJugadores($("#Name").val());
-                    //Añadir jugadores
+                    //Aï¿½adir jugadores
                 }
             },
             cancel: {
@@ -50,7 +50,7 @@ function addLiga() {
                 className: "btn-success",
                 callback: function () {
                     addEquipos($("#Name").val());
-                    //Añadir jugadores
+                    //Aï¿½adir jugadores
                 }
             },
             cancel: {
@@ -70,7 +70,7 @@ function addJugador() {
 
     bootbox.dialog({
         closeButton: false,
-        title: "Añadir jugador",
+        title: "Aï¿½adir jugador",
         message: msg,
         buttons: {
             ok: {
@@ -109,7 +109,7 @@ function addJugadores(nameEquipo) {
                     addJugador();
                     e.preventDefault();
                     return false;
-                    //Añadir jugador
+                    //Aï¿½adir jugador
                 }
             }, ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
@@ -126,8 +126,8 @@ function addJugadores(nameEquipo) {
 function addEquipos(nameLiga) {
 
     var msg =
-        "<span id=\"nameaux\"><h4>Jugadores :</h4></span><div class='table-responsive' style='max-height: 20em;overflow: auto;'>" +
-        "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Dorsal</th><th>Borrar</th></tr></thead>" +
+        "<span id=\"nameaux\"><h4>Equipos :</h4></span><div class='table-responsive' style='max-height: 20em;overflow: auto;'>" +
+        "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
         "<tbody id='tablebody'></tbody></table></div> ";
 
     bootbox.dialog({
@@ -142,7 +142,7 @@ function addEquipos(nameLiga) {
                     addJugador();
                     e.preventDefault();
                     return false;
-                    //Añadir jugador
+                    //Aï¿½adir jugador
                 }
             }, ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
@@ -178,12 +178,12 @@ function change(bool) {
             '<th colspan="5" class="text-center name">Jornadas</th></tr></thead><tbody id="jornadastable">' +
             '<tr><td class="day old">5</td><td class="day">6</td><td class="day">7</td><td class="day">8</td>' +
             '<td class="day">9</td></tr></tbody> </table></div>');
-        Sortable.init();
-        $(".day").click(function () {
-            $('.day').removeClass('active');
-            $(this).addClass('active');
-            jornada($(this).html());
-        });
+            Sortable.init();
+            $(".day").click(function () {
+                $('.day').removeClass('active');
+                $(this).addClass('active');
+                jornada($(this).html());
+            });
 
     } else {
         $("#addbtt").empty();
@@ -234,18 +234,21 @@ function jornada(jor) {
 }
 
 function partido(id, pos) {
-    var msg = "<div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Local :</h4></span>" +
-        "<li>Goles: <input type='number' id='golLocal' min='0' max='100' value='0'></li><li>Estadisticas:" +
+    var msg = "<div  id ='alert' style='display:none;'' class='alert alert-warning alert-dismissible' role='alert'>"+
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+
+  "<strong>Error!</strong>goles negativos</div>"    +
+        "<div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Local :</h4></span>" +
+        "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</li><li>Estadisticas:" +
         "<div class='jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Posicion</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody><tr><td>Jugador</td><td>15</td><td>MC</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
-        "<input type='number' min='0' max='1' value='0' style='width: 5em;'></td><td><input type='number' min='0' max='100' value='0' style='width: 5em;'></td>" +
-        "<td><input type='number' min='0' max='100' value='0' style='width: 5em;'></td></tr></tbody></table></div></li>" +
+        "<input type='checkbox'></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td>" +
+        "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li>" +
         "</div><div class='col-md-6'><span id=\"neq\"><h4>Visitante :</h4></span>" +
-        "<li>Goles: <input type='number' id='golVisitante' min='0' max='100' value='0'></li><li>Estadisticas:" +
+        "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Posicion</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody><tr><td>Jugador</td><td>15</td><td>MC</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
-        "<input type='number' min='0' max='1' value='0' style='width: 5em;'></td><td><input type='number' min='0' max='100' value='0' style='width: 5em;'></td>" +
-        "<td><input type='number' min='0' max='100' value='0' style='width: 5em;'></td></tr></tbody></table></div></li></div></div>";
+        "<input type='checkbox'></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''></td>" +
+        "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div>";
     bootbox.dialog({
         closeButton: false,
         title: "Partido: ",
@@ -255,8 +258,47 @@ function partido(id, pos) {
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
-                callback: function () {
-                    var goles = $("#golLocal").val() + "-" + $("#golVisitante").val();
+                callback: function (e) {
+                var local = document.getElementsByName("golLocal");
+                var localpp = document.getElementsByName("golLocalpp");
+                var visitante = document.getElementsByName("golVisitante");
+                var visitantepp = document.getElementsByName("golVisitantepp");
+                var loc = 0;
+                var vis = 0;
+
+                for(i=0;i<local.length;i++){
+                    if(parseInt(local[i].value)<0){
+                        $("#alert").css({"display":"block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+
+                for(i=0;i<visitantepp.length;i++){
+                    if(parseInt(visitantepp[i].value)<0){
+                        $("#alert").css({"display":"block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+
+                for(i=0;i<visitante.length;i++){
+                    if(parseInt(visitante[i].value)<0){
+                        $("#alert").css({"display":"block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+
+                for(i=0;i<localpp.length;i++){
+                    if(parseInt(localpp[i].value)<0){
+                    $("#alert").css({"display":"block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+
+                    var goles = $("#golLocalTotal").html() + "-" + $("#golVisitanteTotal").html();
                     $("#res" + pos).empty();
                     $("#res" + pos).html(goles);
                 }
@@ -267,6 +309,47 @@ function partido(id, pos) {
             }
         }
     });
+}
+
+
+function calcGol() {
+
+    var local = document.getElementsByName("golLocal");
+    var localpp = document.getElementsByName("golLocalpp");
+    var visitante = document.getElementsByName("golVisitante");
+    var visitantepp = document.getElementsByName("golVisitantepp");
+    var loc = 0;
+    var vis = 0;
+
+    for(i=0;i<local.length;i++){
+        if(parseInt(local[i].value)<0){
+            $("#alert").css({"display":"block"});}
+        loc = loc + parseInt(local[i].value);
+    }
+
+    for(i=0;i<visitantepp.length;i++){
+        if(parseInt(visitantepp[i].value)<0){
+            $("#alert").css({"display":"block"});}
+        loc = loc + parseInt(visitantepp[i].value);
+    }
+
+    for(i=0;i<visitante.length;i++){
+        if(parseInt(visitante[i].value)<0){
+            $("#alert").css({"display":"block"});}
+        vis = vis + parseInt(visitante[i].value);
+    }
+
+    for(i=0;i<localpp.length;i++){
+        if(parseInt(localpp[i].value)<0){
+            $("#alert").css({"display":"block"});}
+        vis = vis + parseInt(localpp[i].value);
+    }
+
+    $("#golLocalTotal").empty();
+    $("#golLocalTotal").html(loc);
+    $("#golVisitanteTotal").empty();
+    $("#golVisitanteTotal").html(vis);
+
 }
 
 function modifyEq() {

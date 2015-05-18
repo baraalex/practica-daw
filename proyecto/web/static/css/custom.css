@@ -37,7 +37,7 @@
 }
 
 .imageLittle {
-    max-height: 25em;
+    max-height: 5em;
 }
 
 .name {
@@ -311,6 +311,10 @@
 
 .selectable {
     cursor: pointer;
+}
+
+.gol {
+    font-size: medium;
 }
 
 #tabla {
