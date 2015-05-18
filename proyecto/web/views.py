@@ -7,8 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate
 
-import math
-
 
 @require_GET
 def home(request):
