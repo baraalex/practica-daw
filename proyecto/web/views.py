@@ -5,6 +5,7 @@ from django.views.decorators.http import require_GET  # , require_POST
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
+from .utils import paginate
 
 import math
 
@@ -26,18 +27,11 @@ def competiciones(request, pagina=1):
         return redirect('web:competiciones')
 
     total = Competicion.objects.filter(privada=False).count()
-    muestra = 10.
 
-    pagina_max = int(math.ceil(total / muestra))
-
-    inicio = int((pagina - 1) * muestra)
+    inicio, fin, pagina_max = paginate(10, pagina, total)
 
     if inicio > total:
         return redirect('web:competiciones', pagina=pagina_max)
-
-    fin = inicio + muestra
-    if fin > total:
-        fin = total
 
     context = {
         'view': 'competiciones',
@@ -64,18 +58,11 @@ def competiciones_privadas(request, pagina=1):
 
     total = Competicion.objects.filter(
         privada=True, administrador__id=request.user.id).count()
-    muestra = 10
 
-    pagina_max = math.ceil(total / muestra)
-
-    inicio = (pagina - 1) * muestra
+    inicio, fin, pagina_max = paginate(10, pagina, total)
 
     if inicio > total:
         return redirect('web:competiciones_privadas', pagina=pagina_max)
-
-    fin = inicio + muestra
-    if fin > total:
-        fin = total
 
     context = {
         'view': 'competiciones',
@@ -122,19 +109,11 @@ def competicion(request, id_competicion, pagina=1):
 
         total = Partido.objects.filter(competicion__id=id_competicion).count()
 
-        muestra = 10
-
-        pagina_max = math.ceil(total / muestra)
-
-        inicio = (pagina - 1) * muestra
+        inicio, fin, pagina_max = paginate(10, pagina, total)
 
         if inicio > total:
             return redirect('web:competicion', id_competicion=id_competicion,
                             pagina=pagina_max)
-
-        fin = inicio + muestra
-        if fin > total:
-            fin = total
 
         context = {
             'view': 'competiciones',
@@ -157,18 +136,11 @@ def equipos(request, pagina=1):
         return redirect('web:equipos')
 
     total = Equipo.objects.count()
-    muestra = 10
 
-    pagina_max = math.ceil(total / muestra)
-
-    inicio = (pagina - 1) * muestra
+    inicio, fin, pagina_max = paginate(10, pagina, total)
 
     if inicio > total:
         return redirect('web:equipos', pagina=pagina_max)
-
-    fin = inicio + muestra
-    if fin > total:
-        fin = total
 
     context = {
         'view': 'equipos',
@@ -201,19 +173,11 @@ def equipo(request, id_equipo, pagina=1):
 
         total = Competicion.objects.filter(participantes__id=id_equipo).count()
 
-        muestra = 10
-
-        pagina_max = math.ceil(total / muestra)
-
-        inicio = (pagina - 1) * muestra
+        inicio, fin, pagina_max = paginate(10, pagina, total)
 
         if inicio > total:
             return redirect('web:equipo', id_equipo=id_equipo,
                             pagina=pagina_max)
-
-        fin = inicio + muestra
-        if fin > total:
-            fin = total
 
         context = {
             'view': 'equipos',
@@ -245,11 +209,7 @@ def jugadores(request, pagina=1, posicion=None):
     else:
         total = Jugador.objects.count()
 
-    muestra = 10
-
-    pagina_max = math.ceil(total / muestra)
-
-    inicio = (pagina - 1) * muestra
+    inicio, fin, pagina_max = paginate(10, pagina, total)
 
     if inicio > total:
         if posicion:
@@ -257,10 +217,6 @@ def jugadores(request, pagina=1, posicion=None):
                             posicion=posicion)
         else:
             return redirect('web:jugadores', pagina=pagina_max)
-
-    fin = inicio + muestra
-    if fin > total:
-        fin = total
 
     context = {
         'view': 'jugadores',
@@ -299,19 +255,11 @@ def jugador(request, id_jugador, pagina=1):
 
         total = Participante.objects.filter(jugador__id=id_jugador).count()
 
-        muestra = 10
-
-        pagina_max = math.ceil(total / muestra)
-
-        inicio = (pagina - 1) * muestra
+        inicio, fin, pagina_max = paginate(10, pagina, total)
 
         if inicio > total:
             return redirect('web:jugador', id_jugador=id_jugador,
                             pagina=pagina_max)
-
-        fin = inicio + muestra
-        if fin > total:
-            fin = total
 
         context = {
             'view': 'jugadores',
