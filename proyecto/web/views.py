@@ -26,11 +26,11 @@ def competiciones(request, pagina=1):
         return redirect('web:competiciones')
 
     total = Competicion.objects.filter(privada=False).count()
-    muestra = 10
+    muestra = 10.
 
-    pagina_max = math.ceil(total / muestra)
+    pagina_max = int(math.ceil(total / muestra))
 
-    inicio = (pagina - 1) * muestra
+    inicio = int((pagina - 1) * muestra)
 
     if inicio > total:
         return redirect('web:competiciones', pagina=pagina_max)
