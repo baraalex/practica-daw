@@ -124,15 +124,16 @@ function addJugadores(nameEquipo) {
 }
 
 function addEquipos(nameLiga) {
-
     var msg =
         "<div class='row'><div class='col-md-6'><span id=\"nameaux\"><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
-        "<tbody id='tablebodyAdded'><tr><td>E1</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr></tbody>" +
+        "<tbody id='tablebodyAdded'></tbody>" +
         "</table></div></div><div class='col-md-6'><span id=\"nameaux\">" +
         "<h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Add</th></tr></thead>" +
-        "<tbody id='tablebody'><tr><td>E2</td><td class='butt '><span class='fa fa-plus'></span></td></tr></tbody>" +
+        "<tbody id='tablebody'><tr id='add2'><td>E2</td><td class='butt'><span class='fa fa-plus'></span></td></tr>" +
+        "<tr id='add3'><td>E3</td><td class='butt'><span class='fa fa-plus'></span></td></tr>" +
+        "<tr id='add4'><td>E4</td><td class='butt'><span class='fa fa-plus'></span></td></tr></tbody>" +
         "</table></div></div> </div>";
 
     bootbox.dialog({
@@ -140,25 +141,37 @@ function addEquipos(nameLiga) {
         title: "Add equipos a liga: " + nameLiga,
         message: msg,
         buttons: {
-            //add: {
-            //    label: '<span class="fa fa-plus" aria-hidden="true"></span>',
-            //    className: "btn-primary",
-            //    callback: function () {
-            //        addJugador();
-            //        e.preventDefault();
-            //        return false;
-            //        //A�adir jugador
-            //    }
-            //},
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
-                className: "btn-success"
+                className: "btn-success",
+                callback: function () {
+                    var add = document.getElementById("tablebodyAdded").children;
+                    var all = "";
+                    for (i = 0; i < add.length; i++) {
+                        all = all + add[i].id + ",";
+                    }
+                    alert(all);
+                }
             },
             cancel: {
                 label: '<span class="fa fa-remove" aria-hidden="true"></span>',
                 className: "btn-danger"
             }
         }
+    });
+
+    $(".butt").click(function () {
+        var el = $(this);
+        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><td>" +
+            el[0].parentNode.childNodes[0].childNodes[0].data +
+            "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>");
+        el.addClass('disabled');
+        $(".butt-danger").click(function () {
+            //alert("#add" + $(this)[0].parentNode.id);
+            document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
+            $(this)[0].parentNode.remove();
+        });
+        //jornada($(this).html());
     });
 }
 
