@@ -59,7 +59,7 @@
 
 .jornada {
     max-height: 20em;
-    overflow: auto;
+    /*overflow: auto;*/
     max-width: 100%;
 }
 
@@ -118,7 +118,50 @@
 .jornada td.active[disabled],
 .jornada td.butt:hover[disabled] {
     background-color: #468c46;
+}
 
+.jornada td.butt.disabled,
+.jornada td.butt[disabled],
+fieldset[disabled] .jornada td.butt {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.jornada td.butt.disabled:hover,
+.jornada td.butt[disabled]:hover,
+fieldset[disabled] .jornada td.butt:hover {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.jornada td.butt-danger {
+    color: #ffffff;
+    background-color: #d10d0c;
+}
+
+.jornada td.butt-danger:hover {
+    cursor: pointer;
+}
+
+.jornada td.butt-danger:hover,
+.jornada td.butt-danger:hover:hover,
+.jornada td.butt-danger:focus,
+.jornada td.butt-danger:hover:focus,
+.jornada td.butt-danger:hover:active,
+.jornada td.butt-danger:hover.active,
+.jornada td.active.disabled,
+.jornada td.butt-danger:hover.disabled,
+.jornada td.active[disabled],
+.jornada td.butt-danger:hover[disabled] {
+    background-color: #910d0c;
 }
 
 .jornadapicker {
@@ -318,47 +361,47 @@
 }
 
 #tabla {
-  max-width: 90%;
-  margin: 5px auto;
+    max-width: 90%;
+    margin: 5px auto;
 }
 
 #tabla td {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 #tabla .admin {
-  width: 150px;
-  text-align: center;
+    width: 150px;
+    text-align: center;
 }
 
 #tabla .privado {
-  text-align: center;
-  font-style: italic;
+    text-align: center;
+    font-style: italic;
 }
 
 #logIn .input-group-addon .fa {
-  width: 12px;
+    width: 12px;
 }
 
 .aviso {
-  max-width: 500px;
-  margin: 5px auto;
+    max-width: 500px;
+    margin: 5px auto;
 }
 
 .well h4 {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .well .informacion {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 .well .panel {
-  max-height: 300px;
-  width: 90%;
-  overflow-y: auto;
+    max-height: 300px;
+    width: 90%;
+    overflow-y: auto;
 }
 
 .imageBig {
-  max-width: 10em;
+    max-width: 10em;
 }
