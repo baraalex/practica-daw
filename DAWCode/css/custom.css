@@ -59,7 +59,7 @@
 
 .jornada {
     max-height: 20em;
-    overflow: auto;
+    /*overflow: auto;*/
     max-width: 100%;
 }
 
@@ -118,7 +118,28 @@
 .jornada td.active[disabled],
 .jornada td.butt:hover[disabled] {
     background-color: #468c46;
+}
 
+.jornada td.butt-danger {
+    color: #ffffff;
+    background-color: #d10d0c;
+}
+
+.jornada td.butt-danger:hover {
+    cursor: pointer;
+}
+
+.jornada td.butt-danger:hover,
+.jornada td.butt-danger:hover:hover,
+.jornada td.butt-danger:focus,
+.jornada td.butt-danger:hover:focus,
+.jornada td.butt-danger:hover:active,
+.jornada td.butt-danger:hover.active,
+.jornada td.active.disabled,
+.jornada td.butt-danger:hover.disabled,
+.jornada td.active[disabled],
+.jornada td.butt-danger:hover[disabled] {
+    background-color: #910d0c;
 }
 
 .jornadapicker {
