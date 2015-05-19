@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_GET  # , require_POST
-# from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
@@ -16,6 +17,53 @@ def home(request):
     }
 
     return render(request, 'index.djhtml', context)
+
+
+@require_http_methods(["GET", "POST"])
+def do_login(request):
+    if request.POST:
+        logout(request)
+        username = password = None
+
+        username = request.POST['username']
+        password = request.POST['password']
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect(request.GET.get('r', 'web:home'))
+                else:
+                    context = {
+                        'title': 'Login: Usuario inactivo',
+                        'inactivo': True,
+                        'r': request.GET.get('r', None),
+                    }
+            else:
+                context = {
+                    'title': 'Login: Datos incorrectos',
+                    'incorrecto': True,
+                    'r': request.GET.get('r', None),
+                }
+        else:
+            context = {
+                'title': 'Login: Datos vacios',
+                'vacios': True,
+                'r': request.GET.get('r', None),
+            }
+    else:
+        context = {
+            'title': 'Login',
+        }
+
+    return render(request, 'login.djhtml', context)
+
+
+@require_GET
+def do_logout(request):
+    logout(request)
+    return redirect(request.GET.get('r', 'web:home'))
 
 
 @require_GET
@@ -86,7 +134,6 @@ def competicion(request, id_competicion, pagina=1):
 
     if comp is None:
         context = {
-            'view': 'competiciones',
             'title': 'No existe la competición',
         }
     elif comp.privada and not request.user.is_authenticated():
@@ -96,34 +143,9 @@ def competicion(request, id_competicion, pagina=1):
             request.user.id is not comp.administrador.id
     )):
         context = {
-            'views': 'competiciones',
-            'noperm': True,
             'title': 'No se puede mostrar la competición',
+            'noperm': True,
         }
-    elif True is False:
-        pagina = int(pagina)
-
-        if pagina == 0:
-            return redirect('web:competicion', id_competicion=id_competicion)
-
-        total = Partido.objects.filter(competicion__id=id_competicion).count()
-
-        inicio, fin, pagina_max = paginate(10, pagina, total)
-
-        if inicio > total:
-            return redirect('web:competicion', id_competicion=id_competicion,
-                            pagina=pagina_max)
-
-        context = {
-            'view': 'competiciones',
-            'title': 'Competición: ' + comp.nombre,
-            'competicion': comp,
-            'pagina': pagina,
-            'pagina_max': pagina_max,
-            'partidos': Partido.objects.filter(competicion__id=id_competicion)
-            .order_by('jornada')[inicio:fin]
-        }
-
     else:
         clasificacion = []
 
@@ -174,12 +196,12 @@ def competicion(request, id_competicion, pagina=1):
                                   goles_favor, goles_contra))
 
         context = {
-            'view': 'competiciones',
             'title': 'Competición: ' + comp.nombre,
             'competicion': comp,
             'clasificacion': clasificacion,
         }
 
+    context['view'] = 'competiciones'
     return render(request, 'competicion.djhtml', context)
 
 
@@ -217,7 +239,6 @@ def equipo(request, id_equipo, pagina=1):
 
     if not equi:
         context = {
-            'view': 'jugadores',
             'title': 'No se puede mostrar el jugador',
         }
     else:
@@ -235,7 +256,6 @@ def equipo(request, id_equipo, pagina=1):
                             pagina=pagina_max)
 
         context = {
-            'view': 'equipos',
             'title': 'Equipo: ' + equi.nombre,
             'equipo': equi,
             'pagina': pagina,
@@ -246,6 +266,7 @@ def equipo(request, id_equipo, pagina=1):
             .order_by('-temporada')[inicio:fin]
         }
 
+    context['view'] = 'equipos'
     return render(request, 'equipo.djhtml', context)
 
 
@@ -299,7 +320,6 @@ def jugador(request, id_jugador, pagina=1):
 
     if not jug:
         context = {
-            'view': 'jugadores',
             'title': 'No se puede mostrar el jugador',
         }
     else:
@@ -317,7 +337,6 @@ def jugador(request, id_jugador, pagina=1):
                             pagina=pagina_max)
 
         context = {
-            'view': 'jugadores',
             'title': 'Jugador: ' + jug.nombre,
             'jugador': jug,
             'pagina': pagina,
@@ -326,4 +345,5 @@ def jugador(request, id_jugador, pagina=1):
             .order_by('partido__jornada')[inicio:fin]
         }
 
+    context['view'] = 'jugadores'
     return render(request, 'jugador.djhtml', context)

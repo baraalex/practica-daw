@@ -66,7 +66,7 @@
                   <li>
                     <div class="navbar-login navbar-login-session">
                       <p>
-                        <a href="#" class="btn btn-danger btn-block">Cerrar Sesion</a>
+                        <a href="{% url 'web:logout' %}?r={{ request.get_full_path }}" class="btn btn-danger btn-block">Cerrar Sesion</a>
                       </p>
                     </div>
                   </li>
@@ -82,10 +82,11 @@
                 <ul class="dropdown-menu">
                   <li>
                     <div class="navbar-login">
-                      <form id="logIn">
+                      <form id="logIn" method="post" action="{% url 'web:login' %}?r={{ request.get_full_path }}">
+                        {% csrf_token %}
                         <div class="input-group">
                           <span class="input-group-addon"><span class="fa fa-user"></span></span>
-                          <input type="text" id="usrName" name="userName" class="form-control" placeholder="Username" required="" value="">
+                          <input type="text" id="usrName" name="username" class="form-control" placeholder="Username" required="" value="">
                         </div>
                         <div class="input-group" style="padding-top: 1%">
                           <span class="input-group-addon"><span class="fa fa-lock"></span></span>
@@ -103,7 +104,7 @@
                   <li>
                     <div class="navbar-login navbar-login-session">
                       <p>
-                        <a href="#" class="btn btn-primary btn-block" onclick="window.location = 'registro.html'"><span class="fa fa-pencil" aria-hidden="true"></span> Registrar</a>
+                        <a href="{% url 'web:registro' %}" class="btn btn-primary btn-block"><span class="fa fa-pencil" aria-hidden="true"></span> Registrar</a>
                       </p>
                     </div>
                   </li>
