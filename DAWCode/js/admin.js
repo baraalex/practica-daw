@@ -428,7 +428,7 @@ function modifyEq() {
         "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea maxlength='64' cols='1' id='Name' class='textareaDiv' " +
         "placeholder='Enter name'></textarea><span id='campoaux'><h4>Campo :</h4></span><textarea maxlength='250'" +
-        " id='Campo' class='textareaDiv' placeholder='Enter campo'></textarea><h4>Foto :</h4></span><input type='file' " +
+        " id='newCampo' class='textareaDiv' placeholder='Enter campo'></textarea><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
@@ -441,8 +441,8 @@ function modifyEq() {
                 className: "btn-success",
                 callback: function () {
                     var name = $("#Name").val();
-                    var neq = $("#Campo").val();
-                    if (name == "" || name == null || neq == "" || neq == null) {
+                    var campo = $("#newCampo").val();
+                    if (name == "" || name == null || campo == "" || campo == null) {
                         $("#alert").css({"display": "block"});
                         e.preventDefault();
                         return false;
@@ -451,6 +451,8 @@ function modifyEq() {
                         $("#alert").css({"display": "none"});
                         $("#media-heading").empty();
                         $("#media-heading").html(name);
+                        $("#campo").empty();
+                        $("#campo").html(campo);
                     }
                 }
             },
@@ -463,6 +465,7 @@ function modifyEq() {
 
     
     $("#Name").val($("#media-heading").html());
+    $("#campo").val($("#newCampo").html());
     $(".selectable").change(function () {
         readURL(this);
     });

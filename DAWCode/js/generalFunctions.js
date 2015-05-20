@@ -51,7 +51,7 @@ function readURL(input) {
 function editUserData(id) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-        "<div class='name'>Error!</div>El nombre e email de usuario no pueden estar vacios</div>" +
+        "<div class='name'>Error!</div>El nombre, apellidos e email de usuario no pueden estar vacios</div>" +
         "<span><h4>Nombre Real:</h4></span>"+
         "<div class='input-group'><span class='input-group-addon' id='sizing-addon2' required><span class='fa fa-user'></span></span>" +
         "<input id='newName' type='text' class='form-control' placeholder='User Name' aria-describedby='sizing-addon2' value='" +
@@ -76,8 +76,9 @@ function editUserData(id) {
                 type: "submit",
                 callback: function () {
                     var name = $("#newName").val();
+                    var lastname = $("#newlastName").val();
                     var mail = $("#newEmail").val();
-                    if (name == "" || name == null || mail == "" || mail == null) {
+                    if (name == "" || name == null || lastname == "" || lastname == null || mail == "" || mail == null) {
                         $("#alert").css({"display": "block"});
                         e.preventDefault();
                         return false;
@@ -87,6 +88,8 @@ function editUserData(id) {
 
                         $("#realName").empty;
                         $("#realName").html(name);
+                        $("#lastName").empty;
+                        $("#lastName").html(lastname);
                         $("#email").empty;
                         $("#email").html(mail);
                         //Añadir jugadores
@@ -101,5 +104,6 @@ function editUserData(id) {
     });
 
     $("#newName").val($("#realName").html());
+    $("#newlastName").val($("#lastName").html());
     $("#newEmail").val($("#email").html());
 }
