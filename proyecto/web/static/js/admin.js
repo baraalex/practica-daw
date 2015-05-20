@@ -460,7 +460,7 @@ function modifyEq() {
     });
 
     
-    $("#Name").val($("#media-heading").val());
+    $("#Name").val($("#media-heading").html());
     $(".selectable").change(function () {
         readURL(this);
     });
@@ -502,7 +502,7 @@ function modifyComp() {
         }
     });
 
-    $("#Name").val($("#media-heading").val());
+    $("#Name").val($("#media-heading").html());
 
 
     $(".selectable").change(function () {

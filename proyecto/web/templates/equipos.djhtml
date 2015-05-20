@@ -9,7 +9,7 @@
   </ul>
 {% endblock %}
 {% block contenido %}
-  <div id="tabla">
+  <div id="tabla" class="table-responsive">
     {% if equipos %}
       <table class="table table-striped">
         <thead>
