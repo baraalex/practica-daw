@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
@@ -68,6 +69,45 @@ def do_login(request):
 def do_logout(request):
     logout(request)
     return redirect(request.GET.get('r', 'web:home'))
+
+
+@require_http_methods(["GET", "POST"])
+def registro(request):
+    if request.POST:
+        username = passwd1 = passwd2 = email = nombre = apellidos = None
+
+        if not username or not passwd1 or not passwd2 or not email or \
+           not nombre or not apellidos:
+            context = {
+                'title': 'Registro: Campos vacíos',
+                'vacios': True,
+            }
+        elif passwd1 != passwd2:
+            context = {
+                'title': 'Registro: Las contraseñas no coinciden',
+                'passwds': True,
+            }
+        elif User.objects.filter(username=username).exists():
+            context = {
+                'title': 'Registro: El usuario ya existe',
+                'existe': True,
+            }
+        else:
+            user = User.objects.create_user(username, email, passwd1,
+                                            first_name=nombre,
+                                            last_name=apellidos,
+                                            is_active=False)
+            user.save()
+            context = {
+                'title': 'Registro: Correcto',
+                'correcto': True,
+            }
+    else:
+        context = {
+            'title': 'Registro',
+        }
+
+    return render(request, 'registro.djhtml', context)
 
 
 @require_GET

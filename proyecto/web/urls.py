@@ -12,7 +12,7 @@ urlpatterns = [
         views.home,
         name='admin'),
     url(r'^usuario/registro/$',
-        views.do_login,
+        views.registro,
         name='registro'),
     url(r'^usuario/login/$',
         views.do_login,

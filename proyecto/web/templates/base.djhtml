@@ -50,7 +50,7 @@
                 <ul class="dropdown-menu">
                   <li>
                     <div class="navbar-login">
-                      <p class="text-left name" id="realName">{{ user.first_name }} {{ user.last_name }}</p>
+                      <p class="text-left name"><span id="realName">{{ user.first_name }}</span> <span id="lastName">{{ user.last_name }}</span></p>
                       <p class="text-left small" id="email">{{ user.email }}</p>
                       <div class="row">
                         <div class="col-md-6"><p class="text-left">
