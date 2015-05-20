@@ -108,7 +108,7 @@ def competiciones_privadas(request, pagina=1):
         return redirect('web:competiciones_privadas')
 
     total = Competicion.objects.filter(
-        privada=True, administrador__id=request.user.id).count()
+        privada=True, administrador=request.user).count()
 
     inicio, fin, pagina_max = paginate(10, pagina, total)
 
@@ -122,7 +122,7 @@ def competiciones_privadas(request, pagina=1):
         'pagina_max': pagina_max,
         'tipo': 'prv',
         'competiciones': Competicion.objects
-        .filter(privada=True, administrador__id=request.user.id)
+        .filter(privada=True, administrador=request.user)
         .order_by('-temporada')[inicio:fin],
     }
 
@@ -144,7 +144,7 @@ def competicion(request, id_competicion, pagina=1):
         return redirect('web:competiciones')  # TBD Ir al login
     elif (comp.privada and (
             request.user.is_authenticated() and
-            request.user.id is not comp.administrador.id
+            request.user != comp.administrador
     )):
         context = {
             'title': 'No se puede mostrar la competición',
