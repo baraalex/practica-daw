@@ -26,6 +26,12 @@ $( document ).ready(function() {
    $("#addJugador").click(function () {
             addJugador();
         });
+   
+   $(".day").click(function () {
+            $('.day').removeClass('active');
+            $(this).addClass('active');
+            jornada($(this).html());
+        });
 });
 
 

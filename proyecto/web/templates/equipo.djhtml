@@ -9,7 +9,7 @@
   </ul>
 {% endblock %}
 {% block contenido %}
-  <div id="tabla">
+  <div id="tabla" class="table-responsive">
     {% if equipo %}
       <div class="well well-lg media">
         <div class="media-body">
@@ -50,6 +50,7 @@
         </div>
       </div>
       <h3>Competiciones</h3>
+      <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -74,6 +75,7 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           <a href="{% if pagina != 1 %}{% url 'web:equipo' equipo.id pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
