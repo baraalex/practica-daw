@@ -13,13 +13,13 @@
     {% if jugador %}
       <div class="well well-lg media">
         <div class="media-body">
-          <h2 id="media-heading" class="media-heading">{{ jugador.nombre }}</h2>
+          <h2 id="media-heading" class="media-heading name">{{ jugador.nombre }}</h2>
           <hr>
-          <h4>Equipo actual:</h4>
+          <h4 class="name">Equipo actual:</h4>
           <span class="informacion"><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></span>
-          <h4>Posición:</h4>
+          <h4 class="name">Posición:</h4>
           <span class="informacion">{{ jugador.get_posicion_display }}</span>
-          <h4>Dorsal:</h4>
+          <h4 class="name">Dorsal:</h4>
           <span class="informacion">{{ jugador.dorsal }}</span>
         </div>
         <div class="media-right">
@@ -28,7 +28,7 @@
           </a>
         </div>
       </div>
-      <h3>Partidos jugados</h3>
+      <h3 class="name">Partidos jugados</h3>
       <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -73,7 +73,7 @@
     {% else %}
       <div class="aviso panel panel-warning">
         <div class="panel-heading">
-          <h3 class="panel-title">Aviso</h3>
+          <h3 class="panel-title name">Aviso</h3>
         </div>
         <div class="panel-body">
           No se ha encontrado el jugador
