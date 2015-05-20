@@ -2,7 +2,7 @@
 {% block navegacion %}
   <ul class="nav nav-pills nav-stacked">
     <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
-      <a{% if user.is_authenticated %} id="editJugador"{% endif %} href="#">
+      <a{% if user.is_authenticated %} id="editEquipo"{% endif %} href="#">
         <span class="fa fa-pencil"></span> Editar equipo
       </a>
     </li>
