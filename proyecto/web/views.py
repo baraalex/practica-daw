@@ -55,6 +55,7 @@ def do_login(request):
     else:
         context = {
             'title': 'Login',
+            'r': request.GET.get('r', None),
         }
 
     return render(request, 'login.djhtml', context)

@@ -62,7 +62,7 @@
         </table>
       </div>
     {% elif noperm %}
-      <div class="aviso panel panel-error">
+      <div class="aviso panel panel-danger">
         <div class="panel-heading">
           <h3 class="panel-title">Error</h3>
         </div>

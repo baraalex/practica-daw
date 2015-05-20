@@ -1,0 +1,39 @@
+{% extends 'base_simple.djhtml' %}
+{% block contenido %}
+  {% if inactivo %}
+    <div class="aviso alert alert-warning alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+      <span class="sr-only">Aviso:</span>
+      Su cuenta está inactiva, por favor contacte con el administrador.
+    </div>
+  {% elif incorrecto or vacios %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      Los datos proporcionados son incorrectos o el usuario no existe.
+    </div>
+  {% endif %}
+  <div id="formulario-usuario">
+    <h1>Inicio de sesión</h1>
+    <form id="logIn" method="post" action="{% url 'web:login' %}{% if r %}?r={{ r }}{% endif %}">
+      {% csrf_token %}
+      <div class="input-group">
+        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+        <input type="text" id="usrName" name="username" class="form-control" placeholder="Usuario" required="" value="">
+      </div>
+      <div class="input-group" style="padding-top: 1%">
+        <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+        <input id="psswd" type="password" name="password" placeholder="Contraseña" class="form-control" required="" value="">
+      </div>
+      <div style="padding-top: 1%">
+        <button type="submit" class="btn btn-success btn-block">
+          <i class="fa fa-sign-in"></i> Iniciar sesión
+        </button>
+      </div>
+    </form>
+    <hr />
+    <a href="{% url 'web:registro' %}" class="btn btn-primary btn-block"><span class="fa fa-pencil" aria-hidden="true"></span> Registrarse</a>
+  </div>
+{% endblock %}

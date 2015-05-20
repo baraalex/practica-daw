@@ -82,15 +82,15 @@
                 <ul class="dropdown-menu">
                   <li>
                     <div class="navbar-login">
-                      <form id="logIn" method="post" action="{% url 'web:login' %}?r={{ request.get_full_path }}">
+                      <form id="logIn" method="post" action="{% url 'web:login' %}?r={% if r %}{{ r }}{% else %}{{ request.get_full_path }}{% endif %}">
                         {% csrf_token %}
                         <div class="input-group">
                           <span class="input-group-addon"><span class="fa fa-user"></span></span>
-                          <input type="text" id="usrName" name="username" class="form-control" placeholder="Username" required="" value="">
+                          <input type="text" id="usrName" name="username" class="form-control" placeholder="Usuario" required="" value="">
                         </div>
                         <div class="input-group" style="padding-top: 1%">
                           <span class="input-group-addon"><span class="fa fa-lock"></span></span>
-                          <input id="psswd" type="password" name="password" placeholder="Password" class="form-control" required="" value="">
+                          <input id="psswd" type="password" name="password" placeholder="Contraseña" class="form-control" required="" value="">
                         </div>
                         <div style="padding-top: 1%">
                           <button type="submit" class="btn btn-success btn-block">
@@ -104,7 +104,7 @@
                   <li>
                     <div class="navbar-login navbar-login-session">
                       <p>
-                        <a href="{% url 'web:registro' %}" class="btn btn-primary btn-block"><span class="fa fa-pencil" aria-hidden="true"></span> Registrar</a>
+                        <a href="{% url 'web:registro' %}" class="btn btn-primary btn-block"><span class="fa fa-pencil" aria-hidden="true"></span> Registrarse</a>
                       </p>
                     </div>
                   </li>

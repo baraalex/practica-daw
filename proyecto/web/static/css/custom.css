@@ -385,7 +385,11 @@ fieldset[disabled] .jornada td.butt:hover {
 
 .aviso {
     max-width: 500px;
-    margin: 5px auto;
+    margin: 10px auto;
+}
+
+.aviso .fa {
+  margin-right: 10px;
 }
 
 .well h4 {
@@ -404,4 +408,10 @@ fieldset[disabled] .jornada td.butt:hover {
 
 .imageBig {
     max-width: 10em;
+}
+
+#formulario-usuario {
+  text-align: center;
+  max-width: 500px;
+  margin: 10px auto;
 }
