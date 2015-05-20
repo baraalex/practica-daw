@@ -4,11 +4,13 @@
 
 function addEquipo() {
 
-    var msg =
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea maxlength='64' cols='1' id='Name' class='textareaDiv' " +
         "placeholder='Enter name'></textarea><span id='campoaux'><h4>Campo :</h4></span><textarea maxlength='250'" +
         " id='Campo' class='textareaDiv' placeholder='Enter campo'></textarea><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable' onchange='readURL(this);'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
         closeButton: false,
@@ -19,8 +21,17 @@ function addEquipo() {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
                 callback: function () {
-                    addJugadores($("#Name").val());
-                    //A�adir jugadores
+                    var name = $("#Name").val();
+                    var campo = $("#Campo").val();
+                    if (name == "" || name == null || campo == "" || campo == null) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        $("#alert").css({"display": "none"});
+                        addJugadores(name);
+                    }
                 }
             },
             cancel: {
@@ -29,16 +40,22 @@ function addEquipo() {
             }
         }
     });
+    $(".selectable").change(function () {
+        readURL(this);
+    });
+
 }
 
 function addLiga() {
 
-    var msg =
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El nombre de la liga no puede estar vacio y los equipos deben ser validos</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea maxlength='64' cols='1' id='Name' class='textareaDiv' " +
         "placeholder='Enter name'></textarea><div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Temporada :</h4></span><select>" +
-        "<option value='13/14'>13/14</option> </select></div><div class='col-md-6'><span id=\"neq\"><h4>Numero equipos :</h4></span>" +
-        "<input type='number' id='dorsal' min='2' max='100' step='2' value='20'></div></div><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable' onchange='readURL(this);'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "<option value='13/14'>13/14</option> </select></div><div class='col-md-6'><span><h4>Numero equipos :</h4></span>" +
+        "<input type='number' id='neq' min='2' max='100' step='2' value='38'></div></div><h4>Foto :</h4></span><input type='file' " +
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
         closeButton: false,
@@ -48,9 +65,19 @@ function addLiga() {
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
-                callback: function () {
-                    addEquipos($("#Name").val());
-                    //A�adir jugadores
+                callback: function (e) {
+
+                    var name = $("#Name").val();
+                    var neq = $("#neq").val();
+                    if (name == "" || name == null || neq < 2 || neq > 100) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        $("#alert").css({"display": "none"});
+                        addEquipos(name, neq);
+                    }
                 }
             },
             cancel: {
@@ -59,14 +86,19 @@ function addLiga() {
             }
         }
     });
+    $(".selectable").change(function () {
+        readURL(this);
+    });
 }
 
 function addJugador() {
-    var msg =
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea id='Name' maxlength='64' class='textareaDiv' " +
         "placeholder=\"Enter name\"></textarea><span id=\"dorsalaux\"><h4>Dorsal :</h4></span>" +
         "<input type='number' id='dorsal' min='1' max='99' value='1'><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable' onchange='readURL(this);'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
         closeButton: false,
@@ -77,9 +109,20 @@ function addJugador() {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
                 callback: function () {
-                    var jug = "<tr><td>" + $("#Name").val() + "</td><td>" + $("#dorsal").val() + "</td><td>" +
-                        "<button class='btn btn-danger'><span class='fa fa-remove'' aria-hidden='true'></span></button></td></tr>";
-                    $("#tablebody").append(jug);
+                    var name = $("#Name").val();
+                    if (name == "" || name == null) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        var jug = "<tr id='1'><td>" + name + "</td><td>" + $("#dorsal").val() + "</td><td>" +
+                            "<button class='btn btn-danger deljugador'><span class='fa fa-remove'' aria-hidden='true'></span></button></td></tr>";
+                        $("#tablebody").append(jug);
+                        $(".deljugador").click(function () {
+                            $(this)[0].parentNode.parentNode.remove();
+                        });
+                    }
                 }
             },
             cancel: {
@@ -87,6 +130,10 @@ function addJugador() {
                 className: "btn-danger"
             }
         }
+    });
+
+    $(".selectable").change(function () {
+        readURL(this);
     });
 }
 
@@ -123,8 +170,10 @@ function addJugadores(nameEquipo) {
     });
 }
 
-function addEquipos(nameLiga) {
-    var msg =
+function addEquipos(nameLiga, num) {
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
         "<div class='row'><div class='col-md-6'><span id=\"nameaux\"><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
         "<tbody id='tablebodyAdded'></tbody>" +
@@ -146,11 +195,11 @@ function addEquipos(nameLiga) {
                 className: "btn-success",
                 callback: function () {
                     var add = document.getElementById("tablebodyAdded").children;
-                    var all = "";
-                    for (i = 0; i < add.length; i++) {
-                        all = all + add[i].id + ",";
+                    if (num != add.length) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
                     }
-                    alert(all);
                 }
             },
             cancel: {
@@ -161,17 +210,17 @@ function addEquipos(nameLiga) {
     });
 
     $(".butt").click(function () {
+        $("#alert").css({"display": "none"});
         var el = $(this);
         $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><td>" +
             el[0].parentNode.childNodes[0].childNodes[0].data +
             "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>");
         el.addClass('disabled');
         $(".butt-danger").click(function () {
-            //alert("#add" + $(this)[0].parentNode.id);
+            $("#alert").css({"display": "none"});
             document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
             $(this)[0].parentNode.remove();
         });
-        //jornada($(this).html());
     });
 }
 
@@ -209,9 +258,7 @@ function change(bool) {
         $("#addbtt").html('<div class="input-group"><button type="button" class="btn btn-success" title=" Add equipo"' +
             'onclick="addEquipo();"><span class="fa fa-plus" aria-hidden="true"></span></button></div>');
         $("#admindiv").empty();
-        $("#admindiv").html('<div class="col-md-6"><h3 class="sub-header">Jugadores<div class="input-group" ' +
-            'style="float: right;"><button type="button" class="btn btn-primary" onclick="addJugador();" ' +
-            'title="Add equipo"><span class="fa fa-plus" aria-hidden="true"></span></button></div></h3>' +
+        $("#admindiv").html('<div class="col-md-6"><h3 class="sub-header">Jugadores</h3>' +
             '<div class="table-responsive"><table class="table table-striped table-bordered dataTable sortable-theme-bootstrap" data-sortable>' +
             '<thead><tr><th>Nombre</th><th>Dorsal</th><th>Posicion</th></tr></thead>' +
             '<tbody><tr><td>Jugador</td><td>15</td><td>MC</td></tr></tbody></table></div></div><div class="col-md-6">' +
@@ -253,21 +300,22 @@ function jornada(jor) {
 }
 
 function partido(id, pos) {
-    var msg = "<div  id ='alert' style='display:none;'' class='alert alert-warning alert-dismissible' role='alert'>" +
+    var msg = "<div  id ='alert' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-        "<strong>Error!</strong>goles negativos</div>" +
+        "<div class='name'>Error!</div>goles negativos</div>" +
         "<div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Local :</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</li><li>Estadisticas:" +
-        "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Posicion</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td>Jugador</td><td>15</td><td>MC</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
+        "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
+        "<tbody><tr><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
         "<input type='checkbox'></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td>" +
         "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li>" +
         "</div><div class='col-md-6'><span id=\"neq\"><h4>Visitante :</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
-        "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Posicion</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td>Jugador</td><td>15</td><td>MC</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
+        "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
+        "<tbody><tr><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
         "<input type='checkbox'></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''></td>" +
         "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div>";
+
     bootbox.dialog({
         closeButton: false,
         title: "Partido: ",
@@ -375,11 +423,13 @@ function calcGol() {
 }
 
 function modifyEq() {
-    var msg =
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea maxlength='64' cols='1' id='Name' class='textareaDiv' " +
         "placeholder='Enter name'></textarea><span id='campoaux'><h4>Campo :</h4></span><textarea maxlength='250'" +
         " id='Campo' class='textareaDiv' placeholder='Enter campo'></textarea><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable' onchange='readURL(this);'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
         closeButton: false,
@@ -390,6 +440,16 @@ function modifyEq() {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
                 callback: function () {
+                    var name = $("#Name").val();
+                    var neq = $("#Campo").val();
+                    if (name == "" || name == null || neq == "" || neq == null) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        $("#alert").css({"display": "none"});
+                    }
                 }
             },
             cancel: {
@@ -398,14 +458,19 @@ function modifyEq() {
             }
         }
     });
+    $(".selectable").change(function () {
+        readURL(this);
+    });
 }
 
 function modifyComp() {
-    var msg =
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El nombre de la competicion no puede estar vacio</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea maxlength='64' cols='1' id='Name' class='textareaDiv' " +
         "placeholder='Enter name'></textarea><span id='campoaux'><h4>Temporada :</h4></span><select>" +
         "<option value='13/14'>13/14</option> </select><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable' onchange='readURL(this);'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
         closeButton: false,
@@ -416,6 +481,15 @@ function modifyComp() {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
                 callback: function () {
+                    var name = $("#Name").val();
+                    if (name == "" || name == null) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        $("#alert").css({"display": "none"});
+                    }
                 }
             },
             cancel: {
@@ -423,5 +497,8 @@ function modifyComp() {
                 className: "btn-danger"
             }
         }
+    });
+    $(".selectable").change(function () {
+        readURL(this);
     });
 }
