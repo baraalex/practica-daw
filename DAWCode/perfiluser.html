@@ -5,7 +5,7 @@
     <title>Perfil</title>
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/sortable-theme-bootstrap.css" rel="stylesheet"/>
     <link href="css/custom.css" rel="stylesheet">
@@ -16,6 +16,7 @@
     <script src="js/bootstrap/bootstrap.js"></script>
     <script src="js/bootstrap/bootbox.js"></script>
     <script src="js/sortTable/sortable.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/generalFunctions.js"></script>
     <script src="js/admin.js"></script>
 </head>
@@ -23,6 +24,12 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -85,7 +92,7 @@
     </div>
 </nav>
 <div class="container-fluid row row-right">
-    <nav class='col-sm-3 col-md-2 sidebar sidebar-menu-collapsed'><a href='#' id='justify-icon'>
+    <nav class='col-sm-3 col-md-2 sidebar sidebar-left sidebar-animate sidebar-md-show'><a href='#' id='justify-icon'>
         <span class='fa fa-soccer-ball-o'></span>
         <span class='expanded-element'>DAW</span>
     </a>
