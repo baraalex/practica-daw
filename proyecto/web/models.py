@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals  # Soporte unicode en Py2.x
+
 from django.db import models
 from django.contrib.auth.models import User
 

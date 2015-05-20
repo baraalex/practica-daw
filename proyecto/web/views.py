@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals  # Soporte unicode en Py2.x
+
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_http_methods
