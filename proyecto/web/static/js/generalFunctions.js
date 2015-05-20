@@ -52,10 +52,17 @@ function editUserData(id) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre e email de usuario no pueden estar vacios</div>" +
-        "<span id=\"nameaux\"><h4>Nombre Real:</h4></span><textarea maxlength='64' cols='1' id='newName' class='textareaDiv' " +
-        "placeholder='Enter name'>" + $("#realName").val() + "</textarea><span id=\"nameaux\"><h4>Email:</h4></span>" +
-        "<div class='input-group'><span class='input-group-addon' id='sizing-addon2' required>@</span>" +
-        "<input id='newEmail' type='email' class='form-control' placeholder='Username' aria-describedby='sizing-addon2' value='" +
+        "<span><h4>Nombre Real:</h4></span>"+
+        "<div class='input-group'><span class='input-group-addon' id='sizing-addon2' required><span class='fa fa-user'></span></span>" +
+        "<input id='newName' type='text' class='form-control' placeholder='User Name' aria-describedby='sizing-addon2' value='" +
+        $("#realName").val() + "'></div>"+
+        "<span><h4>Apellidos:</h4></span>"+
+        "<div class='input-group'><span class='input-group-addon' id='sizing-addon2' required><span class='fa fa-user'></span></span>" +
+        "<input id='newlastName' type='text' class='form-control' placeholder='User lastName' aria-describedby='sizing-addon2' value='" +
+        $("#lastName").val() + "'></div>"+
+        "<span><h4>Email:</h4></span>" +
+        "<div class='input-group'><span class='input-group-addon' id='sizing-addon2' required><span class='fa fa-envelope'></span></span>" +
+        "<input id='newEmail' type='email' class='form-control' placeholder='Email' aria-describedby='sizing-addon2' value='" +
         $("#email").val() + "'></div>";
 
     bootbox.dialog({

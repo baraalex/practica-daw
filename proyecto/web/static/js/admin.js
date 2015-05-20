@@ -449,6 +449,8 @@ function modifyEq() {
                     }
                     else {
                         $("#alert").css({"display": "none"});
+                        $("#media-heading").empty();
+                        $("#media-heading").html(name);
                     }
                 }
             },
@@ -492,6 +494,8 @@ function modifyComp() {
                     }
                     else {
                         $("#alert").css({"display": "none"});
+                        $("#media-heading").empty();
+                        $("#media-heading").html(name);
                     }
                 }
             },
