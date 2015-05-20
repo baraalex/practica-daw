@@ -380,10 +380,6 @@ fieldset[disabled] .jornada td.butt:hover {
     font-style: italic;
 }
 
-#logIn .input-group-addon .fa {
-    width: 12px;
-}
-
 .aviso {
     max-width: 500px;
     margin: 10px auto;
@@ -418,6 +414,9 @@ fieldset[disabled] .jornada td.butt:hover {
   text-align: center;
   max-width: 500px;
   margin: 10px auto;
+}
+.input-group-addon .fa {
+  width: 12px;
 }
 
 .main {

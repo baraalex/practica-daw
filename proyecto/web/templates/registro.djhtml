@@ -1,3 +1,35 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
+  <div id="formulario-usuario">
+    <h1>Registro</h1>
+    <form name="registerform" action="index.html" method="get" style="padding-top: 2%">
+      <div class="input-group">
+        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+        <input type="text" id="userName" name="userName" class="form-control" placeholder="Usuario" required="" value="">
+      </div>
+      <div class="input-group" style="padding-top: 1%">
+        <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Correo electrónico" required="" value="">
+      </div>
+      <div class="input-group" style="padding-top: 1%">
+        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+        <input type="text" id="realName" name="realName" class="form-control" placeholder="Nombre" required="" value="">
+      </div>
+      <div class="input-group" style="padding-top: 1%">
+        <span class="input-group-addon"><span class="fa fa-user"></span></span>
+        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Apellidos" required="" value="">
+      </div>
+      <div class="input-group" style="padding-top: 1%">
+        <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+        <input id="password" type="password" name="password" placeholder="Contraseña" class="form-control" required="" value="">
+      </div>
+      <div class="input-group" style="padding-top: 1%">
+        <span class="input-group-addon"><span class="fa fa-lock"></span></span>
+        <input id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Repetir contraseña" class="form-control" required="" value="">
+      </div>
+      <div style="padding-top: 1%">
+        <input class="btn btn-primary btn-block" type="submit" value="Register">
+      </div>
+    </form>
+  </div>
 {% endblock %}
