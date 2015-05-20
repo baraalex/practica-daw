@@ -23,8 +23,9 @@ def home(request):
 
 @require_http_methods(["GET", "POST"])
 def do_login(request):
-    if request.POST:
-        logout(request)
+    if request.user.is_authenticated():
+        return redirect(request.GET.get('r', 'web:home'))
+    elif request.POST:
         username = password = None
 
         username = request.POST['username']
