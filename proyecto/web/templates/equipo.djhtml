@@ -15,7 +15,7 @@
         <div class="media-body">
           <h2 id="media-heading" class="media-heading name">{{ equipo.nombre }}</h2>
           <hr>
-          <h4 class="name">Campo:</h4>
+          <h4 id="campo" class="name">Campo:</h4>
           <span class="informacion">{{ equipo.campo }}</span>
           <h4 class="name">Jugadores:</h4>
           <div class="panel panel-default">
