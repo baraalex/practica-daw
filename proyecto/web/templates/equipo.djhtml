@@ -13,11 +13,11 @@
     {% if equipo %}
       <div class="well well-lg media">
         <div class="media-body">
-          <h2 id="media-heading" class="media-heading">{{ equipo.nombre }}</h2>
+          <h2 id="media-heading" class="media-heading name">{{ equipo.nombre }}</h2>
           <hr>
-          <h4>Campo:</h4>
+          <h4 class="name">Campo:</h4>
           <span class="informacion">{{ equipo.campo }}</span>
-          <h4>Jugadores:</h4>
+          <h4 class="name">Jugadores:</h4>
           <div class="panel panel-default">
             <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
@@ -49,7 +49,7 @@
           </a>
         </div>
       </div>
-      <h3>Competiciones</h3>
+      <h3 class="name">Competiciones</h3>
       <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -88,7 +88,7 @@
     {% else %}
       <div class="aviso panel panel-warning">
         <div class="panel-heading">
-          <h3 class="panel-title">Aviso</h3>
+          <h3 class="panel-title name">Aviso</h3>
         </div>
         <div class="panel-body">
           No se ha encontrado el equipo
