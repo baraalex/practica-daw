@@ -1,8 +1,38 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
+  {% if vacios %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      Se han enviado campos vacíos, todos los campos son necesarios.
+    </div>
+  {% elif passwds %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      Las contraseñas no coinciden.
+    </div>
+  {% elif existe %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      El usuario elegido ya existe.
+    </div>
+  {% elif correcto %}
+    <div class="aviso alert alert-success alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+      <span class="sr-only">Aviso:</span>
+      Se ha creado la cuenta satisfactoriamente, ahora deberá esperar a su aprobación por parte de un administrador.
+    </div>
+  {% endif %}
   <div id="formulario-usuario">
     <h1>Registro</h1>
-    <form name="registerform" action="index.html" method="get" style="padding-top: 2%">
+    <form name="registerform" action="{% url 'web:registro' %}" method="post" style="padding-top: 2%">
+      {% csrf_token %}
       <div class="input-group">
         <span class="input-group-addon"><span class="fa fa-user"></span></span>
         <input type="text" id="userName" name="userName" class="form-control" placeholder="Usuario" required="" value="">
@@ -28,7 +58,9 @@
         <input id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Repetir contraseña" class="form-control" required="" value="">
       </div>
       <div style="padding-top: 1%">
-        <input class="btn btn-primary btn-block" type="submit" value="Register">
+        <button class="btn btn-success btn-block" type="submit">
+          <span class="fa fa-pencil"></span> Registrarse
+        </button>
       </div>
     </form>
   </div>

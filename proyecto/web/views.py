@@ -6,12 +6,14 @@ from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate
 
+import sys
 
 @require_GET
 def home(request):
@@ -29,8 +31,10 @@ def do_login(request):
     elif request.POST:
         username = password = None
 
-        username = request.POST['username']
-        password = request.POST['password']
+        if 'username' in request.POST:
+            username = request.POST['username']
+        if 'password' in request.POST:
+            password = request.POST['password']
 
         if username and password:
             user = authenticate(username=username, password=password)
@@ -73,8 +77,23 @@ def do_logout(request):
 
 @require_http_methods(["GET", "POST"])
 def registro(request):
-    if request.POST:
+    if request.user.is_authenticated():
+        return redirect('web:home')
+    elif request.POST:
         username = passwd1 = passwd2 = email = nombre = apellidos = None
+
+        if 'userName' in request.POST:
+            username = request.POST['userName']
+        if 'password' in request.POST:
+            passwd1 = request.POST['password']
+        if 'passwordConfirm' in request.POST:
+            passwd2 = request.POST['passwordConfirm']
+        if 'email' in request.POST:
+            email = request.POST['email']
+        if 'email' in request.POST:
+            nombre = request.POST['realName']
+        if 'email' in request.POST:
+            apellidos = request.POST['lastName']
 
         if not username or not passwd1 or not passwd2 or not email or \
            not nombre or not apellidos:
@@ -93,11 +112,11 @@ def registro(request):
                 'existe': True,
             }
         else:
-            user = User.objects.create_user(username, email, passwd1,
-                                            first_name=nombre,
-                                            last_name=apellidos,
-                                            is_active=False)
-            user.save()
+            nuevo = User.objects.create_user(username, email, passwd1,
+                                             first_name=nombre,
+                                             last_name=apellidos)
+            nuevo.is_active = False
+            nuevo.save()
             context = {
                 'title': 'Registro: Correcto',
                 'correcto': True,
@@ -140,7 +159,8 @@ def competiciones(request, pagina=1):
 @require_GET
 def competiciones_privadas(request, pagina=1):
     if not request.user.is_authenticated():
-        return redirect('web:competiciones')  # TBD Ir al login
+        return redirect("%s?r=%s" %
+                        (reverse('web:login'), request.get_full_path()))
 
     pagina = int(pagina)
 
@@ -181,7 +201,8 @@ def competicion(request, id_competicion, pagina=1):
             'title': 'No existe la competición',
         }
     elif comp.privada and not request.user.is_authenticated():
-        return redirect('web:competiciones')  # TBD Ir al login
+        return redirect("%s?r=%s" %
+                        (reverse('web:login'), request.get_full_path()))
     elif (comp.privada and (
             request.user.is_authenticated() and
             request.user != comp.administrador

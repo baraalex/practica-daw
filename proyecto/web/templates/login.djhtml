@@ -29,7 +29,7 @@
       </div>
       <div style="padding-top: 1%">
         <button type="submit" class="btn btn-success btn-block">
-          <i class="fa fa-sign-in"></i> Iniciar sesión
+          <span class="fa fa-sign-in"></span> Iniciar sesión
         </button>
       </div>
     </form>
