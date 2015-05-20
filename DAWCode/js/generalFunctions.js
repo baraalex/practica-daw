@@ -2,6 +2,33 @@
  * Created by Alex on 13/05/2015.
  */
 
+$( document ).ready(function() {
+   $("#addEquipo").click(function () {
+            addEquipo();
+        });
+   
+   $("#addCompeticion").click(function () {
+            addLiga();
+        });
+
+   $("#editEquipo").click(function () {
+            modifyEq();
+        });
+
+   $("#editCompeticion").click(function () {
+            modifyComp();
+        });
+
+   $("#editJugador").click(function () {
+            addEquipo();
+        });
+
+   $("#addJugador").click(function () {
+            addJugador();
+        });
+});
+
+
 function readURL(input) {
 
     if (input.files && input.files[0]) {
