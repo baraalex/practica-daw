@@ -34,6 +34,7 @@
 
 .imageBig {
     max-height: 25em;
+    max-width: 10em;
 }
 
 .imageLittle {
@@ -402,6 +403,9 @@ fieldset[disabled] .jornada td.butt:hover {
     overflow-y: auto;
 }
 
-.imageBig {
-    max-width: 10em;
+.deljugador {
+}
+
+.alerta {
+    display: none;
 }
