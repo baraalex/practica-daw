@@ -278,8 +278,16 @@ function jornada(jor) {
         "<span id=\"nameaux\"><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
-        "<tbody id='tablebody'><tr><td class='butt' onclick='partido(0,1);'><span class='fa fa-pencil-square-o'></span></td>" +
-        "<td>eq1</td><td>eq2</td><td id='res1'>1-2</td></tr></tbody></table></div> ";
+        "<tbody id='tablebody'>"+
+        "<tr><td class='butt' onclick='";
+
+    if(document.getElementById('editCompeticion')){
+        msg = msg + "partido(0,1);";
+    }
+
+    msg = msg + "'><span class='fa fa-pencil-square-o'></span></td>" +
+        "<td>eq1</td><td>eq2</td><td id='res1'>1-2</td></tr>"+
+        "</tbody></table></div> ";
 
     bootbox.dialog({
         closeButton: false,
@@ -465,7 +473,7 @@ function modifyEq() {
 
     
     $("#Name").val($("#media-heading").html());
-    $("#campo").val($("#newCampo").html());
+    $("#newCampo").val($("#campo").html());
     $(".selectable").change(function () {
         readURL(this);
     });
@@ -515,4 +523,22 @@ function modifyComp() {
     $(".selectable").change(function () {
         readURL(this);
     });
+}
+
+function getJSON(url) {
+    var json = "";
+    $.getJSON(url,
+        function (data) {
+            json = JSON.parse(JSON.stringify(data));
+        });
+    return json;
+}
+
+function sendJSON(url, json) {
+    var success = false;
+
+    $.post(url, json).done(function () {
+        success = true;
+    });
+    return success;
 }
