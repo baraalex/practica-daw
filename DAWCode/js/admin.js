@@ -236,7 +236,7 @@ function change(bool) {
             '<a href="equipoej.html">Lorem</a></td><td>10</td></tr><tr><td>2</td><td><a href="">Lorem 2</a></td>' +
             '<td>120</td></tr><tr><td>3</td><td><a href="">Lorem 3</a></td><td>1560</td></tr></tbody></table></div></div><div class="col-md-4">' +
             '<h3 class="sub-header">Datos de la competicion<div class="input-group" style="float: right;">' +
-            '<button type="button" class="btn btn-primary" onclick="modifyComp();" title="Add equipo">' +
+            '<button id="editCompeticion" type="button" class="btn btn-primary" onclick="modifyComp();" title="Add equipo">' +
             '<span class="fa fa-pencil" aria-hidden="true"></span></button></div></h3><div class="row row-right">' +
             '<div class="col-md-8">a</div><div class="col-md-4"><div class="media-right">' +
             '<a href="Imgs/Escudos/Ej1.png" target="_blank"><img data-holder-rendered="true" ' +
@@ -279,15 +279,9 @@ function jornada(jor) {
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
         "<tbody id='tablebody'>"+
-        "<tr><td class='butt' onclick='";
-
-    if(document.getElementById('editCompeticion')){
-        msg = msg + "partido(0,1);";
-    }
-
-    msg = msg + "'><span class='fa fa-pencil-square-o'></span></td>" +
-        "<td>eq1</td><td>eq2</td><td id='res1'>1-2</td></tr>"+
+        "<tr><td class='butt' id = '1_0'><span class='fa fa-pencil-square-o'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
         "</tbody></table></div> ";
+
 
     bootbox.dialog({
         closeButton: false,
@@ -305,6 +299,13 @@ function jornada(jor) {
             }
         }
     });
+
+    if(document.getElementById('editCompeticion')){
+        $(".butt").click(function () {
+            var x = $(this)[0].id.split('_');
+           var goles = partido(x[0] ,x[1]);
+        });
+    }
 }
 
 function partido(id, pos) {
@@ -484,8 +485,7 @@ function modifyComp() {
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre de la competicion no puede estar vacio</div>" +
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><textarea maxlength='64' cols='1' id='Name' class='textareaDiv' " +
-        "placeholder='Enter name'></textarea><span id='campoaux'><h4>Temporada :</h4></span><select>" +
-        "<option value='13/14'>13/14</option> </select><h4>Foto :</h4></span><input type='file' " +
+        "placeholder='Enter name'></textarea><span id='campoaux'><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
