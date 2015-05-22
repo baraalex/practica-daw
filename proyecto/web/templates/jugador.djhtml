@@ -9,7 +9,7 @@
   </ul>
 {% endblock %}
 {% block contenido %}
-  <div id="tabla" class="table-responsive">
+  <div id="tabla">
     {% if jugador %}
       <div class="well well-lg media">
         <div class="media-body">
@@ -30,37 +30,37 @@
       </div>
       <h3 class="name">Partidos jugados</h3>
       <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Competición</th>
-            <th>Equipo</th>
-            <th>Titular</th>
-            <th>Amarillas</th>
-            <th>Roja</th>
-            <th>Goles</th>
-            <th>Goles P.P.</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for partido in partidos %}
+        <table class="table table-striped">
+          <thead>
             <tr>
-              {% if not partido.partido.competicion.privada or user.is_authenticated and user.id == partido.partido.competicion.administrador.id %}
-                <td><a href="{% url 'web:competicion' partido.partido.competicion.id %}">{{ partido.partido.competicion.nombre }}</a></td>
-                <td><a href="{% url 'web:equipo' partido.equipo.id %}">{{ partido.equipo.nombre }}</a></td>
-                <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td>
-                <td>{{ partido.amarillas }}</td>
-                <td>{% if partido.roja %}Sí{% else %}No{% endif %}</td>
-                <td>{{ partido.goles }}</td>
-                <td>{{ partido.goles_pp }}</td>
-              {% else %}
-                <td class="privado" colspan="7">Partido disputado en competición privada.</td>
-              {% endif %}
+              <th>Competición</th>
+              <th>Equipo</th>
+              <th>Titular</th>
+              <th>Amarillas</th>
+              <th>Roja</th>
+              <th>Goles</th>
+              <th>Goles P.P.</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {% for partido in partidos %}
+              <tr>
+                {% if not partido.partido.competicion.privada or user.is_authenticated and user.id == partido.partido.competicion.administrador.id %}
+                  <td><a href="{% url 'web:competicion' partido.partido.competicion.id %}">{{ partido.partido.competicion.nombre }}</a></td>
+                  <td><a href="{% url 'web:equipo' partido.equipo.id %}">{{ partido.equipo.nombre }}</a></td>
+                  <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td>
+                  <td>{{ partido.amarillas }}</td>
+                  <td>{% if partido.roja %}Sí{% else %}No{% endif %}</td>
+                  <td>{{ partido.goles }}</td>
+                  <td>{{ partido.goles_pp }}</td>
+                {% else %}
+                  <td class="privado" colspan="7">Partido disputado en competición privada.</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           <a href="{% if pagina != 1 %}{% url 'web:jugador' jugador.id pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
