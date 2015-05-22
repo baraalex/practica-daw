@@ -550,7 +550,7 @@ function modifyJug() {
 
     bootbox.dialog({
         closeButton: false,
-        title: "Modificar Competicion",
+        title: "Modificar Jugador",
         message: msg,
         buttons: {
             ok: {
