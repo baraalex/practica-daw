@@ -3,13 +3,66 @@
   <div class="well well-lg media">
     <h2 id="media-heading" class="media-heading name">{{ user.first_name }} {{ user.last_name }}</h2>
     <hr>
-    <h4 class="name">Usuario:</h4>
-    <span class="informacion">{{ user.username }}</span>
-    <h4 class="name">Correo electrónico:</h4>
-    <span class="informacion">{{ user.email }}</span>
-    <h4 class="name">Rol:</h4>
-    <span class="informacion">{% if user.is_superuser %}Administrador{% else %}Usuario{% endif %}</span>
-
+    <div class="row">
+      <div class="col-md-4">
+        <h4 class="name">Usuario:</h4>
+        <span class="informacion">{{ user.username }}</span>
+        <h4 class="name">Correo electrónico:</h4>
+        <span class="informacion">{{ user.email }}</span>
+        <h4 class="name">Rol:</h4>
+        <span class="informacion">{% if user.is_superuser %}Administrador{% else %}Usuario{% endif %}</span>
+      </div>
+      <div class="col-md-4">
+        <form>
+          <div id="alert" class="alert alert-danger alert-dismissible alerta" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div class="name">Error!</div>El nombre, apellidos e email de usuario no pueden estar vacios.
+          </div>
+          <span><h4>Nombre Real:</h4></span>
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
+            <input id="newName" class="form-control" placeholder="User Name" aria-describedby="sizing-addon2" value="{{ user.first_name }}" type="text"></div>
+          <span><h4>Apellidos:</h4></span>
+          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
+            <input id="newlastName" class="form-control" placeholder="User lastName" aria-describedby="sizing-addon2" value="{{ user.last_name }}" type="text"></div>
+          <span><h4>Email:</h4></span>
+          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-envelope"></span></span>
+            <input id="newEmail" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" value="{{ user.email }}" type="email"></div>
+          <div style="padding-top: 1%">
+              <button class="btn btn-success btn-block" type="submit">
+                  <span class="fa fa-pencil"></span> Modificar datos
+              </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <form>
+          <div id="alertPasswd" class="alert alert-danger alert-dismissible alerta" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div class="name">Error!</div>Contraseña actual incorrecta.
+          </div>
+          <div id="alertPasswd2" class="alert alert-danger alert-dismissible alerta" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div class="name">Error!</div>Contraseña nueva y su confirmacion no coinciden.
+          </div>
+          <span><h4>Contraseña actual:</h4></span>
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
+            <input id="newName" class="form-control" placeholder="Password actual" aria-describedby="sizing-addon2" value="" type="password"></div>
+          <span><h4>Contraseña nueva:</h4></span>
+          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
+            <input id="newlastName" class="form-control" placeholder="Nueva contraseña" aria-describedby="sizing-addon2" value="" type="password"></div>
+          <span><h4>Confirmar contraseña nueva:</h4></span>
+          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
+            <input id="newEmail" class="form-control" placeholder="Repita nueva contraseña" aria-describedby="sizing-addon2" value="" type="password"></div>
+          <div style="padding-top: 1%">
+              <button class="btn btn-success btn-block" type="submit">
+                  <span class="fa fa-pencil"></span> Modificar contraseña
+              </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
   {% if usuarios %}
     <div id="tabla">
