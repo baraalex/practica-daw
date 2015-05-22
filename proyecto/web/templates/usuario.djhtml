@@ -13,52 +13,50 @@
         <span class="informacion">{% if user.is_superuser %}Administrador{% else %}Usuario{% endif %}</span>
       </div>
       <div class="col-md-4">
-        <form>
-          <div id="alert" class="alert alert-danger alert-dismissible alerta" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <div class="name">Error!</div>El nombre, apellidos e email de usuario no pueden estar vacios.
-          </div>
-          <span><h4>Nombre Real:</h4></span>
+        <div class="mgrtop btn btn-block btn-default btn-sm" data-toggle="collapse" data-target="#datos">Cambiar datos</div>
+        <form id="datos" class="collapse">
+          <h4>Nombre Real:</h4>
           <div class="input-group">
             <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
-            <input id="newName" class="form-control" placeholder="User Name" aria-describedby="sizing-addon2" value="{{ user.first_name }}" type="text"></div>
-          <span><h4>Apellidos:</h4></span>
-          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
-            <input id="newlastName" class="form-control" placeholder="User lastName" aria-describedby="sizing-addon2" value="{{ user.last_name }}" type="text"></div>
-          <span><h4>Email:</h4></span>
-          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-envelope"></span></span>
-            <input id="newEmail" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" value="{{ user.email }}" type="email"></div>
+            <input id="newName" class="form-control" placeholder="User Name" aria-describedby="sizing-addon2" value="{{ user.first_name }}" type="text" />
+          </div>
+          <h4>Apellidos:</h4>
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
+            <input id="newlastName" class="form-control" placeholder="User lastName" aria-describedby="sizing-addon2" value="{{ user.last_name }}" type="text" />
+          </div>
+          <h4>Email:</h4>
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-envelope"></span></span>
+            <input id="newEmail" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" value="{{ user.email }}" type="email" />
+          </div>
           <div style="padding-top: 1%">
-              <button class="btn btn-success btn-block" type="submit">
-                  <span class="fa fa-pencil"></span> Modificar datos
-              </button>
+            <button class="btn btn-success btn-block" type="submit">
+              <span class="fa fa-pencil"></span> Modificar datos
+            </button>
           </div>
         </form>
       </div>
       <div class="col-md-4">
-        <form>
-          <div id="alertPasswd" class="alert alert-danger alert-dismissible alerta" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <div class="name">Error!</div>Contraseña actual incorrecta.
-          </div>
-          <div id="alertPasswd2" class="alert alert-danger alert-dismissible alerta" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <div class="name">Error!</div>Contraseña nueva y su confirmacion no coinciden.
-          </div>
-          <span><h4>Contraseña actual:</h4></span>
+        <div class="mgrtop btn btn-block btn-default btn-sm" data-toggle="collapse" data-target="#passwd">Cambiar contraseña</div>
+        <form id="passwd" class="collapse">
+          <h4>Contraseña actual:</h4>
           <div class="input-group">
             <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
-            <input id="newName" class="form-control" placeholder="Password actual" aria-describedby="sizing-addon2" value="" type="password"></div>
-          <span><h4>Contraseña nueva:</h4></span>
+            <input id="newName" class="form-control" placeholder="Password actual" aria-describedby="sizing-addon2" value="" type="password" />
+          </div>
+          <h4>Contraseña nueva:</h4>
           <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
-            <input id="newlastName" class="form-control" placeholder="Nueva contraseña" aria-describedby="sizing-addon2" value="" type="password"></div>
-          <span><h4>Confirmar contraseña nueva:</h4></span>
+            <input id="newlastName" class="form-control" placeholder="Nueva contraseña" aria-describedby="sizing-addon2" value="" type="password" />
+          </div>
+          <h4>Confirmar contraseña nueva:</h4>
           <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
-            <input id="newEmail" class="form-control" placeholder="Repita nueva contraseña" aria-describedby="sizing-addon2" value="" type="password"></div>
+            <input id="newEmail" class="form-control" placeholder="Repita nueva contraseña" aria-describedby="sizing-addon2" value="" type="password" />
+          </div>
           <div style="padding-top: 1%">
-              <button class="btn btn-success btn-block" type="submit">
-                  <span class="fa fa-pencil"></span> Modificar contraseña
-              </button>
+            <button class="btn btn-success btn-block" type="submit">
+              <span class="fa fa-pencil"></span> Modificar contraseña
+            </button>
           </div>
         </form>
       </div>
@@ -66,6 +64,31 @@
   </div>
   {% if usuarios %}
     <div id="tabla">
+      {% if activado %}
+        <div class="aviso alert alert-success alert-dismissiable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="fa fa-check" aria-hidden="true"></span>
+          El usuario <strong>{{ afectado }}</strong> ahora está activado.
+        </div>
+      {% elif desactivado %}
+        <div class="aviso alert alert-success alert-dismissiable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="fa fa-check" aria-hidden="true"></span>
+          El usuario <strong>{{ afectado }}</strong> ahora está desactivado.
+        </div>
+      {% elif normal %}
+        <div class="aviso alert alert-success alert-dismissiable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="fa fa-check" aria-hidden="true"></span>
+          El usuario <strong>{{ afectado }}</strong> ahora es un usuario normal.
+        </div>
+      {% elif administrador %}
+        <div class="aviso alert alert-success alert-dismissiable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="fa fa-check" aria-hidden="true"></span>
+          El usuario <strong>{{ afectado }}</strong> ahora es un administrador.
+        </div>
+      {% endif %}
       <div class="table-responsive">
         <table class="table table-striped sortable-theme-bootstrap" data-sortable>
           <thead>

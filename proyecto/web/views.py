@@ -40,25 +40,25 @@ def usuario(request):
             if 'uid' in request.POST:
                 try:
                     usuario = User.objects.get(id=request.POST['uid'])
-                    context['usuario'] = "%s %s (%s)" % (usuario.first_name,
-                                                         usuario.last_name,
-                                                         usuario.username)
+                    context['afectado'] = "%s %s (%s)" % (usuario.first_name,
+                                                          usuario.last_name,
+                                                          usuario.username)
                     if 'activar' in request.POST:
                         usuario.is_active = True
                         usuario.save()
-                        context['accion'] = 'activado'
+                        context['activado'] = True
                     elif 'desactivar' in request.POST:
                         usuario.is_active = False
                         usuario.save()
-                        context['accion'] = 'desactivado'
+                        context['desactivado'] = True
                     elif 'normal' in request.POST:
                         usuario.is_superuser = False
                         usuario.save()
-                        context['accion'] = 'normal'
+                        context['normal'] = True
                     elif 'super' in request.POST:
                         usuario.is_superuser = True
                         usuario.save()
-                        context['accion'] = 'super'
+                        context['administrador'] = True
                 except ObjectDoesNotExist:
                     context['accion'] = 'error'
 
