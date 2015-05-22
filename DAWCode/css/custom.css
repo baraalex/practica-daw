@@ -175,6 +175,7 @@ fieldset[disabled] .jornada td.butt:hover {
     border-radius: 4px;
     max-height: 20em;
     overflow: auto;
+    background-color: #ffffff;
 }
 
 .jornadapicker > div {
