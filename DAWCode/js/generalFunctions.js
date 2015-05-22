@@ -20,7 +20,7 @@ $( document ).ready(function() {
         });
 
    $("#editJugador").click(function () {
-            addEquipo();
+            modifyJug();
         });
 
    $("#addJugador").click(function () {
