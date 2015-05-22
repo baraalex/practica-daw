@@ -50,12 +50,10 @@
                 <ul class="dropdown-menu">
                   <li>
                     <div class="navbar-login">
-                      <p class="text-left name"><span id="realName">{{ user.first_name }}</span> <span id="lastName">{{ user.last_name }}</span></p>
-                      <p class="text-left small" id="email">{{ user.email }}</p>
                       <div class="row">
-                        <div class="col-md-6"><p class="text-left">
-                          <a href="#" class="btn btn-primary btn-block btn-sm" onclick="editUserData(0);">Actualizar Datos</a>
-                        </p></div>
+                        <div class="col-md-6">
+                          <p class="text-left name"><span id="realName">{{ user.first_name }}</span> <span id="lastName">{{ user.last_name }}</span></p>
+                          <p class="text-left small" id="email">{{ user.email }}</p></div>
                         <div class="col-md-6"><p class="text-left">
                           <a href="{% url 'web:usuario' %}" class="btn btn-info btn-block btn-sm">Administracion</a>
                         </p></div>
