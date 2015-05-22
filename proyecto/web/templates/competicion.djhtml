@@ -9,7 +9,7 @@
   </ul>
 {% endblock %}
 {% block contenido %}
-  <div id="tabla" class="table-responsive">
+  <div id="tabla">
     {% if competicion %}
       <div class="well well-lg media">
         <div class="media-body">

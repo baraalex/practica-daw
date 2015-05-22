@@ -9,7 +9,7 @@
   </ul>
 {% endblock %}
 {% block contenido %}
-  <div id="tabla" class="table-responsive">
+  <div id="tabla">
     {% if equipo %}
       <div class="well well-lg media">
         <div class="media-body">
@@ -18,7 +18,7 @@
           <h4 id="campo" class="name">Campo:</h4>
           <span class="informacion">{{ equipo.campo }}</span>
           <h4 class="name">Jugadores:</h4>
-          <div class="panel panel-default">
+          <div class="panel panel-default table-responsive">
             <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
                 <tr>
@@ -51,30 +51,30 @@
       </div>
       <h3 class="name">Competiciones</h3>
       <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th style="width: 50px;"></th>
-            <th>Competición</th>
-            <th>Temporada</th>
-            <th>Participantes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for competicion in competiciones %}
+        <table class="table table-striped">
+          <thead>
             <tr>
-              {% if not competicion.privada or user.is_authenticated and user.id == competicion.administrador.id %}
-                <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
-                <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
-                <td>{{ competicion.temporada }}</td>
-                <td>{{ competicion.participantes.count }}</td>
-              {% else %}
-                <td class="privado" colspan="4">Competición privada.</td>
-              {% endif %}
+              <th style="width: 50px;"></th>
+              <th>Competición</th>
+              <th>Temporada</th>
+              <th>Participantes</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for competicion in competiciones %}
+              <tr>
+                {% if not competicion.privada or user.is_authenticated and user.id == competicion.administrador.id %}
+                  <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
+                  <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
+                  <td>{{ competicion.temporada }}</td>
+                  <td>{{ competicion.participantes.count }}</td>
+                {% else %}
+                  <td class="privado" colspan="4">Competición privada.</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">

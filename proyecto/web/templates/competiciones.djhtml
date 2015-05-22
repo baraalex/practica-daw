@@ -19,8 +19,9 @@
   </ul>
 {% endblock %}
 {% block contenido %}
-  <div id="tabla" class="table-responsive">
+  <div id="tabla">
     {% if competiciones %}
+    <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -51,6 +52,7 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           {% if tipo == 'pub' %}

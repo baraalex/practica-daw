@@ -380,6 +380,10 @@ fieldset[disabled] .jornada td.butt:hover {
     font-style: italic;
 }
 
+#tabla .well{
+    overflow: auto;
+}
+
 .aviso {
     max-width: 500px;
     margin: 10px auto;
