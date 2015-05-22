@@ -8,7 +8,7 @@
     <h4 class="name">Correo electrónico:</h4>
     <span class="informacion">{{ user.email }}</span>
     <h4 class="name">Rol:</h4>
-    <span class="informacion">{% if usuario.is_superuser %}Administrador{% else %}Usuario{% endif %}</span>
+    <span class="informacion">{% if user.is_superuser %}Administrador{% else %}Usuario{% endif %}</span>
 
   </div>
   {% if usuarios %}
