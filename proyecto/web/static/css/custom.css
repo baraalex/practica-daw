@@ -60,12 +60,12 @@
 
 .jornada {
     max-height: 20em;
-    /*overflow: auto;*/
+    border: none;
     max-width: 100%;
 }
 
 .jornada table {
-    max-width: 98%;
+    width: 100%;
     margin: 0;
     max-width: 100%;
     margin-bottom: 20px;
@@ -175,6 +175,7 @@ fieldset[disabled] .jornada td.butt:hover {
     border-radius: 4px;
     max-height: 20em;
     overflow: auto;
+    background-color: #ffffff;
 }
 
 .jornadapicker > div {
@@ -258,6 +259,7 @@ fieldset[disabled] .jornada td.butt:hover {
 }
 
 .jornadapicker td span {
+    background-color: #ffffff;
     display: block;
     width: 47px;
     height: 54px;
@@ -348,7 +350,7 @@ fieldset[disabled] .jornada td.butt:hover {
 
 .part-width > .modal-dialog {
     width: auto;
-    max-width: 75em !important;
+    max-width: 70em !important;
 }
 
 .row-right {
