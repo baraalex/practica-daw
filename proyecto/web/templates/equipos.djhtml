@@ -12,25 +12,25 @@
   <div id="tabla">
     {% if equipos %}
       <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th style="width: 50px;"></th>
-            <th>Equipo</th>
-            <th>Campo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for equipo in equipos %}
+        <table class="table table-striped">
+          <thead>
             <tr>
-              <td><img src="{{ equipo.foto.url }}" style="height: 50px;" /></td>
-              <td><a href="{% url 'web:equipo' equipo.id %}">{{ equipo.nombre }}</a></td>
-              <td>{{ equipo.campo }}</td>
+              <th style="width: 50px;"></th>
+              <th>Equipo</th>
+              <th>Campo</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {% for equipo in equipos %}
+              <tr>
+                <td><img src="{{ equipo.foto.url }}" style="height: 50px;" /></td>
+                <td><a href="{% url 'web:equipo' equipo.id %}">{{ equipo.nombre }}</a></td>
+                <td>{{ equipo.campo }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           <a href="{% if pagina != 1 %}{% url 'web:equipos' pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>

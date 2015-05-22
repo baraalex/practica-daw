@@ -21,38 +21,38 @@
 {% block contenido %}
   <div id="tabla">
     {% if competiciones %}
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th style="width: 50px;"></th>
-            <th>Competición</th>
-            <th>Temporada</th>
-            <th>Participantes</th>
-            {% if user.is_authenticated %}<th class="admin">Administrador</th>{% endif %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for competicion in competiciones %}
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
             <tr>
-              <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
-              <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
-              <td>{{ competicion.temporada }}</td>
-              <td>{{ competicion.participantes.count }}</td>
-              {% if user.is_authenticated %}
-                <td class="admin">
-                  {% if user.id == competicion.administrador.id %}
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                  {% else %}
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  {% endif %}
-                </td>
-              {% endif %}
+              <th style="width: 50px;"></th>
+              <th>Competición</th>
+              <th>Temporada</th>
+              <th>Participantes</th>
+              {% if user.is_authenticated %}<th class="admin">Administrador</th>{% endif %}
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {% for competicion in competiciones %}
+              <tr>
+                <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
+                <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
+                <td>{{ competicion.temporada }}</td>
+                <td>{{ competicion.participantes.count }}</td>
+                {% if user.is_authenticated %}
+                  <td class="admin">
+                    {% if user.id == competicion.administrador.id %}
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    {% else %}
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    {% endif %}
+                  </td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           {% if tipo == 'pub' %}
