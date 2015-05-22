@@ -17,10 +17,54 @@ from .utils import paginate
 @require_GET
 def home(request):
     context = {
+        'view': 'inicio',
         'title': 'Inicio',
     }
 
     return render(request, 'index.djhtml', context)
+
+
+@require_http_methods(["GET", "POST"])
+def usuario(request):
+    if not request.user.is_authenticated():
+        return redirect('web:home')
+
+    context = {
+        'title': 'Usuario',
+    }
+
+    if request.user.is_superuser:
+        context['title'] += ' | Administración'
+
+        if request.POST:
+            if 'uid' in request.POST:
+                try:
+                    usuario = User.objects.get(id=request.POST['uid'])
+                    context['usuario'] = "%s %s (%s)" % (usuario.first_name,
+                                                         usuario.last_name,
+                                                         usuario.username)
+                    if 'activar' in request.POST:
+                        usuario.is_active = True
+                        usuario.save()
+                        context['accion'] = 'activado'
+                    elif 'desactivar' in request.POST:
+                        usuario.is_active = False
+                        usuario.save()
+                        context['accion'] = 'desactivado'
+                    elif 'normal' in request.POST:
+                        usuario.is_superuser = False
+                        usuario.save()
+                        context['accion'] = 'normal'
+                    elif 'super' in request.POST:
+                        usuario.is_superuser = True
+                        usuario.save()
+                        context['accion'] = 'super'
+                except ObjectDoesNotExist:
+                    context['accion'] = 'error'
+
+        context['usuarios'] = User.objects.all()
+
+    return render(request, 'usuario.djhtml', context)
 
 
 @require_http_methods(["GET", "POST"])

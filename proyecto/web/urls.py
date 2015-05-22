@@ -9,17 +9,17 @@ urlpatterns = [
 
     # Usuarios
     url(r'^usuario/$',
-        views.home,
-        name='admin'),
-    url(r'^usuario/registro/$',
-        views.registro,
-        name='registro'),
+        views.usuario,
+        name='usuario'),
     url(r'^usuario/login/$',
         views.do_login,
         name='login'),
     url(r'^usuario/logout/$',
         views.do_logout,
         name='logout'),
+    url(r'^usuario/registro/$',
+        views.registro,
+        name='registro'),
 
     # Competiciones
     url(r'^competiciones/$',

@@ -1,4 +1,6 @@
 {% extends 'base.djhtml' %}
 {% block contenido_base %}
-  {% block contenido %}{% endblock %}
+  <div class="col-md-8 col-md-offset-2 main">
+    {% block contenido %}{% endblock %}
+  </div>
 {% endblock %}
