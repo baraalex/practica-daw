@@ -19,7 +19,7 @@
           <span class="informacion"><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></span>
           <h4 class="name">Posición:</h4>
           <span class="informacion">{{ jugador.get_posicion_display }}</span>
-          <h4 class="name">Dorsal:</h4>
+          <h4 class="name" id="dorsal">Dorsal:</h4>
           <span class="informacion">{{ jugador.dorsal }}</span>
         </div>
         <div class="media-right">

@@ -538,6 +538,58 @@ function modifyComp() {
         readURL(this);
     });
 }
+function modifyJug() {
+    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio</div>" +
+        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<span class='fa fa-font' aria-hidden='true'></span></span>"+
+        "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'></div>"+
+        "<h4>Dorsal :</h4></span><input type='number' id='newDorsal' min='1' max='99' value='1'><span id='campoaux'><h4>Foto :</h4></span><input type='file' " +
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+
+    bootbox.dialog({
+        closeButton: false,
+        title: "Modificar Competicion",
+        message: msg,
+        buttons: {
+            ok: {
+                label: '<span class="fa fa-check" aria-hidden="true"></span>',
+                className: "btn-success",
+                callback: function () {
+                    var name = $("#Name").val();
+                    var dorsal = $("#newDorsal").val();
+                    if (name == "" || name == null) {
+                        $("#alert").css({"display": "block"});
+                        e.preventDefault();
+                        return false;
+                    }
+                    else {
+                        $("#alert").css({"display": "none"});
+                        $("#media-heading").empty();
+                        $("#media-heading").html(name);
+                        $("#dorsal").empty();
+                        $("#dorsal").html(dorsal);
+                    }
+                }
+            },
+            cancel: {
+                label: '<span class="fa fa-remove" aria-hidden="true"></span>',
+                className: "btn-danger"
+            }
+        }
+    });
+
+    $("#Name").val($("#media-heading").html());
+    $("#newDorsal").val($("#dorsal").val());
+
+
+    $(".selectable").change(function () {
+        readURL(this);
+    });
+}
+
+
 
 function getJSON(url) {
     var json = "";
