@@ -342,11 +342,13 @@ fieldset[disabled] .jornada td.butt:hover {
 }
 
 .jor-width > .modal-dialog {
-    width: 80em !important;
+    width: auto;
+    max-width: 80em !important;
 }
 
 .part-width > .modal-dialog {
-    width: 75em !important;
+    width: auto;
+    max-width: 75em !important;
 }
 
 .row-right {
