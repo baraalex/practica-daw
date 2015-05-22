@@ -13,7 +13,6 @@ from django.db.models import Q
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate
 
-import sys
 
 @require_GET
 def home(request):
