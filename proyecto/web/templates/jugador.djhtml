@@ -1,8 +1,8 @@
 {% extends 'base_sidebar.djhtml' %}
 {% block navegacion %}
   <ul class="nav nav-pills nav-stacked">
-    <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
-      <a{% if user.is_authenticated %} id="editJugador"{% endif %} href="#">
+    <li{% if not user.is_authenticated or ( user.is_authenticated and not user.is_superuser ) %} class="disabled"{% endif %}>
+      <a{% if user.is_authenticated and user.is_superuser %} id="editJugador"{% endif %} href="#">
         <span class="fa fa-pencil"></span> Editar jugador
       </a>
     </li>
@@ -19,8 +19,8 @@
           <span class="informacion"><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></span>
           <h4 class="name">Posición:</h4>
           <span class="informacion">{{ jugador.get_posicion_display }}</span>
-          <h4 class="name" id="dorsal">Dorsal:</h4>
-          <span class="informacion">{{ jugador.dorsal }}</span>
+          <h4 class="name">Dorsal:</h4>
+          <span class="informacion" id="dorsal">{{ jugador.dorsal }}</span>
         </div>
         <div class="media-right">
           <a href="{{ jugador.foto.url }}" target="_blank">
