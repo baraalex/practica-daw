@@ -581,7 +581,7 @@ function modifyJug() {
     });
 
     $("#Name").val($("#media-heading").html());
-    $("#newDorsal").val($("#dorsal").val());
+    $("#newDorsal").val($("#dorsal").html());
 
 
     $(".selectable").change(function () {
