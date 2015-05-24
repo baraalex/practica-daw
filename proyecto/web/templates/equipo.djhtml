@@ -1,7 +1,7 @@
 {% extends 'base_sidebar.djhtml' %}
 {% block navegacion %}
   <ul class="nav nav-pills nav-stacked">
-    <li{% if not user.is_authenticated or ( user.is_authenticated and not user.is_superuser ) %} class="disabled"{% endif %}>
+    <li{% if not user.is_authenticated or user.is_authenticated and not user.is_superuser %} class="disabled"{% endif %}>
       <a{% if user.is_authenticated and user.is_superuser %} id="editEquipo"{% endif %} href="#">
         <span class="fa fa-pencil"></span> Editar equipo
       </a>
@@ -63,7 +63,7 @@
           <tbody>
             {% for competicion in competiciones %}
               <tr>
-                {% if not competicion.privada or user.is_authenticated and user.id == competicion.administrador.id %}
+                {% if not competicion.privada or user.is_authenticated and user == competicion.administrador %}
                   <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
                   <td><a href="{% url 'web:competicion' competicion.id %}">{{ competicion.nombre }}</a></td>
                   <td>{{ competicion.temporada }}</td>

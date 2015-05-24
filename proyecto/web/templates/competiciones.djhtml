@@ -41,7 +41,7 @@
                 <td>{{ competicion.participantes.count }}</td>
                 {% if user.is_authenticated %}
                   <td class="admin">
-                    {% if user.id == competicion.administrador.id %}
+                    {% if user == competicion.administrador %}
                       <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     {% else %}
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

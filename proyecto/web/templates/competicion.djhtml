@@ -1,8 +1,8 @@
 {% extends 'base_sidebar.djhtml' %}
 {% block navegacion %}
   <ul class="nav nav-pills nav-stacked">
-    <li{% if not user.is_authenticated or ( user.is_authenticated and ( not user.is_superuser or not user.id == competicion.administrador.id ) )%} class="disabled"{% endif %}>
-      <a{% if user.is_authenticated and ( user.id == competicion.administrador.id or user.is_superuser ) %} id="editCompeticion"{% endif %} href="#">
+    <li{% if not user.is_authenticated or user.is_authenticated and not user == competicion.administrador %} class="disabled"{% endif %}>
+      <a{% if user.is_authenticated and user == competicion.administrador %} id="editCompeticion"{% endif %} href="#">
         <span class="fa fa-pencil"></span> Editar competición
       </a>
     </li>

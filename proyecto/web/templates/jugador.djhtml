@@ -1,7 +1,7 @@
 {% extends 'base_sidebar.djhtml' %}
 {% block navegacion %}
   <ul class="nav nav-pills nav-stacked">
-    <li{% if not user.is_authenticated or ( user.is_authenticated and not user.is_superuser ) %} class="disabled"{% endif %}>
+    <li{% if not user.is_authenticated or user.is_authenticated and not user.is_superuser %} class="disabled"{% endif %}>
       <a{% if user.is_authenticated and user.is_superuser %} id="editJugador"{% endif %} href="#">
         <span class="fa fa-pencil"></span> Editar jugador
       </a>
@@ -45,7 +45,7 @@
           <tbody>
             {% for partido in partidos %}
               <tr>
-                {% if not partido.partido.competicion.privada or user.is_authenticated and user.id == partido.partido.competicion.administrador.id %}
+                {% if not partido.partido.competicion.privada or user.is_authenticated and user == partido.partido.competicion.administrador %}
                   <td><a href="{% url 'web:competicion' partido.partido.competicion.id %}">{{ partido.partido.competicion.nombre }}</a></td>
                   <td><a href="{% url 'web:equipo' partido.equipo.id %}">{{ partido.equipo.nombre }}</a></td>
                   <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td>
