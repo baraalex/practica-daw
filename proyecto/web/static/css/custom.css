@@ -161,6 +161,12 @@ fieldset[disabled] .jornada td.butt:hover {
     background-color: #910d0c;
 }
 
+.jornada td a,
+.jornada td a:hover{
+    color: #ffffff;
+
+}
+
 .jornadapicker {
     top: 0;
     left: 0;
