@@ -2,19 +2,21 @@
  * Created by Alex on 06/04/2015.
  */
 
-function addEquipo() {
+function addEquipo(token) {
 
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
-        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form id='addNewEquipo' method='POST' action='"+document.location.pathname+
+        "'><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
         "</div><span id='campoaux'><h4>Campo :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-building' aria-hidden='true'></span></span>"+
         "<input id='Campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250'>"+
         "</div><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
+        token+"'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -34,6 +36,7 @@ function addEquipo() {
                     }
                     else {
                         $("#alert").css({"display": "none"});
+                        $("#addNewEquipo").submit();
                         //addJugadores(name);
                     }
                 }
@@ -49,7 +52,7 @@ function addEquipo() {
     });
 }
 
-function addLiga() {
+function addLiga(token) {
 
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
@@ -81,7 +84,7 @@ function addLiga() {
                     }
                     else {
                         $("#alert").css({"display": "none"});
-                        addEquipos(name, neq);
+                        addEquipos(name, neq, token);
                     }
                 }
             },
@@ -96,21 +99,21 @@ function addLiga() {
     });
 }
 
-function addJugador() {
+function addJugador(token) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio y el dorsal debe ser valido</div>" +
         "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-child' aria-hidden='true'></span></span>"+
-        "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
-        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='posicion'>" +
+        "<input id='Name' name='name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
+        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='posicion' name='pos'>" +
         "<option value='po'>Portero</option><option value='df'>Defensa</option><option value='ce'>Mediocentro</option>"+
         "<option value='dl'>Delantero</option></select></div><div class='col-md-4'><h4>Equipo :</h4></span>"+
-        "<select id='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
+        "<select id='equipo' name='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
         "<option value='4'>Eq4</option></select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
-        "<input type='number' id='dorsal' min='1' max='99' value='1'></div></div><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
+        "<input type='number' id='dorsal' min='1' max='99' value='1' name='dorsal'></div></div><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
+        "id='foto' accept='image/*' class='selectable' name='foto'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -135,6 +138,8 @@ function addJugador() {
                         $("#alert").css({"display": "block"});
                         if(!disp){
                             document.getElementById('dorsal').setCustomValidity('Invalid');
+                        }else{
+                            document.getElementById('dorsal').setCustomValidity('');
                         }
                         if(name == "" || name == null){
                             document.getElementById('Name').setCustomValidity('Invalid');
@@ -197,7 +202,7 @@ function addJugadores(nameEquipo) {
     });
 }
 
-function addEquipos(nameLiga, num) {
+function addEquipos(nameLiga, num, token) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
@@ -315,7 +320,7 @@ function jornadaVisual(jor) {
     });
 }
 
-function partido(id, pos) {
+function partido(id, pos, token) {
     var msg = "<div  id ='alert' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>goles negativos</div>" +
@@ -438,7 +443,7 @@ function calcGol() {
 
 }
 
-function modifyEq() {
+function modifyEq(token) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
@@ -491,7 +496,7 @@ function modifyEq() {
     });
 }
 
-function modifyComp() {
+function modifyComp(token) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre de la competicion no puede estar vacio</div>" +
@@ -538,7 +543,7 @@ function modifyComp() {
     });
 }
 
-function modifyJug() {
+function modifyJug(token) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio</div>" +
