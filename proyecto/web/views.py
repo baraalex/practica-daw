@@ -364,8 +364,15 @@ def competicion(request, id_competicion, pagina=1):
     return render(request, 'competicion.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def equipos(request, pagina=1):
+    if request.POST:
+        nombre = request.POST['nombre']
+        campo = request.POST['campo']
+        imagen = request.FILES['imagen']
+        e = Equipo(nombre=nombre, foto=imagen, campo=campo)
+        e.save()
+
     pagina = int(pagina)
 
     if pagina == 0:
