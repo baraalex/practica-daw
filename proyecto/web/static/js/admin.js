@@ -257,7 +257,7 @@ function addEquipos(nameLiga, num, token) {
     });
 }
 
-function jornada(jor) {
+function jornada(jor, token) {
     var msg =
         "<span id=\"nameaux\"><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
@@ -287,7 +287,7 @@ function jornada(jor) {
     if(document.getElementById('editCompeticion')){
         $(".butt").click(function () {
             var x = $(this)[0].id.split('_');
-           var goles = partido(x[0] ,x[1]);
+           var goles = partido(x[0] ,x[1], token);
         });
     }
 }

@@ -31,7 +31,7 @@ $( document ).ready(function() {
     $('.day').removeClass('active');
     $(this).addClass('active');
     if(document.getElementById('editCompeticion')){
-        jornada($(this).html($(this).data("token")));
+        jornada($(this).html(),$(this).data("token"));
     }else{
         jornadaVisual($(this).html());
     }
