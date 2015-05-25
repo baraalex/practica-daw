@@ -26,6 +26,11 @@
         <span class="fa fa-futbol-o"></span> Delanteros
       </a>
     </li>
+     <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
+      <a{% if user.is_authenticated %} id="addJugador"{% endif %} href="#">
+        <span class="fa fa-plus-circle"></span> Crear jugador
+      </a>
+    </li>
   </ul>
 {% endblock %}
 {% block contenido %}

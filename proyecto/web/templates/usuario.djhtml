@@ -31,7 +31,7 @@
             <input id="newEmail" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" value="{{ user.email }}" type="email" />
           </div>
           <div style="padding-top: 1em">
-            <button class="btn btn-success btn-block" type="submit">
+            <button class="btn btn-success btn-block form-separacion" type="submit">
               <span class="fa fa-pencil"></span> Modificar datos
             </button>
           </div>
@@ -54,7 +54,7 @@
             <input id="newEmail" class="form-control" placeholder="Repita nueva contraseña" aria-describedby="sizing-addon2" value="" type="password" />
           </div>
           <div style="padding-top: 1em">
-            <button class="btn btn-success btn-block" type="submit">
+            <button class="btn btn-success btn-block form-separacion" type="submit">
               <span class="fa fa-pencil"></span> Modificar contraseña
             </button>
           </div>
@@ -116,14 +116,14 @@
                     <form style="display: inline" action="{% url 'web:usuario' %}" method="post">
                       {% csrf_token %}
                       <input type="hidden" name="uid" value="{{ usuario.id }}" />
-                      <button style="min-width: 100px" type="submit" class="btn btn-xs btn-{% if usuario.is_active %}warning{% else %}success{% endif %}" name="{% if usuario.is_active %}desactivar{% else %}activar{% endif %}">
+                      <button style="min-width: 100px" type="submit" class="btn btn-xs btn-{% if usuario.is_active %}warning{% else %}success{% endif %} form-separacion" name="{% if usuario.is_active %}desactivar{% else %}activar{% endif %}">
                         {% if usuario.is_active %}Desactivar{% else %}Activar{% endif %}
                       </button>
                     </form>
                     <form style="display: inline" action="{% url 'web:usuario' %}" method="post">
                       {% csrf_token %}
                       <input type="hidden" name="uid" value="{{ usuario.id }}" />
-                      <button style="min-width: 125px" type="submit" class="btn btn-xs btn-info" name="{% if usuario.is_superuser %}normal{% else %}super{% endif %}">
+                      <button style="min-width: 125px" type="submit" class="btn btn-xs btn-info form-separacion" name="{% if usuario.is_superuser %}normal{% else %}super{% endif %}">
                         Hacer {% if usuario.is_superuser %}usuario{% else %}administrador{% endif %}
                       </button>
                     </form>
