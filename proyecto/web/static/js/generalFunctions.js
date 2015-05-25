@@ -4,34 +4,34 @@
 
 $( document ).ready(function() {
    $("#addEquipo").click(function () {
-        addEquipo();
+        addEquipo($(this).data("token"));
     });
    
    $("#addCompeticion").click(function () {
-        addLiga();
+        addLiga($(this).data("token"));
     });
 
    $("#editEquipo").click(function () {
-        modifyEq();
+        modifyEq($(this).data("token"));
     });
 
    $("#editCompeticion").click(function () {
-        modifyComp();
+        modifyComp($(this).data("token"));
     });
 
    $("#editJugador").click(function () {
-        modifyJug();
+        modifyJug($(this).data("token"));
     });
 
    $("#addJugador").click(function () {
-        addJugador();
+        addJugador($(this).data("token"));
     });
    
    $(".day").click(function () {
     $('.day').removeClass('active');
     $(this).addClass('active');
     if(document.getElementById('editCompeticion')){
-        jornada($(this).html());
+        jornada($(this).html($(this).data("token")));
     }else{
         jornadaVisual($(this).html());
     }
