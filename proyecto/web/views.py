@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -36,32 +37,82 @@ def usuario(request):
     if request.user.is_superuser:
         context['title'] += ' | Administración'
 
-        if request.POST:
-            if 'uid' in request.POST:
-                try:
-                    usuario = User.objects.get(id=request.POST['uid'])
-                    context['afectado'] = "%s %s (%s)" % (usuario.first_name,
-                                                          usuario.last_name,
-                                                          usuario.username)
-                    if 'activar' in request.POST:
-                        usuario.is_active = True
-                        usuario.save()
-                        context['activado'] = True
-                    elif 'desactivar' in request.POST:
-                        usuario.is_active = False
-                        usuario.save()
-                        context['desactivado'] = True
-                    elif 'normal' in request.POST:
-                        usuario.is_superuser = False
-                        usuario.save()
-                        context['normal'] = True
-                    elif 'super' in request.POST:
-                        usuario.is_superuser = True
-                        usuario.save()
-                        context['administrador'] = True
-                except ObjectDoesNotExist:
-                    context['accion'] = 'error'
+    if request.POST:
+        if request.user.is_superuser and 'uid' in request.POST:
+            try:
+                usuario = User.objects.get(id=request.POST['uid'])
+                context['afectado'] = "%s %s (%s)" % (usuario.first_name,
+                                                      usuario.last_name,
+                                                      usuario.username)
+                if 'activar' in request.POST:
+                    usuario.is_active = True
+                    usuario.save()
+                    context['activado'] = True
+                elif 'desactivar' in request.POST:
+                    usuario.is_active = False
+                    usuario.save()
+                    context['desactivado'] = True
+                elif 'normal' in request.POST:
+                    usuario.is_superuser = False
+                    usuario.save()
+                    context['normal'] = True
+                elif 'super' in request.POST:
+                    usuario.is_superuser = True
+                    usuario.save()
+                    context['administrador'] = True
+            except ObjectDoesNotExist:
+                context['error'] = 'edit'
+        elif 'moddatos' in request.POST:
+            nombre = apellidos = email = None
 
+            if 'nombre' in request.POST:
+                nombre = request.POST['nombre']
+
+            if 'apellidos' in request.POST:
+                apellidos = request.POST['apellidos']
+
+            if 'email' in request.POST:
+                email = request.POST['email']
+
+            if nombre and apellidos and email:
+                request.user.first_name = nombre
+                request.user.last_name = apellidos
+                request.user.email = email
+                request.user.save()
+                context['chgdatos'] = True
+            else:
+                context['error'] = 'campos'
+
+        elif 'modpasswd' in request.POST:
+            passwd = newpasswd = newpasswdchk = None
+
+            if 'passwd' in request.POST:
+                passwd = request.POST['passwd']
+
+            if 'newpasswd' in request.POST:
+                newpasswd = request.POST['newpasswd']
+
+            if 'newpasswdchk' in request.POST:
+                newpasswdchk = request.POST['newpasswdchk']
+
+            if passwd and newpasswd and newpasswdchk:
+                if newpasswd == newpasswdchk:
+                    user = authenticate(username=request.user.username,
+                                        password=passwd)
+
+                    if user:
+                        user.set_password(newpasswd)
+                        user.save()
+                        update_session_auth_hash(request, user)
+                        context['chgpasswd'] = True
+                    else:
+                        context['error'] = 'oldpasswd'
+                else:
+                    context['error'] = 'newpasswd'
+            else:
+                context['error'] = 'campos'
+
+    if request.user.is_superuser:
         context['usuarios'] = User.objects.all()
 
     return render(request, 'usuario.djhtml', context)
@@ -81,7 +132,7 @@ def do_login(request):
 
         if username and password:
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user:
                 if user.is_active:
                     login(request, user)
                     return redirect(request.GET.get('r', 'web:home'))

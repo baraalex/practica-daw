@@ -1,5 +1,37 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
+  {% if error == 'oldpasswd' %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      La contraseña actual es incorrecta.
+    </div>
+  {% elif error == 'newpasswd' %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      La nueva contraseña no coincide con su repetición.
+    </div>
+  {% elif error == 'campos' %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      Todos los campos son obligatorios.
+    </div>
+  {% elif chgpasswd %}
+    <div class="aviso alert alert-success alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-check" aria-hidden="true"></span>
+      La contraseña ha sido cambiada satisfactoriamente.
+    </div>
+  {% elif chgdatos %}
+    <div class="aviso alert alert-success alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-check" aria-hidden="true"></span>
+      Los datos han sido actualizados correctamente.
+    </div>
+  {% endif %}
+
   <div class="well well-lg media">
     <h2 id="media-heading" class="media-heading name">{{ user.first_name }} {{ user.last_name }}</h2>
     <hr>
@@ -14,24 +46,25 @@
       </div>
       <div class="col-md-4">
         <div class="mgrtop btn btn-block btn-default btn-sm" data-toggle="collapse" data-target="#datos">Cambiar datos</div>
-        <form id="datos" class="collapse">
+        <form id="datos" class="collapse" method="post" action="{% url 'web:usuario' %}">
+          {% csrf_token %}
           <h4>Nombre Real:</h4>
           <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
-            <input id="newName" class="form-control" placeholder="User Name" aria-describedby="sizing-addon2" value="{{ user.first_name }}" type="text" />
+            <span class="input-group-addon" id="nombre"><span class="fa fa-user"></span></span>
+            <input name="nombre" class="form-control" placeholder="Nombre" aria-describedby="nombre" type="text" required="" value="{{ user.first_name }}" />
           </div>
           <h4>Apellidos:</h4>
           <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-user"></span></span>
-            <input id="newlastName" class="form-control" placeholder="User lastName" aria-describedby="sizing-addon2" value="{{ user.last_name }}" type="text" />
+            <span class="input-group-addon" id="apellidos"><span class="fa fa-user"></span></span>
+            <input name="apellidos" class="form-control" placeholder="Apellidos" aria-describedby="apellidos" type="text" required="" value="{{ user.last_name }}" />
           </div>
           <h4>Email:</h4>
           <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-envelope"></span></span>
-            <input id="newEmail" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" value="{{ user.email }}" type="email" />
+            <span class="input-group-addon" id="email"><span class="fa fa-envelope"></span></span>
+            <input name="email" class="form-control" placeholder="Correo electrónico" aria-describedby="email" type="email" required="" value="{{ user.email }}" />
           </div>
           <div style="padding-top: 1em">
-            <button class="btn btn-success btn-block form-separacion" type="submit">
+            <button name="moddatos" class="btn btn-success btn-block form-separacion" type="submit">
               <span class="fa fa-pencil"></span> Modificar datos
             </button>
           </div>
@@ -39,22 +72,25 @@
       </div>
       <div class="col-md-4">
         <div class="mgrtop btn btn-block btn-default btn-sm" data-toggle="collapse" data-target="#passwd">Cambiar contraseña</div>
-        <form id="passwd" class="collapse">
+        <form id="passwd" class="collapse" method="post" action="{% url 'web:usuario' %}">
+          {% csrf_token %}
           <h4>Contraseña actual:</h4>
           <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
-            <input id="newName" class="form-control" placeholder="Password actual" aria-describedby="sizing-addon2" value="" type="password" />
+            <span class="input-group-addon" id="pwd"><span class="fa fa-lock"></span></span>
+            <input name="passwd" class="form-control" placeholder="Contraseña actual" aria-describedby="pwd" type="password" required="" />
           </div>
           <h4>Contraseña nueva:</h4>
-          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
-            <input id="newlastName" class="form-control" placeholder="Nueva contraseña" aria-describedby="sizing-addon2" value="" type="password" />
+          <div class="input-group">
+            <span class="input-group-addon" id="pwd2"><span class="fa fa-lock"></span></span>
+            <input name="newpasswd" class="form-control" placeholder="Contraseña nueva" aria-describedby="pwd2" type="password" required="" />
           </div>
           <h4>Confirmar contraseña nueva:</h4>
-          <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
-            <input id="newEmail" class="form-control" placeholder="Repita nueva contraseña" aria-describedby="sizing-addon2" value="" type="password" />
+          <div class="input-group">
+            <span class="input-group-addon" id="pwd3"><span class="fa fa-lock"></span></span>
+            <input name="newpasswdchk" class="form-control" placeholder="Confirmar contraseña nueva" aria-describedby="pwd3" type="password" required="" />
           </div>
           <div style="padding-top: 1em">
-            <button class="btn btn-success btn-block form-separacion" type="submit">
+            <button name="modpasswd" class="btn btn-success btn-block form-separacion" type="submit">
               <span class="fa fa-pencil"></span> Modificar contraseña
             </button>
           </div>
@@ -88,6 +124,12 @@
           <span class="fa fa-check" aria-hidden="true"></span>
           El usuario <strong>{{ afectado }}</strong> ahora es un administrador.
         </div>
+      {% elif error == 'edit' %}
+        <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+          No se ha podido realizar la operación.
+        </div>
       {% endif %}
       <div class="table-responsive">
         <table class="table table-striped sortable-theme-bootstrap" data-sortable>
@@ -116,14 +158,14 @@
                     <form style="display: inline" action="{% url 'web:usuario' %}" method="post">
                       {% csrf_token %}
                       <input type="hidden" name="uid" value="{{ usuario.id }}" />
-                      <button style="min-width: 100px" type="submit" class="btn btn-xs btn-{% if usuario.is_active %}warning{% else %}success{% endif %} form-separacion" name="{% if usuario.is_active %}desactivar{% else %}activar{% endif %}">
+                      <button style="min-width: 100px" type="submit" class="btn btn-xs btn-{% if usuario.is_active %}warning{% else %}success{% endif %}" name="{% if usuario.is_active %}desactivar{% else %}activar{% endif %}">
                         {% if usuario.is_active %}Desactivar{% else %}Activar{% endif %}
                       </button>
                     </form>
                     <form style="display: inline" action="{% url 'web:usuario' %}" method="post">
                       {% csrf_token %}
                       <input type="hidden" name="uid" value="{{ usuario.id }}" />
-                      <button style="min-width: 125px" type="submit" class="btn btn-xs btn-info form-separacion" name="{% if usuario.is_superuser %}normal{% else %}super{% endif %}">
+                      <button style="min-width: 125px" type="submit" class="btn btn-xs btn-info" name="{% if usuario.is_superuser %}normal{% else %}super{% endif %}">
                         Hacer {% if usuario.is_superuser %}usuario{% else %}administrador{% endif %}
                       </button>
                     </form>
