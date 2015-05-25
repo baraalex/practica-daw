@@ -30,7 +30,7 @@
             <span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-envelope"></span></span>
             <input id="newEmail" class="form-control" placeholder="Email" aria-describedby="sizing-addon2" value="{{ user.email }}" type="email" />
           </div>
-          <div style="padding-top: 1%">
+          <div style="padding-top: 1em">
             <button class="btn btn-success btn-block" type="submit">
               <span class="fa fa-pencil"></span> Modificar datos
             </button>
@@ -53,7 +53,7 @@
           <div class="input-group"><span class="input-group-addon" id="sizing-addon2" required=""><span class="fa fa-lock"></span></span>
             <input id="newEmail" class="form-control" placeholder="Repita nueva contraseña" aria-describedby="sizing-addon2" value="" type="password" />
           </div>
-          <div style="padding-top: 1%">
+          <div style="padding-top: 1em">
             <button class="btn btn-success btn-block" type="submit">
               <span class="fa fa-pencil"></span> Modificar contraseña
             </button>
