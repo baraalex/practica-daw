@@ -483,6 +483,7 @@ function modifyEq(token) {
                         return false;
                     }
                     else {
+                        $("#formulario").submit();
                         $("#alert").css({"display": "none"});
                         $("#media-heading").empty();
                         $("#media-heading").html(name);
@@ -533,6 +534,7 @@ function modifyComp(token) {
                         return false;
                     }
                     else {
+                        $("#formulario").submit();
                         $("#alert").css({"display": "none"});
                         $("#media-heading").empty();
                         $("#media-heading").html(name);
@@ -597,6 +599,7 @@ function modifyJug(token) {
                     else {
                         $("#alert").css({"display": "none"});
                        document.getElementById('dorsal').setCustomValidity('');
+                       $("#formulario").submit();
                         $("#media-heading").empty();
                         $("#media-heading").html(name);
                         $("#dorsal").empty();
