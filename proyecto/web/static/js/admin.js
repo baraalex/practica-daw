@@ -10,13 +10,13 @@ function addEquipo(token) {
         "<form id='addNewEquipo' method='POST' action='"+document.location.pathname+
         "'><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
-        "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
+        "<input id='Name' name='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64' required=''>"+
         "</div><span id='campoaux'><h4>Campo :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-building' aria-hidden='true'></span></span>"+
-        "<input id='Campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250'>"+
+        "<input id='Campo' name='campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250' required=''>"+
         "</div><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
-        token+"'/></form>";
+        "id='foto' accept='image/*' name='imagen' class='selectable' required=''/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
+        token+"' required=''/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -257,7 +257,7 @@ function addEquipos(nameLiga, num, token) {
     });
 }
 
-function jornada(jor) {
+function jornada(jor, token) {
     var msg =
         "<span id=\"nameaux\"><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
@@ -287,7 +287,7 @@ function jornada(jor) {
     if(document.getElementById('editCompeticion')){
         $(".butt").click(function () {
             var x = $(this)[0].id.split('_');
-           var goles = partido(x[0] ,x[1]);
+           var goles = partido(x[0] ,x[1], token);
         });
     }
 }
