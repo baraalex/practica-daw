@@ -366,12 +366,29 @@ def competicion(request, id_competicion, pagina=1):
 
 @require_http_methods(["GET", "POST"])
 def equipos(request, pagina=1):
+    tmpContext = {}
+
     if request.POST:
-        nombre = request.POST['nombre']
-        campo = request.POST['campo']
-        imagen = request.FILES['imagen']
-        e = Equipo(nombre=nombre, foto=imagen, campo=campo)
-        e.save()
+        nombre = campo = imagen = None
+
+        if 'nombre' in request.POST:
+            nombre = request.POST['nombre']
+
+        if 'campo' in request.POST:
+            campo = request.POST['campo']
+
+        if 'imagen' in request.FILES:
+            imagen = request.FILES['imagen']
+
+        if nombre and campo and imagen:
+            if Equipo.objects.filter(nombre=nombre).exists():
+                tmpContext['error'] = 'existe'
+            else:
+                nuevoEquipo = Equipo(nombre=nombre, foto=imagen, campo=campo)
+                nuevoEquipo.save()
+                tmpContext['nuevo'] = nombre
+        else:
+            tmpContext['error'] = 'campos'
 
     pagina = int(pagina)
 
@@ -392,6 +409,8 @@ def equipos(request, pagina=1):
         'pagina_max': pagina_max,
         'equipos': Equipo.objects.order_by('nombre')[inicio:fin],
     }
+
+    context.update(tmpContext)
 
     return render(request, 'equipos.djhtml', context)
 
