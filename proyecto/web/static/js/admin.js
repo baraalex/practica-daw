@@ -103,10 +103,10 @@ function addJugador() {
         "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-child' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
-        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='dorsal'>" +
+        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='posicion'>" +
         "<option value='po'>Portero</option><option value='df'>Defensa</option><option value='ce'>Mediocentro</option>"+
         "<option value='dl'>Delantero</option></select></div><div class='col-md-4'><h4>Equipo :</h4></span>"+
-        "<select><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
+        "<select id='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
         "<option value='4'>Eq4</option></select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='dorsal' min='1' max='99' value='1'></div></div><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
@@ -120,7 +120,7 @@ function addJugador() {
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
-                callback: function () {
+                callback: function (e) {
                     var name = $("#Name").val();
                     var dorsal = $("#dorsal").val();
                     var dor = [33,5,6];
