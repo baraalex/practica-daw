@@ -27,7 +27,7 @@
       </a>
     </li>
      <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
-      <a{% if user.is_authenticated %} id="addJugador" data-token="{{ csrf_token }}{% endif %} href="#">
+      <a{% if user.is_authenticated %} id="addJugador" data-token="{{ csrf_token }}"{% endif %} href="#">
         <span class="fa fa-plus-circle"></span> Crear jugador
       </a>
     </li>
