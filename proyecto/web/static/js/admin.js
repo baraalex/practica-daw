@@ -104,8 +104,8 @@ function addJugador() {
         "<span class='fa fa-child' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
         "</div><div class='row row-right'><div class='col-md-6'><span><h4>Posicion :</h4></span><select>" +
-        "<option value='POR'>Portero</option><option value='DEF'>Defensa</option><option value='MC'>Mediocentro</option>"+"
-        <option value='DEL'>Delantero</option></select></div><div class='col-md-6'><span><h4>Dorsal :</h4></span>" +
+        "<option value='po'>Portero</option><option value='df'>Defensa</option><option value='ce'>Mediocentro</option>"+"
+        <option value='dl'>Delantero</option></select></div><div class='col-md-6'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='dorsal' min='1' max='99' value='1'></div></div><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
@@ -302,15 +302,15 @@ function partido(id, pos) {
         "<div class='name'>Error!</div>goles negativos</div>" +
         "<div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Local :</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</li><li>Estadisticas:" +
-        "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
-        "<input type='checkbox'></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td>" +
+        "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th>th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
+        "<tbody><tr><td><input type='checkbox' name='jugadoLocal'></td><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
+        "<input type='checkbox'name='rojaLocal'></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td>" +
         "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li>" +
-        "</div><div class='col-md-6'><span id=\"neq\"><h4>Visitante :</h4></span>" +
+        "</div><div class='col-md-6'><span id='neq'><h4>Visitante :</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
-        "<input type='checkbox'></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''></td>" +
+        "<tbody><tr><input type='checkbox'name='jugadoVisitante'></td><td><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
+        "<input type='checkbox' name='rojaVisitante'></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''></td>" +
         "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div>";
 
     bootbox.dialog({
