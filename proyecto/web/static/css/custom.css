@@ -19,12 +19,8 @@
     width: auto;
 }
 
-.textareaDiv {
-    min-height: 3em;
-    max-height: 7em;
-    max-width: 100%;
-    min-width: 100%;
-    resize: vertical;
+.form-separacion {
+  padding-top: 1em;
 }
 
 .imagePrev {

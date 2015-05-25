@@ -28,12 +28,12 @@
         <input id="psswd" type="password" name="password" placeholder="Contraseña" class="form-control" required="" value="">
       </div>
       <div style="padding-top: 1%">
-        <button type="submit" class="btn btn-success btn-block">
+        <button type="submit" class="btn btn-success btn-block form-separacion">
           <span class="fa fa-sign-in"></span> Iniciar sesión
         </button>
       </div>
     </form>
     <hr />
-    <a href="{% url 'web:registro' %}" class="btn btn-primary btn-block"><span class="fa fa-pencil" aria-hidden="true"></span> Registrarse</a>
+    <a href="{% url 'web:registro' %}" class="btn btn-primary btn-block form-separacion"><span class="fa fa-pencil" aria-hidden="true"></span> Registrarse</a>
   </div>
 {% endblock %}
