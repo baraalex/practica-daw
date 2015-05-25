@@ -305,7 +305,7 @@ function jornadaVisual(jor) {
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
         "<tbody id='tablebody'>"+
-        "<tr><td class='butt' href='#'><span class='fa fa-eye'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
+        "<tr><td class='butt'><a class='butt' target='_blank' href='/media/liga-de-fc3batbol-profesional.gif'><span class='fa fa-eye'></span></a></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
         "</tbody></table></div> ";
 
 
