@@ -5,11 +5,13 @@ table[data-sortable] {
 }
 /* line 6, ../sass/_sortable.sass */
 table[data-sortable] th {
+  text-align: center;
   vertical-align: bottom;
   font-weight: bold;
+  padding: 10px;
 }
 /* line 10, ../sass/_sortable.sass */
-table[data-sortable] th, table[data-sortable] td {
+table[data-sortable] td {
   text-align: left;
   padding: 10px;
 }

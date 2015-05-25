@@ -58,7 +58,7 @@
         <input id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Repetir contraseña" class="form-control" required="" value="">
       </div>
       <div style="padding-top: 1%">
-        <button class="btn btn-success btn-block" type="submit">
+        <button class="btn btn-success btn-block" type="submit form-separacion">
           <span class="fa fa-pencil"></span> Registrarse
         </button>
       </div>

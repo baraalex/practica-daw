@@ -64,7 +64,7 @@
             <input name="email" class="form-control" placeholder="Correo electrónico" aria-describedby="email" type="email" required="" value="{{ user.email }}" />
           </div>
           <div style="padding-top: 1em">
-            <button name="moddatos" class="btn btn-success btn-block" type="submit">
+            <button name="moddatos" class="btn btn-success btn-block form-separacion" type="submit">
               <span class="fa fa-pencil"></span> Modificar datos
             </button>
           </div>
@@ -90,7 +90,7 @@
             <input name="newpasswdchk" class="form-control" placeholder="Confirmar contraseña nueva" aria-describedby="pwd3" type="password" required="" />
           </div>
           <div style="padding-top: 1em">
-            <button name="modpasswd" class="btn btn-success btn-block" type="submit">
+            <button name="modpasswd" class="btn btn-success btn-block form-separacion" type="submit">
               <span class="fa fa-pencil"></span> Modificar contraseña
             </button>
           </div>
