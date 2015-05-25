@@ -3,86 +3,50 @@ Json diseño
 -Editar:
 
 		-Jugador:
-
-				{
-				"jugador":[
-				    {"nombre":"John", "dorsal":"1", "imagen": "valor en base64"},
-				    {"nombre":"Anna", "dorsal":"2", "imagen": "valor en base64"}
-				]
-				}
+			-nombre
+			-dorsal
+			-imagen
 
 		-Competicion:
-
-				{
-				"competicion":[
-				    {"nombre":"John", "imagen": "valor en base64"},
-				    {"nombre":"Anna", "imagen": "valor en base64"}
-				]
-				}
+			-nombre
+			-imagen
 
 		-Equipo:
+			-nombre
+			-campo
+			-imagen
 
-				{
-				"equipo":[
-				    {"nombre":"John", "campo":"campo1", "imagen": "valor en base64"},
-				    {"nombre":"Anna", "campo":"campo2", "imagen": "valor en base64"}
-				]
-				}
 
-		-Partido:
+		-Partido: (todos arrays)
+			-jugadoLocal
+			-amarillaLocal
+			-rojaLocal
+			-golLocal
+			-golLocalpp
+			-jugadoVisitante
+			-amarillaVisitante
+			-rojaVisitante
+			-golVisitante
+			-golVisitantepp
 
-				{
-				"partido":[
-				    {"local":"true", "jugador":[
-					    {"jugado":"true, "nombre":"j1", "dorsal":"11", "amarillas":"1", "roja":"false", "goles":"1", "golespp":"0"},	
-					    {"jugado":"true, "nombre":"j2", "dorsal":"12", "amarillas":"0", "roja":"true", "goles":"0", "golespp":"2"}
-				    ]},
-				    {"local":"flase", "jugador":[
-					    {"jugado":"true, "nombre":"j12", "dorsal":"1", "amarillas":"1", "roja":"false", "goles":"1", "golespp":"0"},	
-					    {"jugado":"false, "nombre":"j21", "dorsal":"2", "amarillas":"0", "roja":"false", "goles":"0", "golespp":"0"}
-				    ]}
-				]
-				}
-
-		-jornada:
-
-				{
-				"jornada":[
-				    {"partidoid":"1", "local":"equipo1", "visitante":"equipo2", "resultado": "0-0"},
-				    {"partidoid":"2", "local":"equipo2", "visitante":"equipo3", "resultado": "0-2"}
-				]
-				}
+		-Add equipos a competicion: (todos arrays)
+			-equipo	
 
 -Nuevo
 
 		-Jugador:
-				{
-				"jugador":[
-				    {"nombre":"John", "dorsal":"1", "posicion":"POR", "imagen": "valor en base64"}
-				]
-				}
+			-name
+			-equipo
+			-pos
+			-dorsal
+			-imagen
 
 		-Competicion:
-
-				{
-				"competicion":[
-				    {"nombre":"Competicion", "temporada": "13/14", "imagen": "valor en base64", "equipos":[
-				    	{"id":"0"},
-				    	{"id":"1"},
-				    	{"id":"2"},
-				    	{"id":"3"}
-				    ]}
-				]
-				}
+			-nombre
+			-temporada
+			-imagen
 
 		-Equipo:
-				{
-				"equipo":[
-				    {"nombre":"equipo1", "campo":"campo1", "imagen": "valor en base64", "jugadores":[
-				    	{"id":"0"},
-				    	{"id":"1"},
-				    	{"id":"2"},
-				    	{"id":"3"},
-				    ]}
-				]
-				}
+			-nombre
+			-campo
+			-imagen
