@@ -47,7 +47,6 @@ function addEquipo() {
     $(".selectable").change(function () {
         readURL(this);
     });
-
 }
 
 function addLiga() {
@@ -58,7 +57,7 @@ function addLiga() {
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
-        "</div><div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Temporada :</h4></span><select>" +
+        "</div><div class='row row-right'><div class='col-md-6'><span id='campoaux'><h4>Temporada :</h4></span><select>" +
         "<option value='13/14'>13/14</option> </select></div><div class='col-md-6'><span><h4>Numero equipos :</h4></span>" +
         "<input type='number' id='neq' min='2' max='100' step='2' value='38'></div></div><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
@@ -104,13 +103,15 @@ function addJugador() {
         "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-child' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
-        "</div><span id=\"dorsalaux\"><h4>Dorsal :</h4></span>" +
-        "<input type='number' id='dorsal' min='1' max='99' value='1'><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
+        "</div><div class='row row-right'><div class='col-md-6'><span><h4>Posicion :</h4></span><select>" +
+        "<option value='POR'>Portero</option><option value='DEF'>Defensa</option><option value='MC'>Mediocentro</option>"+"
+        <option value='DEL'>Delantero</option></select></div><div class='col-md-6'><span><h4>Dorsal :</h4></span>" +
+        "<input type='number' id='dorsal' min='1' max='99' value='1'></div></div><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
 
     bootbox.dialog({
         closeButton: false,
-        title: "A�adir jugador",
+        title: "Nuevo jugador",
         message: msg,
         buttons: {
             ok: {
@@ -154,7 +155,7 @@ function addJugadores(nameEquipo) {
 
     bootbox.dialog({
         closeButton: false,
-        title: "Equipo: " + nameEquipo,
+        title: "Añadir jugadores al equipo: " + nameEquipo,
         message: msg,
         buttons: {
             add: {
@@ -433,7 +434,7 @@ function modifyEq() {
 
     bootbox.dialog({
         closeButton: false,
-        title: "Nuevo equipo",
+        title: "Modificar equipo",
         message: msg,
         buttons: {
             ok: {
