@@ -7,14 +7,14 @@ function addEquipo() {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
         "</div><span id='campoaux'><h4>Campo :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-building' aria-hidden='true'></span></span>"+
         "<input id='Campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250'>"+
         "</div><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -54,13 +54,13 @@ function addLiga() {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre de la liga no puede estar vacio y los equipos deben ser validos</div>" +
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
         "</div><div class='row row-right'><div class='col-md-6'><span id='campoaux'><h4>Temporada :</h4></span><select>" +
         "<option value='13/14'>13/14</option> </select></div><div class='col-md-6'><span><h4>Numero equipos :</h4></span>" +
         "<input type='number' id='neq' min='2' max='100' step='2' value='38'></div></div><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -100,7 +100,7 @@ function addJugador() {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio y el dorsal debe ser valido</div>" +
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-child' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
         "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='dorsal'>" +
@@ -110,7 +110,7 @@ function addJugador() {
         "<option value='4'>Eq4</option></select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='dorsal' min='1' max='99' value='1'></div></div><span id=\"fotoaux\"><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -201,10 +201,10 @@ function addEquipos(nameLiga, num) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
-        "<div class='row'><div class='col-md-6'><span id=\"nameaux\"><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
+        "<div class='row'><div class='col-md-6'><form><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
         "<tbody id='tablebodyAdded'></tbody>" +
-        "</table></div></div><div class='col-md-6'><span id=\"nameaux\">" +
+        "</table></div></div></form><div class='col-md-6'><span>" +
         "<h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Add</th></tr></thead>" +
         "<tbody id='tablebody'><tr id='add2'><td>E2</td><td class='butt'><span class='fa fa-plus'></span></td></tr>" +
@@ -239,7 +239,8 @@ function addEquipos(nameLiga, num) {
     $(".butt").click(function () {
         $("#alert").css({"display": "none"});
         var el = $(this);
-        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><td>" +
+        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><input type='hidden' value='"+
+            el[0].parentNode.id.split("add")[1] +"' name='equipo'/><td>" +
             el[0].parentNode.childNodes[0].childNodes[0].data +
             "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>");
         el.addClass('disabled');
@@ -318,7 +319,7 @@ function partido(id, pos) {
     var msg = "<div  id ='alert' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>goles negativos</div>" +
-        "<div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Local :</h4></span>" +
+        "<form><div class='row row-right'><div class='col-md-6'> <span id='campoaux'><h4>Local :</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th>th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody><tr><td><input type='checkbox' name='jugadoLocal'></td><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
@@ -329,7 +330,7 @@ function partido(id, pos) {
         "<div class='table-responsive jornada'><table><thead><tr><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody><tr><input type='checkbox'name='jugadoVisitante'></td><td><td>Jugador</td><td>15</td><td><input type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
         "<input type='checkbox' name='rojaVisitante'></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''></td>" +
-        "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div>";
+        "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -441,14 +442,14 @@ function modifyEq() {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del equipo y el campo no pueden estar vacios</div>" +
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
         "</div><span id='campoaux'><h4>Campo :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-building' aria-hidden='true'></span></span>"+
         "<input id='newCampo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250'>"+
         "</div><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -494,11 +495,11 @@ function modifyComp() {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre de la competicion no puede estar vacio</div>" +
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'></div>"+
         "<span id='campoaux'><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -541,11 +542,11 @@ function modifyJug() {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio</div>" +
-        "<span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
+        "<form><span id=\"nameaux\"><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'></div>"+
         "<h4>Dorsal :</h4></span><input type='number' id='newDorsal' min='1' max='99' value='1'><span id='campoaux'><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/>";
+        "id='foto' accept='image/*' class='selectable'/><img id='preview' src='#' alt='' class='imagePrev'/></form>";
 
     bootbox.dialog({
         closeButton: false,
