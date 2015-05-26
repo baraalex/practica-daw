@@ -734,6 +734,18 @@ def get_equipos(request):
 
 
 @require_GET
+def get_jugadores(request, id_equipo):
+    if request.user.is_authenticated:
+        return HttpResponse(serialize('json',
+                                      Jugador.objects
+                                      .filter(equipo__id=id_equipo),
+                                      fields=('nombre', 'dorsal',
+                                              'posicion')))
+    else:
+        return HttpResponseBadRequest('')
+
+
+@require_GET
 def get_dorsales(request, id_equipo):
     if request.user.is_authenticated:
         return HttpResponse(serialize('json',
@@ -754,17 +766,5 @@ def get_partidos(request, id_competicion, jornada):
                                       fields=('equipo_loc', 'equipo_vis',
                                               'goles_loc', 'goles_vis',
                                               'celebrado')))
-    else:
-        return HttpResponseBadRequest('')
-
-
-@require_GET
-def get_jugadores(request, id_equipo):
-    if request.user.is_authenticated:
-        return HttpResponse(serialize('json',
-                                      Jugador.objects
-                                      .filter(equipo__id=id_equipo),
-                                      fields=('nombre', 'dorsal',
-                                              'posicion')))
     else:
         return HttpResponseBadRequest('')

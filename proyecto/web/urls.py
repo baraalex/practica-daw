@@ -83,10 +83,10 @@ urlpatterns = [
     # API para Javascript
     url(r'^get/equipos/$',
         views.get_equipos),
+    url(r'^get/jugadores/(?P<id_equipo>[0-9]+)/$',
+        views.get_jugadores),
     url(r'^get/dorsales/(?P<id_equipo>[0-9]+)/$',
         views.get_dorsales),
     url(r'^get/partidos/(?P<id_competicion>[0-9]+)/(?P<jornada>[0-9]+)/$',
         views.get_partidos),
-    url(r'^get/jugadores/(?P<id_equipo>[0-9]+)/$',
-        views.get_jugadores),
 ]
