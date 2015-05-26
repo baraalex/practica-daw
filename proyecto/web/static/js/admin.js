@@ -245,11 +245,13 @@ function addEquipos(nameLiga, num, token) {
         async: false,
         success: function(data) {
             $.each(data, function(i, field) { 
-                eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt'><span class='fa fa-plus'></span></td></tr>";
                 for(var j=0;j<added.length;j++){
                     if(added[j].value==field.pk){
                         eq2 = eq2 + "<tr id='" + field.pk + "' name='equipos'><td>" + field.fields.nombre +
                         "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>";
+                        eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt  disabled'><span class='fa fa-plus'></span></td></tr>";
+                    }else{
+                        eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt'><span class='fa fa-plus'></span></td></tr>";
                     }
                 }
             });
@@ -299,6 +301,7 @@ function addEquipos(nameLiga, num, token) {
 
     $(".butt").click(function () {
         $("#alert").css({"display": "none"});
+        $("#alert2").css({"display": "none"});
         var el = $(this);
         $("#formulario").append("<input id='equipo"+el[0].parentNode.id.split("add")[1] +"' type='hidden' value='"+el[0].parentNode.id.split("add")[1] +"' name='equipo'/>");
         $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "' name='equipos'><td>" +
@@ -315,10 +318,11 @@ function addEquipos(nameLiga, num, token) {
     });
 
     $(".butt-danger").click(function () {
-            $("#alert").css({"display": "none"});
-            document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
-            $("#equipo"+$(this)[0].parentNode.id)[0].remove();
-            $(this)[0].parentNode.remove();
+        $("#alert").css({"display": "none"});
+        $("#alert2").css({"display": "none"});
+        document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
+        $("#equipo"+$(this)[0].parentNode.id)[0].remove();
+        $(this)[0].parentNode.remove();
         });
 }
 
