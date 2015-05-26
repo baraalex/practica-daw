@@ -97,8 +97,7 @@ function addLiga(token) {
                         e.preventDefault();
                             return false;
                     }
-                }
-            },
+                },
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
@@ -130,6 +129,7 @@ function addLiga(token) {
                 label: '<span class="fa fa-remove" aria-hidden="true"></span>',
                 className: "btn-danger"
             }
+        }
     });
     $(".selectable").change(function () {
         readURL(this);
