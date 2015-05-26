@@ -10,10 +10,10 @@ function addEquipo(token) {
         "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
-        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64' required=''>"+
+        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64' required=''/>"+
         "</div><span><h4>Campo :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-building' aria-hidden='true'></span></span>"+
-        "<input id='Campo' name='campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250' required=''>"+
+        "<input id='Campo' name='campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250' required=''/>"+
         "</div><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' name='imagen' class='selectable' required=''/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
@@ -60,10 +60,10 @@ function addLiga(token) {
         "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
-        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
+        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/>"+
         "</div><div class='row row-right'><div class='col-md-6'><span><h4>Temporada :</h4></span><select name='temporada'>" +
         "<option value='13/14'>13/14</option> </select></div><div class='col-md-6'><span><h4>Numero equipos :</h4></span>" +
-        "<input type='number' id='neq' min='2' max='100' step='2' value='38'></div></div><h4>Foto :</h4></span><input type='file' " +
+        "<input type='number' id='neq' min='2' max='100' step='2' value='38'/></div></div><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
@@ -109,14 +109,14 @@ function addJugador(token) {
         "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-child' aria-hidden='true'></span></span>"+
-        "<input id='Name' name='name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
+        "<input id='Name' name='name' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/>"+
         "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='posicion' name='pos'>" +
         "<option value='po'>Portero</option><option value='df'>Defensa</option><option value='ce'>Mediocentro</option>"+
         "<option value='dl'>Delantero</option></select></div><div class='col-md-4'><h4>Equipo :</h4></span>"+
         "<select id='equipo' name='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
         "<option value='4'>Eq4</option></select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
-        "<input type='number' id='dorsal' min='1' max='99' value='1' name='dorsal'></div></div><span><h4>Foto :</h4></span><input type='file' " +
+        "<input type='number' id='dorsal' min='1' max='99' value='1' name='dorsal'/></div></div><span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
@@ -350,14 +350,14 @@ function partido(id, pos, token) {
         "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local :</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td><input type='checkbox' name='jugadoLocal'></td><td>Jugador</td><td>15</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
-        "<input type='checkbox'name='rojaLocal'></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td>" +
+        "<tbody><tr><td><input type='checkbox' name='jugadoLocal'/></td><td>Jugador</td><td>15</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
+        "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
         "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li>" +
         "</div><div class='col-md-6'><span><h4>Visitante :</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td><input type='checkbox'name='jugadoVisitante'></td><td>Jugador</td><td>15</td><td><input name='amarillasVisitante' type='number' min='0' max='2' value='0' style='width: 5em;'></td><td>" +
-        "<input type='checkbox' name='rojaVisitante'></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''></td>" +
+        "<tbody><tr><td><input type='checkbox'name='jugadoVisitante'/></td><td>Jugador</td><td>15</td><td><input name='amarillasVisitante' type='number' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
+        "<input type='checkbox' name='rojaVisitante'/></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''/></td>" +
         "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
@@ -475,10 +475,10 @@ function modifyEq(token) {
         "<id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
-        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'>"+
+        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/>"+
         "</div><span><h4>Campo :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-building' aria-hidden='true'></span></span>"+
-        "<input id='newCampo' name='campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250'>"+
+        "<input id='newCampo' name='campo' type='text' class='form-control' placeholder='Enter campo' aria-describedby='sizing-addon2' maxlength='250'/>"+
         "</div><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
@@ -531,7 +531,7 @@ function modifyComp(token) {
         "<id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
-        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'></div>"+
+        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/></div>"+
         "<span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen' /><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
@@ -581,8 +581,12 @@ function modifyJug(token) {
         "<id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
-        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'></div>"+
-        "<h4>Dorsal :</h4></span><input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'><span><h4>Foto :</h4></span><input type='file' " +
+        "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/></div>"+
+        "<div class='row row-right'><div class='col-md-4'><h4>Equipo :</h4></span>"+
+        "<select id='equipo' name='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
+        "<option value='4'>Eq4</option></select></div>"+
+        "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
+        "<input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'/></div></div><span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
