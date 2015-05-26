@@ -251,6 +251,8 @@ function addJugadores(nameEquipo) {
 function addEquipos(nameLiga, num, token) {
 
     var eq ="";
+    var eq2 ="";
+    var added = document.getElementsByName("equipo");
 
     $.ajax({url: '/web/get/equipos/',
         dataType: 'json',
@@ -258,17 +260,25 @@ function addEquipos(nameLiga, num, token) {
         success: function(data) {
             $.each(data, function(i, field) { 
                 eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt'><span class='fa fa-plus'></span></td></tr>";
+                for(var j=0;j<added.length;j++){
+                    if(added[j].value==field.pk){
+                        eq2 = eq2 + "<tr id='" + field.pk + "' name='equipos'><td>" + field.fields.nombre +
+                        "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>";
+                    }
+                }
             });
         }
     });
 
-    var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+
+
+    var msg = "<div  id ='alert2'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
         //"<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+"'>"+
         "<div class='row'><div class='col-md-6'><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
-        "<tbody id='tablebodyAdded'></tbody>" +
+        "<tbody id='tablebodyAdded'>"+eq2+"</tbody>" +
         "</table></div></div><div class='col-md-6'><span>" +
         "<h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Add</th></tr></thead>" +
@@ -288,7 +298,7 @@ function addEquipos(nameLiga, num, token) {
                 callback: function (e) {
                     var add = document.getElementsByName("equipos");
                     if (num != add.length) {
-                        $("#alert").css({"display": "block"});
+                        $("#alert2").css({"display": "block"});
                         e.preventDefault();
                         return false;
                     }else{
@@ -306,7 +316,7 @@ function addEquipos(nameLiga, num, token) {
     $(".butt").click(function () {
         $("#alert").css({"display": "none"});
         var el = $(this);
-        $("#formulario").append("<input id='equipo"+el[0].parentNode.id.split("add")[1] +"' type='hidden' value='"+el[0].parentNode.id.split("add")[1] +"' name='equipos'/>");
+        $("#formulario").append("<input id='equipo"+el[0].parentNode.id.split("add")[1] +"' type='hidden' value='"+el[0].parentNode.id.split("add")[1] +"' name='equipo'/>");
         $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "' name='equipos'><td>" +
             el[0].parentNode.childNodes[0].childNodes[0].data +
             "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>");
