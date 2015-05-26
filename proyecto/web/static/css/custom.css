@@ -154,6 +154,49 @@ fieldset[disabled] .jornada td.butt:hover {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+.jornada td.butt-visual {
+    color: #ffffff;
+    background-color: #3D55BF;
+}
+
+.jornada td.butt-visual:hover {
+    cursor: pointer;
+}
+
+.jornada td.butt-visual:hover,
+.jornada td.butt-visual:hover:hover,
+.jornada td.butt-visual:focus,
+.jornada td.butt-visual:hover:focus,
+.jornada td.butt-visual:hover:active,
+.jornada td.butt-visual:hover.active,
+.jornada td.active.disabled,
+.jornada td.butt-visual:hover.disabled,
+.jornada td.active[disabled],
+.jornada td.butt-visual:hover[disabled] {
+    background-color: #192A78;
+}
+
+.jornada td.butt-visual.disabled,
+.jornada td.butt-visual[disabled],
+fieldset[disabled] .jornada td.butt-visual {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.jornada td.butt-visual.disabled:hover,
+.jornada td.butt-visual[disabled]:hover,
+fieldset[disabled] .jornada td.butt-visual:hover {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 
 .jornada td.butt-danger {
     color: #ffffff;
@@ -177,11 +220,11 @@ fieldset[disabled] .jornada td.butt:hover {
     background-color: #910d0c;
 }
 
-.jornada td a,
+/*.jornada td a,
 .jornada td a:hover{
     color: #ffffff;
 
-}
+}*/
 
 .jornadapicker {
     top: 0;
