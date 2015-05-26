@@ -578,7 +578,10 @@ def partido(request, id_partido):
     except ObjectDoesNotExist:
         part = None
 
-    if not part:
+    if (not part or
+        (part.competicion.privada and (
+            not request.user.is_authenticated or
+            request.user != part.competicion.administrador))):
         context = {
             'title': 'No se puede mostrar el partido',
         }

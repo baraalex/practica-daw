@@ -35,11 +35,12 @@
             <tr>
               <th>Competición</th>
               <th>Equipo</th>
-              <th>Titular</th>
+              <!-- <th>Titular</th> -->
               <th>Amarillas</th>
               <th>Roja</th>
               <th>Goles</th>
               <th>Goles P.P.</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -48,11 +49,12 @@
                 {% if not partido.partido.competicion.privada or user.is_authenticated and user == partido.partido.competicion.administrador %}
                   <td><a href="{% url 'web:competicion' partido.partido.competicion.id %}">{{ partido.partido.competicion.nombre }}</a></td>
                   <td><a href="{% url 'web:equipo' partido.equipo.id %}">{{ partido.equipo.nombre }}</a></td>
-                  <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td>
+                  <!-- <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td> -->
                   <td>{{ partido.amarillas }}</td>
                   <td>{% if partido.roja %}Sí{% else %}No{% endif %}</td>
                   <td>{{ partido.goles }}</td>
                   <td>{{ partido.goles_pp }}</td>
+                  <td><a href="{% url 'web:partido' partido.partido.id %}">Ver datos</a></td>
                 {% else %}
                   <td class="privado" colspan="7">Partido disputado en competición privada.</td>
                 {% endif %}

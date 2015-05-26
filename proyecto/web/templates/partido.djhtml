@@ -1,111 +1,124 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
   <div id="tabla">
-    <div class="well well-lg media">
-      <div class="media-body">
-        <h2 id="media-heading" class="media-heading name">{{ partido.equipo_loc.nombre }} - {{ partido.equipo_vis.nombre }}</h2>
-        <hr>
-        <h4 class="name">Competición:</h4>
-        <span class="informacion">{{ partido.competicion.nombre }}</span>
-        <h4 class="name">Jornada:</h4>
-        <span class="informacion">{{ partido.jornada }}</span>
-        <h4 class="name">Resumen:</h4>
-        {% if partido.celebrado %}
-          <div class="informacion table-responsive">
-            <table class="table table-striped">
+    {% if partido %}
+      <div class="well well-lg media">
+        <div class="media-body">
+          <h2 id="media-heading" class="media-heading name">{{ partido.equipo_loc.nombre }} - {{ partido.equipo_vis.nombre }}</h2>
+          <hr>
+          <h4 class="name">Competición:</h4>
+          <span class="informacion"><a href="{% url 'web:competicion' partido.competicion.id %}">{{ partido.competicion.nombre }}</a></span>
+          <h4 class="name">Jornada:</h4>
+          <span class="informacion">{{ partido.jornada }}</span>
+          <h4 class="name">Resumen:</h4>
+          {% if partido.celebrado %}
+            <div class="informacion table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th><a href="{% url 'web:equipo' partido.equipo_loc.id %}">{{ partido.equipo_loc.nombre }}</a></th>
+                    <th><a href="{% url 'web:equipo' partido.equipo_vis.id %}">{{ partido.equipo_vis.nombre }}</a></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Goles</th>
+                    <td>{{ partido.goles_loc }}</td>
+                    <td>{{ partido.goles_vis }}</td>
+                  </tr>
+                  <tr>
+                    <th>Amarillas</th>
+                    <td>{{ partido.amarillas_loc }}</td>
+                    <td>{{ partido.amarillas_vis }}</td>
+                  </tr>
+                  <tr>
+                    <th>Rojas</th>
+                    <td>{{ partido.rojas_loc }}</td>
+                    <td>{{ partido.rojas_vis }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <span class="informacion">No disputado</span>
+          {% endif %}
+        </div>
+        <div class="media-right">
+          <a href="{{ partido.equipo_loc.foto.url }}" target="_blank">
+            <img src="{{ partido.equipo_loc.foto.url }}" class="media-object imageBig" />
+          </a>
+          <br />
+          <a href="{{ partido.equipo_vis.foto.url }}" target="_blank">
+            <img src="{{ partido.equipo_vis.foto.url }}" class="media-object imageBig" />
+          </a>
+        </div>
+      </div>
+      {% if partido.celebrado %}
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
                 <tr>
-                  <th></th>
-                  <th>{{ partido.equipo_loc.nombre }}</th>
-                  <th>{{ partido.equipo_vis.nombre }}</th>
+                  <th>Nombre</th>
+                  <th>Dorsal</th>
+                  <th>Posición</th>
+                  <th>Amarillas</th>
+                  <th>Roja</th>
+                  <th>Goles</th>
+                  <th>Goles P.P.</th>
                 </tr>
               </thead>
-              <tbody>
+              {% for participante in jugadores_loc %}
                 <tr>
-                  <th>Goles</th>
-                  <td>{{ partido.goles_loc }}</td>
-                  <td>{{ partido.goles_vis }}</td>
+                  <td><a href="{% url 'web:jugador' participante.jugador.id %}">{{ participante.jugador.nombre }}</a></td>
+                  <td>{{ participante.jugador.dorsal }}</td>
+                  <td>{{ participante.jugador.get_posicion_display }}</td>
+                  <td>{{ participante.amarillas }}</td>
+                  <td>{% if participante.roja %}Sí{% else %}No{% endif %}</td>
+                  <td>{{ participante.goles }}</td>
+                  <td>{{ participante.goles_pp }}</td>
                 </tr>
-                <tr>
-                  <th>Amarillas</th>
-                  <td>{{ partido.amarillas_loc }}</td>
-                  <td>{{ partido.amarillas_vis }}</td>
-                </tr>
-                <tr>
-                  <th>Rojas</th>
-                  <td>{{ partido.rojas_loc }}</td>
-                  <td>{{ partido.rojas_vis }}</td>
-                </tr>
-              </tbody>
+              {% endfor %}
             </table>
           </div>
-        {% else %}
-          <span class="informacion">No disputado</span>
-        {% endif %}
+          <div class="col-md-6">
+            <table class="table table-striped sortable-theme-bootstrap" data-sortable>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Dorsal</th>
+                  <th>Posición</th>
+                  <th>Amarillas</th>
+                  <th>Roja</th>
+                  <th>Goles</th>
+                  <th>Goles P.P.</th>
+                </tr>
+              </thead>
+              {% for participante in jugadores_vis %}
+                <tr>
+                  <td><a href="{% url 'web:jugador' participante.jugador.id %}">{{ participante.jugador.nombre }}</a></td>
+                  <td>{{ participante.jugador.dorsal }}</td>
+                  <td>{{ participante.jugador.get_posicion_display }}</td>
+                  <td>{{ participante.amarillas }}</td>
+                  <td>{% if participante.roja %}Sí{% else %}No{% endif %}</td>
+                  <td>{{ participante.goles }}</td>
+                  <td>{{ participante.goles_pp }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="aviso panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title name">Aviso</h3>
+        </div>
+        <div class="panel-body">
+          El partido no existe o es privado.
+        </div>
       </div>
-      <div class="media-right">
-        <a href="{{ partido.equipo_loc.foto.url }}" target="_blank">
-          <img src="{{ partido.equipo_loc.foto.url }}" class="media-object imageBig" />
-        </a>
-        <br />
-        <a href="{{ partido.equipo_vis.foto.url }}" target="_blank">
-          <img src="{{ partido.equipo_vis.foto.url }}" class="media-object imageBig" />
-        </a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <table class="table table-striped sortable-theme-bootstrap" data-sortable>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Dorsal</th>
-              <th>Posición</th>
-              <th>Amarillas</th>
-              <th>Roja</th>
-              <th>Goles</th>
-              <th>Goles P.P.</th>
-            </tr>
-          </thead>
-          {% for participante in jugadores_loc %}
-            <tr>
-              <td>{{ participante.jugador.nombre }}</td>
-              <td>{{ participante.jugador.dorsal }}</td>
-              <td>{{ participante.jugador.get_posicion_display }}</td>
-              <td>{{ participante.amarillas }}</td>
-              <td>{% if participante.roja %}Sí{% else %}No{% endif %}</td>
-              <td>{{ participante.goles }}</td>
-              <td>{{ participante.goles_pp }}</td>
-            </tr>
-          {% endfor %}
-        </table>
-      </div>
-      <div class="col-md-6">
-        <table class="table table-striped sortable-theme-bootstrap" data-sortable>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Dorsal</th>
-              <th>Posición</th>
-              <th>Amarillas</th>
-              <th>Roja</th>
-              <th>Goles</th>
-              <th>Goles P.P.</th>
-            </tr>
-          </thead>
-          {% for participante in jugadores_vis %}
-            <tr>
-              <td>{{ participante.jugador.nombre }}</td>
-              <td>{{ participante.jugador.dorsal }}</td>
-              <td>{{ participante.jugador.get_posicion_display }}</td>
-              <td>{{ participante.amarillas }}</td>
-              <td>{% if participante.roja %}Sí{% else %}No{% endif %}</td>
-              <td>{{ participante.goles }}</td>
-              <td>{{ participante.goles_pp }}</td>
-            </tr>
-          {% endfor %}
-        </table>
-      </div>
-    </div>
+    {% endif %}
   </div>
 {% endblock %}
