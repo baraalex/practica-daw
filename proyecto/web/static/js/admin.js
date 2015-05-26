@@ -234,39 +234,6 @@ function addJugador(token) {
     });
 }
 
-function addJugadores(nameEquipo) {
-
-    var msg =
-        "<span><h4>Jugadores :</h4></span><div class='table-responsive jornada'>" +
-        "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Dorsal</th><th>Borrar</th></tr></thead>" +
-        "<tbody id='tablebody'></tbody></table></div> ";
-
-    bootbox.dialog({
-        closeButton: false,
-        title: "Añadir jugadores al equipo: " + nameEquipo,
-        message: msg,
-        buttons: {
-            add: {
-                label: '<span class="fa fa-plus" aria-hidden="true"></span>',
-                className: "btn-primary",
-                callback: function () {
-                    addJugador();
-                    e.preventDefault();
-                    return false;
-                    //A�adir jugador
-                }
-            }, ok: {
-                label: '<span class="fa fa-check" aria-hidden="true"></span>',
-                className: "btn-success"
-            },
-            cancel: {
-                label: '<span class="fa fa-remove" aria-hidden="true"></span>',
-                className: "btn-danger"
-            }
-        }
-    });
-}
-
 function addEquipos(nameLiga, num, token) {
 
     var eq ="";
@@ -743,22 +710,4 @@ function modifyJug(token) {
     $(".selectable").change(function () {
         readURL(this);
     });
-}
-
-function getJSON(url) {
-    var json = "";
-    $.getJSON(url,
-        function (data) {
-            json = JSON.parse(JSON.stringify(data));
-        });
-    return json;
-}
-
-function sendJSON(url, json) {
-    var success = false;
-
-    $.post(url, json).done(function () {
-        success = true;
-    });
-    return success;
 }
