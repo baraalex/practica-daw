@@ -612,13 +612,13 @@ function modifyJug(token) {
                     else if(!disp){
                         $("#alert").css({"display": "block"});
                         e.preventDefault();
-                        document.getElementById('dorsal').setCustomValidity('Invalid');
+                        document.getElementById('newDorsal').setCustomValidity('Invalid');
                         return false;
                     }
                     else {
                         $("#alert").css({"display": "none"});
-                       document.getElementById('dorsal').setCustomValidity('');
-                       $("#formulario").submit();
+                       document.getElementById('newDorsal').setCustomValidity('');
+                        $("#formulario").submit();
                         $("#media-heading").empty();
                         $("#media-heading").html(name);
                         $("#dorsal").empty();
