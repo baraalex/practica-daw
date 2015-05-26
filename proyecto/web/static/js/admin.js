@@ -53,6 +53,15 @@ function addEquipo(token) {
 
 function addLiga(token) {
 
+
+    var temp = "";
+
+    var d = new Date().getFullYear();
+
+    for(var i =0 ; i<5; i++){
+        temp=temp + "<option value='"+(d+i)+"/"+(d+i+1)+"'>"+(d+i)+"/"+(d+i+1)+"</option>"
+    }
+
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre de la liga no puede estar vacio y los equipos deben ser validos</div>" +
@@ -60,8 +69,8 @@ function addLiga(token) {
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/>"+
-        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Temporada :</h4></span><select name='temporada'>" +
-        "<option value='13/14'>13/14</option> </select></div><div class='col-md-4'><span><h4>Numero equipos :</h4></span>" +
+        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Temporada :</h4></span><select name='temporada'>" + temp+
+        "</select></div><div class='col-md-4'><span><h4>Numero equipos :</h4></span>" +
         "<input type='number' id='neq' min='2' max='100' step='2' value='38'/></div><div class='col-md-4'><span><h4>Liga Privada :</h4></span>" +
         "<input type='checkbox' id='privada' name='privada'/></div></div><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
