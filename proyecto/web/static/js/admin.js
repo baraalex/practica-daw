@@ -305,7 +305,7 @@ function jornada(jor, token) {
     
     $(".butt-visual").click(function () {
            var x = $(this)[0].id;
-           window.location.assign(window.location.host + "/web/partido/" + x);
+           window.location.assign(window.location.protocol + "//" + window.location.host + "/web/partido/" + x + "/");
         });
 }
 
@@ -338,7 +338,7 @@ function jornadaVisual(jor) {
 
     $(".butt-visual").click(function () {
            var x = $(this)[0].id;
-           window.location.assign(window.location.host + "/web/partido/" + x);
+           window.location.assign(window.location.protocol + "//" + window.location.host + "/web/partido/" + x + "/");
         });
 }
 
