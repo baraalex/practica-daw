@@ -369,24 +369,25 @@ def equipos(request, pagina=1):
     tmpContext = {}
 
     if request.POST:
-        nombre = campo = imagen = None
+        nNombre = nCampo = nImagen = None
 
         if 'nombre' in request.POST:
-            nombre = request.POST['nombre']
+            nNombre = request.POST['nombre']
 
         if 'campo' in request.POST:
-            campo = request.POST['campo']
+            nCampo = request.POST['campo']
 
         if 'imagen' in request.FILES:
-            imagen = request.FILES['imagen']
+            nImagen = request.FILES['imagen']
 
-        if nombre and campo and imagen:
-            if Equipo.objects.filter(nombre=nombre).exists():
+        if nNombre and nCampo and nImagen:
+            if Equipo.objects.filter(nombre=nNombre).exists():
                 tmpContext['error'] = 'existe'
             else:
-                nuevoEquipo = Equipo(nombre=nombre, foto=imagen, campo=campo)
+                nuevoEquipo = Equipo(nombre=nNombre, foto=nImagen,
+                                     campo=nCampo)
                 nuevoEquipo.save()
-                tmpContext['nuevo'] = nombre
+                tmpContext['nuevo'] = nNombre
         else:
             tmpContext['error'] = 'campos'
 
@@ -460,34 +461,34 @@ def jugadores(request, pagina=1, posicion=None):
     tmpContext = {}
 
     if request.POST:
-        nombre = equipo = posicion = dorsal = imagen = None
+        nNombre = nEquipo = nPosicion = nDorsal = nImagen = None
 
         if 'name' in request.POST:
-            nombre = request.POST['name']
+            nNombre = request.POST['name']
 
         if 'equipo' in request.POST:
-            equipo = request.POST['equipo']
+            nEquipo = request.POST['equipo']
 
         if 'pos' in request.POST:
-            posicion = request.POST['pos']
+            nPosicion = request.POST['pos']
 
         if 'dorsal' in request.POST:
-            dorsal = request.POST['dorsal']
+            nDorsal = request.POST['dorsal']
 
         if 'imagen' in request.FILES:
-            imagen = request.FILES['imagen']
+            nImagen = request.FILES['imagen']
 
-        if nombre and equipo and posicion and dorsal and imagen:
-            if Jugador.objects.filter(nombre=nombre).exists():
+        if nNombre and nEquipo and nPosicion and nDorsal and nImagen:
+            if Jugador.objects.filter(nombre=nNombre).exists():
                 tmpContext['error'] = 'existe'
             else:
                 try:
                     equipoObj = Equipo.objects.get(id=equipo)
-                    nuevoJugador = Jugador(nombre=nombre, foto=imagen,
-                                           posicion=posicion, dorsal=dorsal,
+                    nuevoJugador = Jugador(nombre=nNombre, foto=nImagen,
+                                           posicion=nPosicion, dorsal=nDorsal,
                                            equipo=equipoObj)
                     nuevoJugador.save()
-                    tmpContext['nuevo'] = nombre
+                    tmpContext['nuevo'] = nNombre
                 except ObjectDoesNotExist:
                     tmpContext['error'] = 'equipo'
         else:
