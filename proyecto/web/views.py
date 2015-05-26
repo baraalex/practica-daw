@@ -568,3 +568,28 @@ def jugador(request, id_jugador, pagina=1):
 
     context['view'] = 'jugadores'
     return render(request, 'jugador.djhtml', context)
+
+
+@require_GET
+def partido(request, id_partido):
+    try:
+        part = Partido.objects.get(id=id_partido)
+    except ObjectDoesNotExist:
+        part = None
+
+    if not part:
+        context = {
+            'title': 'No se puede mostrar el partido',
+        }
+    else:
+        context = {
+            'title': 'Partido: ' + part.equipo_loc.nombre + ' - ' +
+            part.equipo_vis.nombre,
+            'partido': part,
+            'jugadores_loc': Participante.objects
+            .filter(partido=part, equipo=part.equipo_loc),
+            'jugadores_vis': Participante.objects
+            .filter(partido=part, equipo=part.equipo_vis),
+        }
+
+    return render(request, 'partido.djhtml', context)

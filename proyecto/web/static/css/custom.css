@@ -455,3 +455,7 @@ body {
 .mgrtop {
   margin-top: 5px;
 }
+
+.table.sortable-theme-bootstrap > thead > tr > th {
+  vertical-align: baseline !important;
+}

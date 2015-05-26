@@ -41,6 +41,11 @@ urlpatterns = [
         views.competicion,
         name='competicion'),
 
+    # Partido
+    url(r'^partido/(?P<id_partido>[0-9]+)/$',
+        views.partido,
+        name='partido'),
+
     # Equipos
     url(r'^equipos/$',
         views.equipos,
