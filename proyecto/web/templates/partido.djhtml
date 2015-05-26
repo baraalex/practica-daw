@@ -57,7 +57,7 @@
       {% if partido.celebrado %}
         <div class="row">
           <div class="col-lg-6 table-responsive">
-            <h4>{{ partido.equipo_loc.nombre }}</h4>
+            <h4 class="name">{{ partido.equipo_loc.nombre }}</h4>
             <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
                 <tr>
@@ -84,7 +84,7 @@
             </table>
           </div>
           <div class="col-lg-6 table-responsive">
-            <h4>{{ partido.equipo_vis.nombre }}</h4>
+            <h4 class="name">{{ partido.equipo_vis.nombre }}</h4>
             <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
                 <tr>
