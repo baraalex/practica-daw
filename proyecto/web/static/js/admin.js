@@ -317,21 +317,53 @@ function addEquipos(nameLiga, num, token) {
         });
 }
 
-function jornada(jor, token) {
+function jornada(id, comp, token) {
+
+    var eq;
+    $.ajax({url: '/web/get/equipos/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            eq=data;
+        }
+    });
+
+    var partidos = "";
+
+    $.ajax({url: '/web/get/partidos/'+comp+'/'+id+'/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            $.each(data, function(i, field) { 
+                var loc ="";
+                var vis ="";
+                for(var j = 0; j<eq.length && (loc =="" || vis =="");j++){
+                        if(field.fields.equipo_loc==eq[j].pk){
+                            loc=eq[j].fields.nombre;
+                        }else if(field.fields.equipo_vis==eq[j].pk){
+                            vis=eq[j].fields.nombre;
+                        }
+                }
+                partidos=partidos+"<tr><td class='butt-visual' id='"+ field.pk+
+                "'><span class='fa fa-eye'></span></td><td class='butt' id = '"+ field.pk + "_" + i + "'>"+
+                "<span class='fa fa-pencil-square-o'></span></td><td id='"+ field.fields.equipo_loc +"'>"+ loc + 
+                "</td><td id='"+ field.fields.equipo_vis +"'>"+ vis + "</td><td id='res0'>"+ field.fields.goles_loc + "-"+ field.fields.goles_vis + "</td></tr>";
+            });
+        }
+    });
+
     var msg =
         "<span><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'>"+
         "<thead><tr><th>Ficha</th><th>editar</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
-        "<tbody id='tablebody'>"+
-        "<tr><td class='butt-visual' id='3'><span class='fa fa-eye'></span></td><td class='butt' id = '1_0'>"+
-        "<span class='fa fa-pencil-square-o'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
+        "<tbody id='tablebody'>"+ partidos +
         "</tbody></table></div> ";
 
 
     bootbox.dialog({
         closeButton: false,
-        title: "Jornada: " + jor,
+        title: "Jornada: " + id,
         message: msg,
         className: "jor-width",
         buttons: {
@@ -349,7 +381,7 @@ function jornada(jor, token) {
     if(document.getElementById('editCompeticion')){
         $(".butt").click(function () {
             var x = $(this)[0].id.split('_');
-            var goles = partido(x[0] ,x[1], token);
+            partido(x[0], comp,x[1], $(this).parentNode.childNodes[2].id, $(this).parentNode.childNodes[3].id, token);
         });
     }
     
@@ -359,19 +391,51 @@ function jornada(jor, token) {
         });
 }
 
-function jornadaVisual(jor) {
+function jornadaVisual(id, comp) {
+
+    var eq;
+    $.ajax({url: '/web/get/equipos/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            eq=data;
+        }
+    });
+
+    var partidos = "";
+
+    $.ajax({url: '/web/get/partidos/'+comp+'/'+id+'/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            $.each(data, function(i, field) { 
+                var loc ="";
+                var vis ="";
+                for(var j = 0; j<eq.length && (loc =="" || vis =="");j++){
+                        if(field.fields.equipo_loc==eq[j].pk){
+                            loc=eq[j].fields.nombre;
+                        }else if(field.fields.equipo_vis==eq[j].pk){
+                            vis=eq[j].fields.nombre;
+                        }
+                }
+                partidos=partidos+"<tr><td class='butt-visual' id='"+ field.pk+
+                "'><span class='fa fa-eye'></span></td><td>"+ loc + "</td><td>"+
+                vis + "</td><td id='res0'>"+ field.fields.goles_loc + "-"+ field.fields.goles_vis + "</td></tr>";
+            });
+        }
+    });
+
     var msg =
         "<span><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>Ficha</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
-        "<tbody id='tablebody'>"+
-        "<tr><td class='butt-visual' id='3'><span class='fa fa-eye'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
+        "<tbody id='tablebody'>"+partidos+
         "</tbody></table></div> ";
 
 
     bootbox.dialog({
         closeButton: false,
-        title: "Jornada: " + jor,
+        title: "Jornada: " + id,
         message: msg,
         className: "jor-width",
         buttons: {
@@ -392,7 +456,27 @@ function jornadaVisual(jor) {
         });
 }
 
-function partido(id, pos, token) {
+function partido(id, comp, pos, loc, vis, token) {
+
+
+    var jugLoc;
+    $.ajax({url: '/web/get/jugadores/'+ loc +'/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            jugLoc=data;
+        }
+    });
+
+    var jugVis;
+    $.ajax({url: '/web/get/jugadores/'+ vis +'/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            jugVis=data;
+        }
+    });
+
     var msg = "<div  id ='alert' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>goles negativos</div>" +

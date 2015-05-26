@@ -31,9 +31,9 @@ $( document ).ready(function() {
     $('.day').removeClass('active');
     $(this).addClass('active');
     if(document.getElementById('editCompeticion')){
-        jornada($(this).html(),$(this).data("token"));
+        jornada($(this).data("jornada"),$(this).data("competicion"),$(this).data("token"));
     }else{
-        jornadaVisual($(this).html());
+        jornadaVisual($(this).data("jornada"),$(this).data("competicion"));
     }
     });
 });

@@ -411,12 +411,53 @@ fieldset[disabled] .jornada td.butt-visual:hover {
 
 .jor-width > .modal-dialog {
     width: auto;
-    max-width: 80em !important;
+    max-width: 35em !important;
+}
+
+@media (min-width: 768px) {
+    .jor-width > .modal-dialog {
+        width: auto;
+        max-width: 45em !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .jor-width > .modal-dialog {
+        width: auto;
+        max-width: 55em !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .jor-width > .modal-dialog {
+        width: auto;
+        max-width: 80em !important;
+    }
 }
 
 .part-width > .modal-dialog {
     width: auto;
-    max-width: 70em !important;
+    max-width: 30em !important;
+}
+
+@media (min-width: 768px) {
+    .part-width > .modal-dialog {
+        width: auto;
+        max-width: 40em !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .part-width > .modal-dialog {
+        width: auto;
+        max-width: 45em !important;
+    }
+}
+@media (min-width: 1200px) {
+    .part-width > .modal-dialog {
+        width: auto;
+        max-width: 70em !important;
+    }
 }
 
 .row-right {
