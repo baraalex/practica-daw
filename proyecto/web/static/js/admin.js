@@ -59,7 +59,7 @@ function addLiga(token) {
     var d = new Date().getFullYear();
 
     for(var i =0 ; i<5; i++){
-        temp=temp + "<option value='"+(d+i)+"/"+(d+i+1)+"'>"+(d+i)+"/"+(d+i+1)+"</option>"
+        temp=temp + "<option value='"+(d+i)+"/"+(d+i+1)+"'>"+(d+i)+"/"+(d+i+1)+"</option>";
     }
 
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
@@ -112,6 +112,20 @@ function addLiga(token) {
 }
 
 function addJugador(token) {
+
+    var eq ="";
+
+    $.ajax({url: '/web/get/equipos/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            $.each(data, function(i, field) { 
+                eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>");
+            });
+        }
+    });
+
+
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio y el dorsal debe ser valido</div>" +
@@ -122,8 +136,7 @@ function addJugador(token) {
         "</div><div class='row row-right'><div class='col-md-4'><span><h4>Posicion :</h4></span><select id='posicion' name='pos'>" +
         "<option value='po'>Portero</option><option value='df'>Defensa</option><option value='ce'>Mediocentro</option>"+
         "<option value='dl'>Delantero</option></select></div><div class='col-md-4'><h4>Equipo :</h4></span>"+
-        "<select id='equipo' name='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
-        "<option value='4'>Eq4</option></select></div>"+
+        "<select id='equipo' name='equipo'>"+eq+"</select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='dorsal' min='1' max='99' value='1' name='dorsal'/></div></div><span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
