@@ -329,6 +329,13 @@ function addEquipos(nameLiga, num, token) {
             $(this)[0].parentNode.remove();
         });
     });
+    
+    $(".butt-danger").click(function () {
+            $("#alert").css({"display": "none"});
+            document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
+            $("#equipo"+$(this)[0].parentNode.id)[0].remove();
+            $(this)[0].parentNode.remove();
+        });
 }
 
 function jornada(jor, token) {
