@@ -251,17 +251,18 @@ def competiciones(request, pagina=1):
                                           temporada=nTemporada).exists():
                 tmpContext['error'] = 'existe'
             else:
+                nJornadas, nPartidos = calc_matchs(nEquipos)
+
                 nCompeticion = Competicion(nombre=nNombre, foto=nImagen,
                                            temporada=nTemporada,
                                            administrador=request.user,
-                                           privada=nPrivada)
+                                           privada=nPrivada,
+                                           jornadas=nJornadas)
 
                 nCompeticion.save()
 
                 for eid in nEquipos:
                     nCompeticion.participantes.add(Equipo.objects.get(id=eid))
-
-                nJornadas, nPartidos = calc_matchs(nEquipos)
 
                 for jor in range(1, nJornadas+1):
                     for part in nPartidos[jor]:
@@ -333,17 +334,18 @@ def competiciones_privadas(request, pagina=1):
                                           temporada=nTemporada).exists():
                 tmpContext['error'] = 'existe'
             else:
+                nJornadas, nPartidos = calc_matchs(nEquipos)
+
                 nCompeticion = Competicion(nombre=nNombre, foto=nImagen,
                                            temporada=nTemporada,
                                            administrador=request.user,
-                                           privada=nPrivada)
+                                           privada=nPrivada,
+                                           jornadas=nJornadas)
 
                 nCompeticion.save()
 
                 for eid in nEquipos:
                     nCompeticion.participantes.add(Equipo.objects.get(id=eid))
-
-                nJornadas, nPartidos = calc_matchs(nEquipos)
 
                 for jor in range(1, nJornadas+1):
                     for part in nPartidos[jor]:
@@ -732,11 +734,37 @@ def get_equipos(request):
 
 
 @require_GET
-def get_dorsales(request, id_equipo=None):
+def get_jugadores(request, id_equipo):
+    if request.user.is_authenticated:
+        return HttpResponse(serialize('json',
+                                      Jugador.objects
+                                      .filter(equipo__id=id_equipo),
+                                      fields=('nombre', 'dorsal',
+                                              'posicion')))
+    else:
+        return HttpResponseBadRequest('')
+
+
+@require_GET
+def get_dorsales(request, id_equipo):
     if request.user.is_authenticated:
         return HttpResponse(serialize('json',
                                       Jugador.objects
                                       .filter(equipo__id=id_equipo),
                                       fields=('dorsal')))
+    else:
+        return HttpResponseBadRequest('')
+
+
+@require_GET
+def get_partidos(request, id_competicion, jornada):
+    if request.user.is_authenticated:
+        return HttpResponse(serialize('json',
+                                      Partido.objects
+                                      .filter(competicion__id=id_competicion,
+                                              jornada=jornada),
+                                      fields=('equipo_loc', 'equipo_vis',
+                                              'goles_loc', 'goles_vis',
+                                              'celebrado')))
     else:
         return HttpResponseBadRequest('')
