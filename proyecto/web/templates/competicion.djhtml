@@ -31,9 +31,23 @@
                   <thead>
                     <tr>
                       <th colspan="5" class="text-center name">Jornadas</th>
-                    </tr></thead>
+                    </tr>
+                  </thead>
                   <tbody id="jornadastable">
-                    <tr><td class="day old">5</td><td class="day">6</td><td class="day active">7</td><td class="day">8</td><td class="day">9</td></tr>
+                    <tr>
+                      {% with ''|center:competicion.jornadas as range %}
+                        {% for _ in range %}
+                          <td class="day" data-competicion="{{ competicion.id }}" data-jornada="{{ forloop.counter }}">{{ forloop.counter }}</td>
+
+                          {% if forloop.counter != competicion.jornadas %}
+                            {% if forloop.counter|divisibleby:5 %}
+                    </tr>
+                    <tr>
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endwith %}
+                    </tr>
                   </tbody>
                 </table>
               </div>
