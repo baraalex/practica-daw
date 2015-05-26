@@ -45,6 +45,7 @@ class Competicion(models.Model):
     participantes = models.ManyToManyField(Equipo)
     administrador = models.ForeignKey(User, null=False)
     privada = models.BooleanField(default=False)
+    jornadas = models.PositiveSmallIntegerField(default=0, null=False)
 
     def __unicode__(self):
         return self.nombre
