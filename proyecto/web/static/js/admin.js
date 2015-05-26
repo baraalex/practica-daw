@@ -285,7 +285,7 @@ function addEquipos(nameLiga, num, token) {
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
-                callback: function () {
+                callback: function (e) {
                     var add = document.getElementsByName("equipos");
                     if (num != add.length) {
                         $("#alert").css({"display": "block"});
@@ -315,7 +315,7 @@ function addEquipos(nameLiga, num, token) {
         $(".butt-danger").click(function () {
             $("#alert").css({"display": "none"});
             document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
-            $("equipo"+$(this)[0].parentNode.id)[0].remove();
+            $("#equipo"+$(this)[0].parentNode.id)[0].remove();
             $(this)[0].parentNode.remove();
         });
     });
