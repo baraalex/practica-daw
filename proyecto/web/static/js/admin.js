@@ -118,7 +118,6 @@ function addLiga(token) {
                             $("#formulario").submit();
                         }else{
                             $("#alert").css({"display": "block"});
-                            //addEquipos(name, neq, token);
                             e.preventDefault();
                             return false;
                         }
@@ -212,13 +211,7 @@ function addJugador(token) {
                         return false;
                     }
                     else {
-                        var jug = "<tr id='1'><td>" + name + "</td><td>" + $("#dorsal").val() + "</td><td>" +
-                            "<button class='btn btn-danger deljugador'><span class='fa fa-remove'' aria-hidden='true'></span></button></td></tr>";
-                        $("#tablebody").append(jug);
                         $("#formulario").submit();
-                        $(".deljugador").click(function () {
-                            $(this)[0].parentNode.parentNode.remove();
-                        });
                     }
                 }
             },
@@ -263,7 +256,6 @@ function addEquipos(nameLiga, num, token) {
     var msg = "<div  id ='alert2'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
-        //"<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+"'>"+
         "<div class='row'><div class='col-md-6'><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
         "<tbody id='tablebodyAdded'>"+eq2+"</tbody>" +
@@ -273,7 +265,6 @@ function addEquipos(nameLiga, num, token) {
         "<tbody id='tablebody'>"+eq+"</tbody>" +
         "</table></div></div> </div><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/>";
-        //+"</form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -524,7 +515,6 @@ function calcGol() {
     $("#golLocalTotal").html(loc);
     $("#golVisitanteTotal").empty();
     $("#golVisitanteTotal").html(vis);
-
 }
 
 function modifyEq(token) {
