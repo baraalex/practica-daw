@@ -79,4 +79,8 @@ urlpatterns = [
     url(r'^jugador/(?P<id_jugador>[0-9]+)/(?P<pagina>[0-9]+)/$',
         views.jugador,
         name='jugador'),
+
+    # API
+    url(r'^get/equipos/$',
+        views.get_equipos)
 ]
