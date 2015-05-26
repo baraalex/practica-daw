@@ -120,7 +120,7 @@ function addJugador(token) {
         async: false,
         success: function(data) {
             $.each(data, function(i, field) { 
-                eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>");
+                eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>";
             });
         }
     });
