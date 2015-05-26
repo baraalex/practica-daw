@@ -10,6 +10,14 @@
 {% endblock %}
 {% block contenido %}
   <div id="tabla">
+    {% if error == 'equipo' %}
+      <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        El equipo especificado no existe.
+      </div>
+    {% endif %}
     {% if jugador %}
       <div class="well well-lg media">
         <div class="media-body">

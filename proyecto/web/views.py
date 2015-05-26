@@ -479,18 +479,15 @@ def jugadores(request, pagina=1, posicion=None):
             nImagen = request.FILES['imagen']
 
         if nNombre and nEquipo and nPosicion and nDorsal and nImagen:
-            if Jugador.objects.filter(nombre=nNombre).exists():
-                tmpContext['error'] = 'existe'
-            else:
-                try:
-                    equipoObj = Equipo.objects.get(id=nEquipo)
-                    nuevoJugador = Jugador(nombre=nNombre, foto=nImagen,
-                                           posicion=nPosicion, dorsal=nDorsal,
-                                           equipo=equipoObj)
-                    nuevoJugador.save()
-                    tmpContext['nuevo'] = nNombre
-                except ObjectDoesNotExist:
-                    tmpContext['error'] = 'equipo'
+            try:
+                equipoObj = Equipo.objects.get(id=nEquipo)
+                nuevoJugador = Jugador(nombre=nNombre, foto=nImagen,
+                                       posicion=nPosicion, dorsal=nDorsal,
+                                       equipo=equipoObj)
+                nuevoJugador.save()
+                tmpContext['nuevo'] = nNombre
+            except ObjectDoesNotExist:
+                tmpContext['error'] = 'equipo'
         else:
             tmpContext['error'] = 'campos'
 
@@ -530,10 +527,12 @@ def jugadores(request, pagina=1, posicion=None):
     else:
         context['jugadores'] = Jugador.objects.order_by('nombre')[inicio:fin]
 
+    context.update(tmpContext)
+
     return render(request, 'jugadores.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def jugador(request, id_jugador, pagina=1):
     try:
         jug = Jugador.objects.get(id=id_jugador)
@@ -545,6 +544,26 @@ def jugador(request, id_jugador, pagina=1):
             'title': 'No se puede mostrar el jugador',
         }
     else:
+        tmpContext = {}
+
+        if request.POST:
+            if 'nombre' in request.POST:
+                jug.nombre = request.POST['nombre']
+
+            if 'equipo' in request.POST:
+                try:
+                    jug.equipo = Equipo.objects.get(id=request.POST['equipo'])
+                except ObjectDoesNotExist:
+                    tmpContext['error'] = 'equipo'
+
+            if 'dorsal' in request.POST:
+                jug.dorsal = request.POST['dorsal']
+
+            if 'imagen' in request.FILES:
+                jug.foto = request.FILES['imagen']
+
+            jug.save()
+
         pagina = int(pagina)
 
         if pagina == 0:

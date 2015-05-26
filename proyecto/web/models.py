@@ -25,7 +25,7 @@ class Jugador(models.Model):
         ('dl', 'Delantero'),
     )
 
-    nombre = models.CharField(max_length=64, unique=True)
+    nombre = models.CharField(max_length=64, null=False)
     foto = models.ImageField()
     posicion = models.CharField(max_length=2, choices=POSICIONES, null=False)
     dorsal = models.PositiveSmallIntegerField(null=False)
