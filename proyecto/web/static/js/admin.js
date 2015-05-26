@@ -95,7 +95,7 @@ function addLiga(token) {
                     }
                     else {
                         $("#alert").css({"display": "none"});
-                        $("#formulario").submit();
+                        //$("#formulario").submit();
                         addEquipos(name, neq, token);
                     }
                 }
@@ -259,8 +259,8 @@ function addEquipos(nameLiga, num, token) {
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
-        "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
-        "'><div class='row'><div class='col-md-6'><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
+        //"<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+"'>"+
+        "<div class='row'><div class='col-md-6'><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
         "<tbody id='tablebodyAdded'></tbody>" +
         "</table></div></div><div class='col-md-6'><span>" +
@@ -268,7 +268,8 @@ function addEquipos(nameLiga, num, token) {
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Add</th></tr></thead>" +
         "<tbody id='tablebody'>"+eq+"</tbody>" +
         "</table></div></div> </div><input type='hidden' name='csrfmiddlewaretoken' value='"+
-        token+"' required=''/></form>";
+        token+"' required=''/>";
+        //+"</form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -299,14 +300,16 @@ function addEquipos(nameLiga, num, token) {
     $(".butt").click(function () {
         $("#alert").css({"display": "none"});
         var el = $(this);
-        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><input type='hidden' value='"+
-            el[0].parentNode.id.split("add")[1] +"' name='equipo'/><td>" +
+        $("#formulario").append("<input id='equipo"+el[0].parentNode.id.split("add")[1] +"' type='hidden' value='"+el[0].parentNode.id.split("add")[1] +"' name='equipo'/>");
+        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><td>" +
             el[0].parentNode.childNodes[0].childNodes[0].data +
             "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>");
         el.addClass('disabled');
+
         $(".butt-danger").click(function () {
             $("#alert").css({"display": "none"});
             document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
+            $("equipo"+$(this)[0].parentNode.id)[0].remove();
             $(this)[0].parentNode.remove();
         });
     });
