@@ -28,9 +28,25 @@
     margin: 1em;
 }
 
-.imageBig {
-    max-height: 25em;
-    max-width: 10em;
+@media (min-width: 768px) {
+    .imageBig {
+        max-height: 25em;
+        max-width: 5em;
+    }
+}
+
+@media (min-width: 992px) {
+    .imageBig {
+        max-height: 25em;
+        max-width: 8em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .imageBig {
+        max-height: 25em;
+        max-width: 10em;
+    }
 }
 
 .imageLittle {
