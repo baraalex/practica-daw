@@ -28,10 +28,15 @@
     margin: 1em;
 }
 
-@media (min-width: 768px) {
-    .imageBig {
+.imageBig {
         max-height: 25em;
         max-width: 5em;
+}
+
+@media (max-width: 768px) {
+    .imageBig {
+        max-height: 25em;
+        max-width: 6em;
     }
 }
 
