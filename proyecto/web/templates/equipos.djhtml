@@ -28,7 +28,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <span class="fa fa-check" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
-      El equipo <strong>{{ nuevo }}</strong> ha sido creado.
+      El equipo <strong>{{ nuevo }}</strong> ha sido añadido.
     </div>
   {% endif %}
   <div id="tabla">

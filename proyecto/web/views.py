@@ -455,8 +455,44 @@ def equipo(request, id_equipo, pagina=1):
     return render(request, 'equipo.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def jugadores(request, pagina=1, posicion=None):
+    tmpContext = {}
+
+    if request.POST:
+        nombre = equipo = posicion = dorsal = imagen = None
+
+        if 'nombre' in request.POST:
+            nombre = request.POST['nombre']
+
+        if 'equipo' in request.POST:
+            equipo = request.POST['equipo']
+
+        if 'posicion' in request.POST:
+            posicion = request.POST['posicion']
+
+        if 'dorsal' in request.POST:
+            dorsal = request.POST['dorsal']
+
+        if 'imagen' in request.FILES:
+            imagen = request.FILES['imagen']
+
+        if nombre and equipo and posicion and dorsal and imagen:
+            if Jugador.objects.filter(nombre=nombre).exists():
+                tmpContext['error'] = 'existe'
+            else:
+                try:
+                    equipoObj = Equipo.objects.get(id=equipo)
+                    nuevoJugador = Jugador(nombre=nombre, foto=imagen,
+                                           posicion=posicion, dorsal=dorsal,
+                                           equipo=equipoObj)
+                    nuevoJugador.save()
+                    tmpContext['nuevo'] = nombre
+                except ObjectDoesNotExist:
+                    tmpContext['error'] = 'equipo'
+        else:
+            tmpContext['error'] = 'campos'
+
     pagina = int(pagina)
 
     if pagina == 0:

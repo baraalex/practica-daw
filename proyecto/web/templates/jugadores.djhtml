@@ -34,6 +34,35 @@
   </ul>
 {% endblock %}
 {% block contenido %}
+  {% if error == 'existe' %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      Ya existe un jugador con ese nombre.
+    </div>
+  {% elif error == 'campos' %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      Ningún campo puede estar vacío.
+    </div>
+  {% elif error == 'equipo' %}
+    <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      El equipo especificado no existe.
+    </div>
+  {% elif nuevo %}
+    <div class="aviso alert alert-success alert-dismissiable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span class="fa fa-check" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      El jugador <strong>{{ nuevo }}</strong> ha sido añadido.
+    </div>
+  {% endif %}
   <div id="tabla">
     {% if jugadores %}
       <div class="table-responsive">
