@@ -81,6 +81,24 @@ function addLiga(token) {
         title: "Nuevo Liga",
         message: msg,
         buttons: {
+            add: {
+                label: '<span class="fa fa-plus" aria-hidden="true"></span>',
+                className: "btn-primary",
+                callback: function (e) {
+
+                    var name = $("#Name").val();
+                    var neq = $("#neq").val();
+                    if (name == "" || name == null || neq < 2 || neq > 100) {
+                        $("#alert").css({"display": "block"});
+                    }
+                    else {
+                            addEquipos(name, neq, token);
+                        }
+                        e.preventDefault();
+                            return false;
+                    }
+                }
+            },
             ok: {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
@@ -98,8 +116,10 @@ function addLiga(token) {
 
                         if(add.length==neq){
                             $("#alert").css({"display": "none"});
+                            $("#formulario").submit();
                         }else{
-                            addEquipos(name, neq, token);
+                            $("#alert").css({"display": "block"});
+                            //addEquipos(name, neq, token);
                             e.preventDefault();
                             return false;
                         }
@@ -301,8 +321,6 @@ function addEquipos(nameLiga, num, token) {
                         $("#alert2").css({"display": "block"});
                         e.preventDefault();
                         return false;
-                    }else{
-                        $("#formulario").submit();
                     }
                 }
             },
@@ -329,7 +347,7 @@ function addEquipos(nameLiga, num, token) {
             $(this)[0].parentNode.remove();
         });
     });
-    
+
     $(".butt-danger").click(function () {
             $("#alert").css({"display": "none"});
             document.getElementById("add" + $(this)[0].parentNode.id).children[1].setAttribute("class", "butt");
