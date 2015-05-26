@@ -44,4 +44,4 @@ def calc_matchs(teams):
         match_calendar[day + 1] = list(way_matchs)
         match_calendar[day + 1 + num_days] = list(return_matchs)
 
-    return match_calendar
+    return num_days*2, match_calendar

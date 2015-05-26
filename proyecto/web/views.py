@@ -14,7 +14,7 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
-from .utils import paginate
+from .utils import paginate, calc_matchs
 
 
 @require_GET
@@ -48,20 +48,18 @@ def usuario(request):
                                                       usuario.username)
                 if 'activar' in request.POST:
                     usuario.is_active = True
-                    usuario.save()
                     context['activado'] = True
                 elif 'desactivar' in request.POST:
                     usuario.is_active = False
-                    usuario.save()
                     context['desactivado'] = True
                 elif 'normal' in request.POST:
                     usuario.is_superuser = False
-                    usuario.save()
                     context['normal'] = True
                 elif 'super' in request.POST:
                     usuario.is_superuser = True
-                    usuario.save()
                     context['administrador'] = True
+
+                usuario.save()
             except ObjectDoesNotExist:
                 context['error'] = 'edit'
         elif 'moddatos' in request.POST:
@@ -225,8 +223,58 @@ def registro(request):
     return render(request, 'registro.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def competiciones(request, pagina=1):
+    tmpContext = {}
+
+    if request.POST:
+        nNombre = nTemporada = nImagen = nEquipos = None
+        nPrivada = False
+
+        if 'nombre' in request.POST:
+            nNombre = request.POST['nombre']
+
+        if 'temporada' in request.POST:
+            nTemporada = request.POST['temporada']
+
+        if 'equipo' in request.POST:
+            nEquipos = request.POST.getlist('equipo')
+
+        if 'privada' in request.POST:
+            nPrivada = True
+
+        if 'imagen' in request.FILES:
+            nImagen = request.FILES['imagen']
+
+        if nNombre and nTemporada and nImagen and nEquipos:
+            if Competicion.objects.filter(nombre=nNombre,
+                                          temporada=nTemporada).exists():
+                tmpContext['error'] = 'existe'
+            else:
+                nCompeticion = Competicion(nombre=nNombre, foto=nImagen,
+                                           temporada=nTemporada,
+                                           administrador=request.user,
+                                           privada=nPrivada)
+
+                nCompeticion.save()
+
+                for eid in nEquipos:
+                    nCompeticion.participantes.add(Equipo.objects.get(id=eid))
+
+                nJornadas, nPartidos = calc_matchs(nEquipos)
+
+                for jor in range(1, nJornadas+1):
+                    for part in nPartidos[jor]:
+                        nuevoPartido = Partido(competicion=nCompeticion,
+                                               equipo_loc_id=part[0],
+                                               equipo_vis_id=part[1],
+                                               jornada=jor)
+                        nuevoPartido.save()
+
+                tmpContext['nuevo'] = nNombre
+        else:
+            tmpContext['error'] = 'campos'
+
     pagina = int(pagina)
 
     if pagina == 0:
@@ -249,14 +297,65 @@ def competiciones(request, pagina=1):
         .order_by('-temporada')[inicio:fin],
     }
 
+    context.update(tmpContext)
+
     return render(request, 'competiciones.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def competiciones_privadas(request, pagina=1):
     if not request.user.is_authenticated():
         return redirect("%s?r=%s" %
                         (reverse('web:login'), request.get_full_path()))
+    tmpContext = {}
+
+    if request.POST:
+        nNombre = nTemporada = nImagen = nEquipos = None
+        nPrivada = False
+
+        if 'nombre' in request.POST:
+            nNombre = request.POST['nombre']
+
+        if 'temporada' in request.POST:
+            nTemporada = request.POST['temporada']
+
+        if 'equipo' in request.POST:
+            nEquipos = request.POST.getlist('equipo')
+
+        if 'privada' in request.POST:
+            nPrivada = True
+
+        if 'imagen' in request.FILES:
+            nImagen = request.FILES['imagen']
+
+        if nNombre and nTemporada and nImagen and nEquipos:
+            if Competicion.objects.filter(nombre=nNombre,
+                                          temporada=nTemporada).exists():
+                tmpContext['error'] = 'existe'
+            else:
+                nCompeticion = Competicion(nombre=nNombre, foto=nImagen,
+                                           temporada=nTemporada,
+                                           administrador=request.user,
+                                           privada=nPrivada)
+
+                nCompeticion.save()
+
+                for eid in nEquipos:
+                    nCompeticion.participantes.add(Equipo.objects.get(id=eid))
+
+                nJornadas, nPartidos = calc_matchs(nEquipos)
+
+                for jor in range(1, nJornadas+1):
+                    for part in nPartidos[jor]:
+                        nuevoPartido = Partido(competicion=nCompeticion,
+                                               equipo_loc_id=part[0],
+                                               equipo_vis_id=part[1],
+                                               jornada=jor)
+                        nuevoPartido.save()
+
+                tmpContext['nuevo'] = nNombre
+        else:
+            tmpContext['error'] = 'campos'
 
     pagina = int(pagina)
 
@@ -281,6 +380,8 @@ def competiciones_privadas(request, pagina=1):
         .filter(privada=True, administrador=request.user)
         .order_by('-temporada')[inicio:fin],
     }
+
+    context.update(tmpContext)
 
     return render(request, 'competiciones.djhtml', context)
 
