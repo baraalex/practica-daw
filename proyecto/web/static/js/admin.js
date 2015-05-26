@@ -37,7 +37,6 @@ function addEquipo(token) {
                     else {
                         $("#alert").css({"display": "none"});
                         $("#formulario").submit();
-                        //addJugadores(name);
                     }
                 }
             },
@@ -61,9 +60,10 @@ function addLiga(token) {
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/>"+
-        "</div><div class='row row-right'><div class='col-md-6'><span><h4>Temporada :</h4></span><select name='temporada'>" +
-        "<option value='13/14'>13/14</option> </select></div><div class='col-md-6'><span><h4>Numero equipos :</h4></span>" +
-        "<input type='number' id='neq' min='2' max='100' step='2' value='38'/></div></div><h4>Foto :</h4></span><input type='file' " +
+        "</div><div class='row row-right'><div class='col-md-4'><span><h4>Temporada :</h4></span><select name='temporada'>" +
+        "<option value='13/14'>13/14</option> </select></div><div class='col-md-4'><span><h4>Numero equipos :</h4></span>" +
+        "<input type='number' id='neq' min='2' max='100' step='2' value='38'/></div><div class='col-md-4'><span><h4>Liga Privada :</h4></span>" +
+        "<input type='checkbox' id='privada' name='privada'/></div></div><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
@@ -501,11 +501,6 @@ function modifyEq(token) {
                     }
                     else {
                         $("#formulario").submit();
-                        $("#alert").css({"display": "none"});
-                        $("#media-heading").empty();
-                        $("#media-heading").html(name);
-                        $("#campo").empty();
-                        $("#campo").html(campo);
                     }
                 }
             },
@@ -553,9 +548,6 @@ function modifyComp(token) {
                     }
                     else {
                         $("#formulario").submit();
-                        $("#alert").css({"display": "none"});
-                        $("#media-heading").empty();
-                        $("#media-heading").html(name);
                     }
                 }
             },
@@ -623,10 +615,6 @@ function modifyJug(token) {
                         $("#alert").css({"display": "none"});
                        document.getElementById('newDorsal').setCustomValidity('');
                         $("#formulario").submit();
-                        $("#media-heading").empty();
-                        $("#media-heading").html(name);
-                        $("#dorsal").empty();
-                        $("#dorsal").html(dorsal);
                     }
                 }
             },
