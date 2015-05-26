@@ -462,14 +462,14 @@ def jugadores(request, pagina=1, posicion=None):
     if request.POST:
         nombre = equipo = posicion = dorsal = imagen = None
 
-        if 'nombre' in request.POST:
-            nombre = request.POST['nombre']
+        if 'name' in request.POST:
+            nombre = request.POST['name']
 
         if 'equipo' in request.POST:
             equipo = request.POST['equipo']
 
-        if 'posicion' in request.POST:
-            posicion = request.POST['posicion']
+        if 'pos' in request.POST:
+            posicion = request.POST['pos']
 
         if 'dorsal' in request.POST:
             dorsal = request.POST['dorsal']
