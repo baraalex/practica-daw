@@ -98,8 +98,8 @@ function addLiga(token) {
 
                         if(add.length==neq){
                             $("#alert").css({"display": "none"});
-                        else{
-                            addEquipos(name, neq, token);}
+                        }else{
+                            addEquipos(name, neq, token);
                             e.preventDefault();
                             return false;
                         }
