@@ -7,9 +7,11 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.http import HttpResponse, HttpResponseBadRequest
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate
@@ -616,3 +618,13 @@ def partido(request, id_partido):
         }
 
     return render(request, 'partido.djhtml', context)
+
+
+@require_GET
+def get_equipos(request):
+    if request.user.is_authenticated:
+        return HttpResponse(serializers.serialize('json',
+                                                  Equipo.objects.all(),
+                                                  fields=('nombre')))
+    else:
+        return HttpResponseBadRequest('')
