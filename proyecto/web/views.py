@@ -483,7 +483,7 @@ def jugadores(request, pagina=1, posicion=None):
                 tmpContext['error'] = 'existe'
             else:
                 try:
-                    equipoObj = Equipo.objects.get(id=equipo)
+                    equipoObj = Equipo.objects.get(id=nEquipo)
                     nuevoJugador = Jugador(nombre=nNombre, foto=nImagen,
                                            posicion=nPosicion, dorsal=nDorsal,
                                            equipo=equipoObj)

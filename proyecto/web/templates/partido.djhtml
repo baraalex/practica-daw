@@ -12,7 +12,7 @@
           <span class="informacion">{{ partido.jornada }}</span>
           <h4 class="name">Resumen:</h4>
           {% if partido.celebrado %}
-            <div class="informacion table-responsive">
+            <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -56,7 +56,8 @@
       </div>
       {% if partido.celebrado %}
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6 table-responsive">
+            <h4>{{ partido.equipo_loc.nombre }}</h4>
             <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
                 <tr>
@@ -82,7 +83,8 @@
               {% endfor %}
             </table>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6 table-responsive">
+            <h4>{{ partido.equipo_vis.nombre }}</h4>
             <table class="table table-striped sortable-theme-bootstrap" data-sortable>
               <thead>
                 <tr>
