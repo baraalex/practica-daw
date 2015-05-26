@@ -153,7 +153,19 @@ function addJugador(token) {
                 callback: function (e) {
                     var name = $("#Name").val();
                     var dorsal = $("#dorsal").val();
-                    var dor = [33,5,6];
+                    var equipo = $("#equipo").val();
+                    var dor = [];
+
+                    $.ajax({url: '/web/get/dorsales/'+equipo,
+                        dataType: 'json',
+                        async: false,
+                        success: function(data) {
+                            $.each(data, function(i, field) { 
+                                dor.push(field.fields.dorsal);
+                            });
+                        }
+                    });
+
                     var disp = true;
                     for(var i =0;i<dor.length && disp;i++){
                         if(dor[i]==dorsal){
@@ -231,6 +243,19 @@ function addJugadores(nameEquipo) {
 }
 
 function addEquipos(nameLiga, num, token) {
+
+    var eq ="";
+
+    $.ajax({url: '/web/get/equipos/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            $.each(data, function(i, field) { 
+                eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt'><span class='fa fa-plus'></span></td></tr>";
+            });
+        }
+    });
+
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
@@ -241,9 +266,7 @@ function addEquipos(nameLiga, num, token) {
         "</table></div></div></form><div class='col-md-6'><span>" +
         "<h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Add</th></tr></thead>" +
-        "<tbody id='tablebody'><tr id='add2'><td>E2</td><td class='butt'><span class='fa fa-plus'></span></td></tr>" +
-        "<tr id='add3'><td>E3</td><td class='butt'><span class='fa fa-plus'></span></td></tr>" +
-        "<tr id='add4'><td>E4</td><td class='butt'><span class='fa fa-plus'></span></td></tr></tbody>" +
+        "<tbody id='tablebody'>"+eq+"</tbody>" +
         "</table></div></div> </div><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
@@ -589,6 +612,19 @@ function modifyComp(token) {
 }
 
 function modifyJug(token) {
+
+    var eq ="";
+
+    $.ajax({url: '/web/get/equipos/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            $.each(data, function(i, field) { 
+                eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>";
+            });
+        }
+    });
+
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio y el dorsal debe ser valido</div>" +
@@ -597,8 +633,7 @@ function modifyJug(token) {
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/></div>"+
         "<div class='row row-right'><div class='col-md-4'><h4>Equipo :</h4></span>"+
-        "<select id='equipo' name='equipo'><option value='1'>Eq1</option><option value='2'>Eq2</option><option value='3'>Eq3</option>"+
-        "<option value='4'>Eq4</option></select></div>"+
+        "<select id='equipo' name='equipo'>"+eq+"</select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'/></div></div><span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
@@ -614,8 +649,20 @@ function modifyJug(token) {
                 className: "btn-success",
                 callback: function () {
                     var name = $("#Name").val();
+                    var equipo = $("#equipo").val();
                     var dorsal = $("#newDorsal").val();
-                    var dor = [33,5,6];
+                    var dor = [];
+
+                    $.ajax({url: '/web/get/dorsales/'+equipo,
+                        dataType: 'json',
+                        async: false,
+                        success: function(data) {
+                            $.each(data, function(i, field) { 
+                                dor.push(field.fields.dorsal);
+                            });
+                        }
+                    });
+
                     var disp = true;
                     for(var i =0;i<dor.length && disp;i++){
                         if(dor[i]==dorsal){
@@ -635,7 +682,6 @@ function modifyJug(token) {
                     }
                     else {
                         $("#alert").css({"display": "none"});
-                       document.getElementById('newDorsal').setCustomValidity('');
                         $("#formulario").submit();
                     }
                 }
