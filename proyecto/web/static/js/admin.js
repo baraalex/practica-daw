@@ -270,10 +270,12 @@ function addEquipos(nameLiga, num, token) {
 function jornada(jor, token) {
     var msg =
         "<span><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
-        "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
+        "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'>"+
+        "<thead><tr><th>Ficha</th><th>editar</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
         "<tbody id='tablebody'>"+
-        "<tr><td class='butt' id = '1_0'><span class='fa fa-pencil-square-o'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
+        "<tr><td class='butt-visual' id='3'><span class='fa fa-eye'></span></td><td class='butt' id = '1_0'>"+
+        "<span class='fa fa-pencil-square-o'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
         "</tbody></table></div> ";
 
 
@@ -297,18 +299,23 @@ function jornada(jor, token) {
     if(document.getElementById('editCompeticion')){
         $(".butt").click(function () {
             var x = $(this)[0].id.split('_');
-           var goles = partido(x[0] ,x[1], token);
+            var goles = partido(x[0] ,x[1], token);
         });
     }
+    
+    $(".butt-visual").click(function () {
+           var x = $(this)[0].id;
+           window.location.assign(window.location.host + "web/partido/" + x);
+        });
 }
 
 function jornadaVisual(jor) {
     var msg =
         "<span><h4>Partidos :</h4></span><div class='table-responsive jornada'>" +
-        "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>editar</th><th>Local</th>" +
+        "<table class='table table-striped table-bordered dataTable sortable-theme-bootstrap'' id='jornadaTable'><thead><tr><th>Ficha</th><th>Local</th>" +
         "<th>Visitante</th><th>Resultado</th></tr></thead>" +
         "<tbody id='tablebody'>"+
-        "<tr><td class='butt'><a class='butt' target='_blank' href='/media/liga-de-fc3batbol-profesional.gif'><span class='fa fa-eye'></span></a></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
+        "<tr><td class='butt-visual' id='3'><span class='fa fa-eye'></span></td><td>eq1</td><td>eq2</td><td id='res0'>1-2</td></tr>"+
         "</tbody></table></div> ";
 
 
@@ -328,6 +335,11 @@ function jornadaVisual(jor) {
             }
         }
     });
+
+    $(".butt-visual").click(function () {
+           var x = $(this)[0].id;
+           window.location.assign(window.location.host + "web/partido/" + x);
+        });
 }
 
 function partido(id, pos, token) {

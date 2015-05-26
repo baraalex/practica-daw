@@ -1,3 +1,14 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
+<div id="tabla">
+    <div class="well well-lg media">
+      <div class="media-body">
+        <h2 id="media-heading" class="media-heading name">Gesticom</h2>
+        <hr>
+        <span class="informacion">Informacion de la app</span>
+      </div>
+      <div class="media-right">
+      </div>
+
+  </div>
 {% endblock %}
