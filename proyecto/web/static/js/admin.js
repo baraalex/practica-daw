@@ -260,10 +260,10 @@ function addEquipos(nameLiga, num, token) {
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El numero de equipos en la liga debe ser: " + num + "</div>" +
         "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
-        "'><div class='row'><div class='col-md-6'><form><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
+        "'><div class='row'><div class='col-md-6'><span><h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Borrar</th></tr></thead>" +
         "<tbody id='tablebodyAdded'></tbody>" +
-        "</table></div></div></form><div class='col-md-6'><span>" +
+        "</table></div></div><div class='col-md-6'><span>" +
         "<h4>Equipos :</h4></span><div class='table-responsive jornada'>" +
         "<table class='table table-striped table-bordered'><thead><tr><th>Nombre</th><th>Add</th></tr></thead>" +
         "<tbody id='tablebody'>"+eq+"</tbody>" +
