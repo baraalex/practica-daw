@@ -7,7 +7,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
-from django.core import serializers
+from django.core.serializers import serialize
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -623,8 +623,19 @@ def partido(request, id_partido):
 @require_GET
 def get_equipos(request):
     if request.user.is_authenticated:
-        return HttpResponse(serializers.serialize('json',
-                                                  Equipo.objects.all(),
-                                                  fields=('nombre')))
+        return HttpResponse(serialize('json',
+                                      Equipo.objects.all(),
+                                      fields=('nombre')))
+    else:
+        return HttpResponseBadRequest('')
+
+
+@require_GET
+def get_dorsales(request, id_equipo=None):
+    if request.user.is_authenticated:
+        return HttpResponse(serialize('json',
+                                      Jugador.objects
+                                      .filter(equipo__id=id_equipo),
+                                      fields=('dorsal')))
     else:
         return HttpResponseBadRequest('')

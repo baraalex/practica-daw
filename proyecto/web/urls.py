@@ -82,5 +82,7 @@ urlpatterns = [
 
     # API
     url(r'^get/equipos/$',
-        views.get_equipos)
+        views.get_equipos),
+    url(r'^get/dorsales/(?P<id_equipo>[0-9]+)/$',
+        views.get_dorsales),
 ]
