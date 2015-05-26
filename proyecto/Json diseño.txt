@@ -45,6 +45,7 @@ Json diseño
 			-nombre
 			-temporada
 			-imagen
+			-privada
 
 		-Equipo:
 			-nombre
