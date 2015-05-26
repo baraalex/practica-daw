@@ -94,9 +94,15 @@ function addLiga(token) {
                         return false;
                     }
                     else {
-                        $("#alert").css({"display": "none"});
-                        //$("#formulario").submit();
-                        addEquipos(name, neq, token);
+                        var add = document.getElementsByName("equipo");
+
+                        if(add.length==neq){
+                            $("#alert").css({"display": "none"});
+                        else{
+                            addEquipos(name, neq, token);}
+                            e.preventDefault();
+                            return false;
+                        }
                     }
                 }
             },
@@ -280,7 +286,7 @@ function addEquipos(nameLiga, num, token) {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
                 callback: function () {
-                    var add = document.getElementsByName("equipo");
+                    var add = document.getElementsByName("equipos");
                     if (num != add.length) {
                         $("#alert").css({"display": "block"});
                         e.preventDefault();
@@ -300,8 +306,8 @@ function addEquipos(nameLiga, num, token) {
     $(".butt").click(function () {
         $("#alert").css({"display": "none"});
         var el = $(this);
-        $("#formulario").append("<input id='equipo"+el[0].parentNode.id.split("add")[1] +"' type='hidden' value='"+el[0].parentNode.id.split("add")[1] +"' name='equipo'/>");
-        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "'><td>" +
+        $("#formulario").append("<input id='equipo"+el[0].parentNode.id.split("add")[1] +"' type='hidden' value='"+el[0].parentNode.id.split("add")[1] +"' name='equipos'/>");
+        $("#tablebodyAdded").append("<tr id='" + el[0].parentNode.id.split("add")[1] + "' name='equipos'><td>" +
             el[0].parentNode.childNodes[0].childNodes[0].data +
             "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>");
         el.addClass('disabled');
