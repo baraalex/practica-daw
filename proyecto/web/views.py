@@ -13,6 +13,8 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse
 
+from json import dumps
+
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate, calc_matchs
 
@@ -800,6 +802,53 @@ def get_jugadores(request, id_equipo):
                                   .filter(equipo__id=id_equipo),
                                   fields=('nombre', 'dorsal',
                                           'posicion')))
+
+
+@require_GET
+def get_jugadores_new(request, id_partido, id_equipo):
+    jugadores = Jugador.objects.filter(equipo__id=id_equipo).order_by('dorsal')
+    participantes = Participante.objects.filter(partido__id=id_partido,
+                                                equipo__id=id_equipo)
+
+    jugs = []
+    jugsId = []
+    for jugador in jugadores:
+        jugsId.append(jugador.id)
+        jugs.append({
+            'pk': jugador.id,
+            'fields': {
+                'nombre': jugador.nombre,
+                'dorsal': jugador.dorsal,
+                'posicion': jugador.get_posicion_display(),
+                'amarillas': 0,
+                'roja': False,
+                'goles': 0,
+                'goles_pp': 0
+            }
+        })
+
+    for participante in participantes:
+        if participante.jugador.id in jugsId:
+            idx = jugsId.index(participante.jugador.id)
+            jugs[idx]['fields']['amarillas'] = participante.amarillas
+            jugs[idx]['fields']['roja'] = participante.roja
+            jugs[idx]['fields']['goles'] = participante.goles
+            jugs[idx]['fields']['goles_pp'] = participante.goles_pp
+        else:
+            jugs.append({
+                'pk': participante.jugador.id,
+                'fields': {
+                    'nombre': participante.jugador.nombre,
+                    'dorsal': participante.jugador.dorsal,
+                    'posicion': participante.jugador.get_posicion_display(),
+                    'amarillas': participante.amarillas,
+                    'roja': participante.roja,
+                    'goles': participante.goles,
+                    'goles_pp': participante.goles_pp
+                }
+            })
+
+    return HttpResponse(dumps(jugs))
 
 
 @require_GET
