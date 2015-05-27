@@ -510,11 +510,11 @@ function partido(id, pos, loc, vis, token) {
                     }
                 });
                 if(jug==""){
-                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
+                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
                     "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
                     "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
                 }else{
-                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='"+
+                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='"+
                     jug[0].fields.amarillas+"' style='width: 5em;'/></td><td>" +
                     "<input type='checkbox'name='rojaLocal'";
                     if(jug[0].fields.roja){
@@ -540,18 +540,18 @@ function partido(id, pos, loc, vis, token) {
                     }
                 });
                 if(jug==""){
-                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoLocal'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
-                    "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoVisitante'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasVisitante' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
+                    "<input type='checkbox'name='rojaVisitante'/></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
+                    "<td><input name='golVisitantepp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
                 }else{
-                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoLocal' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='"+
+                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoVisitante' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasVisitante' min='0' max='2' value='"+
                     jug[0].fields.amarillas+"' style='width: 5em;'/></td><td>" +
-                    "<input type='checkbox'name='rojaLocal'";
+                    "<input type='checkbox'name='rojaVisitante'";
                     if(jug[0].fields.roja){
                         eqvisitante=eqvisitante+" checked";
                     }
-                    eqvisitante=eqvisitante+ "/></td><td><input name='golLocal' type='number' min='0' max='100' value='"+jug[0].fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='"+jug[0].fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                    eqvisitante=eqvisitante+ "/></td><td><input name='golVisitante' type='number' min='0' max='100' value='"+jug[0].fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
+                    "<td><input name='golVisitantepp' type='number' min='0' max='100' value='"+jug[0].fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
                 }
             });
         }
@@ -559,13 +559,17 @@ function partido(id, pos, loc, vis, token) {
 
     var msg = "<div  id ='alert' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-        "<div class='name'>Error!</div>goles negativos</div>" +
+        "<div class='name'>Error!</div>goles negativos</div><div  id ='alert2' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>Deben jugar entre 11 y 15 jugadores en el equipo local</div><div  id ='alert3' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
+        "<div class='name'>Error!</div>Deben jugar entre 11 y 15 jugadores en el equipo visitante</div>" +
         "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
-        "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local :"+ localeq +"</h4></span>" +
+        "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local : "+ localeq +"</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody>"+eqlocal+"</tbody></table></div></li>" +
-        "</div><div class='col-md-6'><span><h4>Visitante :"+ viseq +"</h4></span>" +
+        "</div><div class='col-md-6'><span><h4>Visitante : "+ viseq +"</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+
@@ -573,7 +577,7 @@ function partido(id, pos, loc, vis, token) {
 
     bootbox.dialog({
         closeButton: false,
-        title: "Partido: "+ localeq + "vs" + viseq,
+        title: "Partido: "+ localeq + " vs " + viseq,
         className: "part-width",
         message: msg,
         buttons: {
@@ -619,6 +623,35 @@ function partido(id, pos, loc, vis, token) {
                             return false;
                         }
                     }
+
+                    var jugaLoc = document.getElementsByName("jugadoLocal");
+                    var jugaVis = document.getElementsByName("jugadoVisitante");
+                    var nl=0;
+                    var nv=0;
+
+                    for (i = 0; i < jugaLoc.length; i++) {
+                        if(jugaLoc[i].checked){
+                            nl=nl+1;
+                        }
+                    }
+                    for (i = 0; i < jugaVis.length; i++) {
+                        if(jugaVis[i].checked){
+                            nv=nv+1;
+                        }
+                    }
+
+                    if(nl<11 || nl>15){
+                            $("#alert2").css({"display": "block"});
+                            e.preventDefault();
+                            return false;
+                    }
+                    if(nv<11 || nv>15){
+                            $("#alert3").css({"display": "block"});
+                            e.preventDefault();
+                            return false;
+                    }
+
+
 
                     var goles = $("#golLocalTotal").html() + "-" + $("#golVisitanteTotal").html();
                     $("#res" + pos).empty();
