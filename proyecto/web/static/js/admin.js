@@ -503,17 +503,20 @@ function partido(id, pos, loc, vis, token) {
         dataType: 'json',
         async: false,
         success: function(data) {
+            var jug_loc = [];
             $.each(data, function(i, field) {
-                eqlocal=eqlocal+ "<tr><td><input type='checkbox' name='jugadoLocal'";
+                jug_loc.push(field.pk);
+                eqlocal=eqlocal+ "<tr><td><input type='checkbox' name='jloc-"+field.pk+"'";
                 if(field.fields.jugado){
                     eqlocal=eqlocal+" checked";
                 }
-                eqlocal=eqlocal+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rojaLocal'";
+                eqlocal=eqlocal+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='aloc-"+field.pk+"' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rloc-"+field.pk+"'";
                 if(field.fields.roja){
                     eqlocal=eqlocal+" checked";
                 }
-                eqlocal=eqlocal+ " /></td><td><input name='golLocal' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='golLocalpp' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                eqlocal=eqlocal+ " /></td><td><input name='gloc-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='gpploc-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
             });
+            eqlocal=eqlocal+ "<input name='jugadores_loc' type='hidden' value='"+jug_loc.join(',')+"' />";
         }
     });
 
@@ -522,17 +525,20 @@ function partido(id, pos, loc, vis, token) {
         dataType: 'json',
         async: false,
         success: function(data) {
+            var jug_vis = [];
             $.each(data, function(i, field) {
-                eqvisitante=eqvisitante+ "<tr><td><input type='checkbox' name='jugadoLocal'";
+                jug_vis.push(field.pk);
+                eqvisitante=eqvisitante+ "<tr><td><input type='checkbox' name='jvis-"+field.pk+"'";
                 if(field.fields.jugado){
                     eqvisitante=eqvisitante+" checked";
                 }
-                eqvisitante=eqvisitante+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rojaLocal'";
+                eqvisitante=eqvisitante+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='avis-"+field.pk+"' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rvis-"+field.pk+"'";
                 if(field.fields.roja){
                     eqvisitante=eqvisitante+" checked";
                 }
-                eqvisitante=eqvisitante+ " /></td><td><input name='golLocal' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='golLocalpp' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                eqvisitante=eqvisitante+ " /></td><td><input name='gvis-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='gppvis-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
             });
+            eqvisitante=eqvisitante+ "<input name='jugadores_vis' type='hidden' value='"+jug_vis.join(',')+"' />";
         }
     });
 
@@ -563,10 +569,10 @@ function partido(id, pos, loc, vis, token) {
                 label: '<span class="fa fa-check" aria-hidden="true"></span>',
                 className: "btn-success",
                 callback: function (e) {
-                    var local = document.getElementsByName("golLocal");
-                    var localpp = document.getElementsByName("golLocalpp");
-                    var visitante = document.getElementsByName("golVisitante");
-                    var visitantepp = document.getElementsByName("golVisitantepp");
+                    var local = $("[name^='gloc-']");
+                    var localpp = $("[name^='gpploc-']");
+                    var visitante = $("[name^='gvis-']");
+                    var visitantepp = $("[name^='gppvis-']");
                     var loc = 0;
                     var vis = 0;
 
@@ -602,8 +608,8 @@ function partido(id, pos, loc, vis, token) {
                         }
                     }
 
-                    var jugaLoc = document.getElementsByName("jugadoLocal");
-                    var jugaVis = document.getElementsByName("jugadoVisitante");
+                    var jugaLoc = $("[name^='jloc-']");
+                    var jugaVis = $("[name^='jvis-']");
                     var nl=0;
                     var nv=0;
 
@@ -647,11 +653,10 @@ function partido(id, pos, loc, vis, token) {
 }
 
 function calcGol() {
-
-    var local = document.getElementsByName("golLocal");
-    var localpp = document.getElementsByName("golLocalpp");
-    var visitante = document.getElementsByName("golVisitante");
-    var visitantepp = document.getElementsByName("golVisitantepp");
+    var local = $("[name^='gloc-']");
+    var localpp = $("[name^='gpploc-']");
+    var visitante = $("[name^='gvis-']");
+    var visitantepp = $("[name^='gppvis-']");
     var loc = 0;
     var vis = 0;
 
