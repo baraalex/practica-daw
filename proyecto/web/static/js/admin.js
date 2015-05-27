@@ -430,7 +430,7 @@ function jornadaVisual(id, comp) {
                 }
                 var res = "";
                 if(field.fields.celebrado){
-                    res=field.fields.goles_loc + "-"+ field.fields.goles_vis;
+                    res=field.fields.goles_loc + "-" + field.fields.goles_vis;
                 }else{
                     res="No celebrado"
                 }
@@ -475,21 +475,85 @@ function jornadaVisual(id, comp) {
 function partido(id, comp, pos, loc, vis, token) {
 
 
-    var jugLoc;
+    var eq;
+    $.ajax({url: '/web/get/equipos/',
+        dataType: 'json',
+        async: false,
+        success: function(data) {
+            eq=data;
+        }
+    });
+
+    var localeq ="";
+    var viseq ="";
+    for(var j = 0; j<eq.length && (loc =="" || vis =="");j++){
+            if(loc==eq[j].pk){
+                localeq=eq[j].fields.nombre;
+            }else if(vis==eq[j].pk){
+                viseq=eq[j].fields.nombre;
+            }
+    }
+
+    var eqlocal = "";
+    var eqvisitante = "";
+    var jug;
     $.ajax({url: '/web/get/jugadores/'+ loc +'/',
         dataType: 'json',
         async: false,
         success: function(data) {
-            jugLoc=data;
+             $.each(data, function(i, field) { 
+                $.ajax({url: '/web/get/jugador/'+ id +'/'+ field.pk +'/',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        jug=data;
+                    }
+                });
+                if(jug==""){
+                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
+                    "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
+                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                }else{
+                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='"+
+                    jug[0].fields.amarillas+"' style='width: 5em;'/></td><td>" +
+                    "<input type='checkbox'name='rojaLocal'";
+                    if(jug[0].fields.roja){
+                        eqlocal=eqlocal+" checked";
+                    }
+                    eqlocal=eqlocal+ "/></td><td><input name='golLocal' type='number' min='0' max='100' value='"+jug[0].fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
+                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='"+jug[0].fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                }
+            });
         }
     });
 
-    var jugVis;
     $.ajax({url: '/web/get/jugadores/'+ vis +'/',
         dataType: 'json',
         async: false,
         success: function(data) {
-            jugVis=data;
+            $.each(data, function(i, field) { 
+                $.ajax({url: '/web/get/jugador/'+ id +'/'+ field.pk +'/',
+                    dataType: 'json',
+                    async: false,
+                    success: function(data) {
+                        jug=data;
+                    }
+                });
+                if(jug==""){
+                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoLocal'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
+                    "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
+                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                }else{
+                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoLocal' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillas' min='0' max='2' value='"+
+                    jug[0].fields.amarillas+"' style='width: 5em;'/></td><td>" +
+                    "<input type='checkbox'name='rojaLocal'";
+                    if(jug[0].fields.roja){
+                        eqvisitante=eqvisitante+" checked";
+                    }
+                    eqvisitante=eqvisitante+ "/></td><td><input name='golLocal' type='number' min='0' max='100' value='"+jug[0].fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
+                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='"+jug[0].fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                }
+            });
         }
     });
 
@@ -497,23 +561,19 @@ function partido(id, comp, pos, loc, vis, token) {
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>goles negativos</div>" +
         "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
-        "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local :</h4></span>" +
+        "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local :"+ localeq +"</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td><input type='checkbox' name='jugadoLocal'/></td><td>Jugador</td><td>15</td><td><input type='number' name='amarillas' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
-        "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-        "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li>" +
-        "</div><div class='col-md-6'><span><h4>Visitante :</h4></span>" +
+        "<tbody>"+eqlocal+"</tbody></table></div></li>" +
+        "</div><div class='col-md-6'><span><h4>Visitante :"+ viseq +"</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody><tr><td><input type='checkbox'name='jugadoVisitante'/></td><td>Jugador</td><td>15</td><td><input name='amarillasVisitante' type='number' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
-        "<input type='checkbox' name='rojaVisitante'/></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();' required=''/></td>" +
-        "<td><input type='number' name='golVisitantepp' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr></tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+
+        "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
     bootbox.dialog({
         closeButton: false,
-        title: "Partido: ",
+        title: "Partido: "+localeq+ "vs" +viseq,
         className: "part-width",
         message: msg,
         buttons: {
@@ -572,6 +632,7 @@ function partido(id, comp, pos, loc, vis, token) {
             }
         }
     });
+    calcGol();
 }
 
 function calcGol() {
