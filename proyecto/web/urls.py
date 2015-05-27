@@ -89,4 +89,6 @@ urlpatterns = [
         views.get_dorsales),
     url(r'^get/partidos/(?P<id_competicion>[0-9]+)/(?P<jornada>[0-9]+)/$',
         views.get_partidos),
+    url(r'^get/jugador/(?P<id_partido>[0-9]+)/(?P<id_jugador>[0-9]+)/$',
+        views.get_jugador),
 ]
