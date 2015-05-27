@@ -346,7 +346,7 @@ function jornada(id, comp, token) {
                 }
 
                 var res = "";
-                if(field.fields.celebrado!="false"){
+                if(field.fields.celebrado){
                     res=field.fields.goles_loc + "-"+ field.fields.goles_vis;
                 }else{
                     res="No celebrado"
