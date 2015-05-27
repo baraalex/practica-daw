@@ -448,9 +448,9 @@ def competicion(request, id_competicion, pagina=1):
 
                         nP.save()
 
-                        part.goles_loc += nG
-                        part.goles_vis += nGPP
-                        part.amarillas_loc += nA
+                        part.goles_loc += int(nG)
+                        part.goles_vis += int(nGPP)
+                        part.amarillas_loc += int(nA)
                         if nR:
                             part.rojas_loc += 1
 
@@ -471,9 +471,9 @@ def competicion(request, id_competicion, pagina=1):
 
                         nP.save()
 
-                        part.goles_vis += nG
-                        part.goles_loc += nGPP
-                        part.amarillas_vis += nA
+                        part.goles_vis += int(nG)
+                        part.goles_loc += int(nGPP)
+                        part.amarillas_vis += int(nA)
                         if nR:
                             part.rojas_vis += 1
 
