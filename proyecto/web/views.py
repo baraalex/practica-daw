@@ -11,7 +11,7 @@ from django.core.serializers import serialize
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate, calc_matchs
@@ -388,7 +388,7 @@ def competiciones_privadas(request, pagina=1):
     return render(request, 'competiciones.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def competicion(request, id_competicion, pagina=1):
     try:
         comp = Competicion.objects.get(id=id_competicion)
@@ -411,6 +411,22 @@ def competicion(request, id_competicion, pagina=1):
             'noperm': True,
         }
     else:
+        tmpContext = {}
+
+        if request.POST and request.user.is_authenticated() \
+           and (request.user.is_superuser or
+                request.user == comp.administrador):
+
+            if 'nombre' in request.POST:
+                comp.nombre = request.POST['nombre']
+
+            if 'imagen' in request.FILES:
+                comp.foto = request.FILES['imagen']
+
+            tmpContext['actualizado'] = True
+
+            comp.save()
+
         jornadas = {}
 
         for jornada in range(1, comp.jornadas + 1):
@@ -478,6 +494,9 @@ def competicion(request, id_competicion, pagina=1):
         }
 
     context['view'] = 'competiciones'
+
+    context.update(tmpContext)
+
     return render(request, 'competicion.djhtml', context)
 
 
@@ -534,7 +553,7 @@ def equipos(request, pagina=1):
     return render(request, 'equipos.djhtml', context)
 
 
-@require_GET
+@require_http_methods(["GET", "POST"])
 def equipo(request, id_equipo, pagina=1):
     try:
         equi = Equipo.objects.get(id=id_equipo)
@@ -546,6 +565,27 @@ def equipo(request, id_equipo, pagina=1):
             'title': 'No se puede mostrar el jugador',
         }
     else:
+        tmpContext = {}
+
+        if request.POST and request.user.is_authenticated() \
+           and request.user.is_superuser:
+            if 'nombre' in request.POST:
+                if Equipo.objects.filter(nombre=request.POST['nombre']) \
+                                 .exists():
+                    tmpContext['error'] = 'existe'
+                else:
+                    equi.nombre = request.POST['nombre']
+
+            if 'campo' in request.POST:
+                equi.campo = request.POST['campo']
+
+            if 'imagen' in request.FILES:
+                equi.foto = request.FILES['imagen']
+
+            tmpContext['actualizado'] = True
+
+            equi.save()
+
         pagina = int(pagina)
 
         if pagina == 0:
@@ -571,6 +611,9 @@ def equipo(request, id_equipo, pagina=1):
         }
 
     context['view'] = 'equipos'
+
+    context.update(tmpContext)
+
     return render(request, 'equipo.djhtml', context)
 
 
@@ -681,6 +724,8 @@ def jugador(request, id_jugador, pagina=1):
 
             if 'imagen' in request.FILES:
                 jug.foto = request.FILES['imagen']
+
+            tmpContext['actualizado'] = True
 
             jug.save()
 

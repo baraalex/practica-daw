@@ -11,11 +11,17 @@
 {% block contenido %}
   <div id="tabla">
     {% if error == 'equipo' %}
-      <div class="aviso alert alert-danger alert-dismissiable" role="alert">
+      <div class="aviso alert alert-warning alert-dismissiable" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        El equipo especificado no existe.
+        <span class="sr-only">Aviso:</span>
+        El equipo especificado no existe, el resto de datos han sido actualizados.
+      </div>
+    {% elif actualizado %}
+      <div class="aviso alert alert-success alert-dismissiable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="fa fa-check" aria-hidden="true"></span>
+        El jugador ha sido actualizado.
       </div>
     {% endif %}
     {% if jugador %}
