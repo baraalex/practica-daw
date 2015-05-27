@@ -823,7 +823,8 @@ def get_jugadores_new(request, id_partido, id_equipo):
                 'amarillas': 0,
                 'roja': False,
                 'goles': 0,
-                'goles_pp': 0
+                'goles_pp': 0,
+                'jugado': False,
             }
         })
 
@@ -834,6 +835,7 @@ def get_jugadores_new(request, id_partido, id_equipo):
             jugs[idx]['fields']['roja'] = participante.roja
             jugs[idx]['fields']['goles'] = participante.goles
             jugs[idx]['fields']['goles_pp'] = participante.goles_pp
+            jugs[idx]['fields']['jugado'] = True
         else:
             jugs.append({
                 'pk': participante.jugador.id,
@@ -844,7 +846,8 @@ def get_jugadores_new(request, id_partido, id_equipo):
                     'amarillas': participante.amarillas,
                     'roja': participante.roja,
                     'goles': participante.goles,
-                    'goles_pp': participante.goles_pp
+                    'goles_pp': participante.goles_pp,
+                    'jugado': True,
                 }
             })
 

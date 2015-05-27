@@ -143,7 +143,7 @@ function addJugador(token) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            $.each(data, function(i, field) { 
+            $.each(data, function(i, field) {
                 eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>";
             });
         }
@@ -184,7 +184,7 @@ function addJugador(token) {
                         dataType: 'json',
                         async: false,
                         success: function(data) {
-                            $.each(data, function(i, field) { 
+                            $.each(data, function(i, field) {
                                 dor.push(field.fields.dorsal);
                             });
                         }
@@ -237,7 +237,7 @@ function addEquipos(nameLiga, num, token) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            $.each(data, function(i, field) { 
+            $.each(data, function(i, field) {
                 var esta = false;
                 for(var j=0;j<added.length && !esta;j++){
                     if(added[j].value==field.pk){
@@ -337,7 +337,7 @@ function jornada(id, comp, token) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            $.each(data, function(i, field) { 
+            $.each(data, function(i, field) {
                 var loc ="";
                 var vis ="";
                 for(var j = 0; j<eq.length && (loc =="" || vis =="");j++){
@@ -356,7 +356,7 @@ function jornada(id, comp, token) {
                 }
                 partidos=partidos+"<tr><td class='butt-visual' id='"+ field.pk+
                 "'><span class='fa fa-eye'></span></td><td class='butt' id = '"+ field.pk + "_" + i + "'>"+
-                "<span class='fa fa-pencil-square-o'></span></td><td id='"+ field.fields.equipo_loc +"'>"+ loc + 
+                "<span class='fa fa-pencil-square-o'></span></td><td id='"+ field.fields.equipo_loc +"'>"+ loc +
                 "</td><td id='"+ field.fields.equipo_vis +"'>"+ vis + "</td><td id='res0'>"+ res + "</td></tr>";
             });
         }
@@ -394,7 +394,7 @@ function jornada(id, comp, token) {
             partido(x[0], x[1], $(this)[0].parentNode.childNodes[2].id, $(this)[0].parentNode.childNodes[3].id, token);
         });
     }
-    
+
     $(".butt-visual").click(function () {
            var x = $(this)[0].id;
            window.location.assign(window.location.protocol + "//" + window.location.host + "/web/partido/" + x + "/");
@@ -418,7 +418,7 @@ function jornadaVisual(id, comp) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            $.each(data, function(i, field) { 
+            $.each(data, function(i, field) {
                 var loc ="";
                 var vis ="";
                 for(var j = 0; j<eq.length && (loc =="" || vis =="");j++){
@@ -435,7 +435,7 @@ function jornadaVisual(id, comp) {
                     res="No celebrado"
                 }
                 partidos=partidos+"<tr><td class='butt-visual' id='"+ field.pk+
-                "'><span class='fa fa-eye'></span></td><td id='"+ field.fields.equipo_loc +"'>"+ loc + 
+                "'><span class='fa fa-eye'></span></td><td id='"+ field.fields.equipo_loc +"'>"+ loc +
                 "</td><td id='"+ field.fields.equipo_vis +"'>"+ vis + "</td><td id='res0'>"+ res + "</td></tr>";
             });
         }
@@ -497,62 +497,41 @@ function partido(id, pos, loc, vis, token) {
     var eqlocal = "";
     var eqvisitante = "";
     var jug;
-    $.ajax({url: '/web/get/jugadores/'+ loc +'/',
+
+    $.ajax({
+        url: '/web/get/jugadores/' + id + '/' + loc + '/',
         dataType: 'json',
         async: false,
         success: function(data) {
-             $.each(data, function(i, field) { 
-                $.ajax({url: '/web/get/jugador/'+ id +'/'+ field.pk +'/',
-                    dataType: 'json',
-                    async: false,
-                    success: function(data) {
-                        jug=data;
-                    }
-                });
-                if(jug==""){
-                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
-                    "<input type='checkbox'name='rojaLocal'/></td><td><input name='golLocal' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
-                }else{
-                    eqlocal=eqlocal+  "<tr><td><input type='checkbox' name='jugadoLocal' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='"+
-                    jug[0].fields.amarillas+"' style='width: 5em;'/></td><td>" +
-                    "<input type='checkbox'name='rojaLocal'";
-                    if(jug[0].fields.roja){
-                        eqlocal=eqlocal+" checked";
-                    }
-                    eqlocal=eqlocal+ "/></td><td><input name='golLocal' type='number' min='0' max='100' value='"+jug[0].fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-                    "<td><input name='golLocalpp' type='number' min='0' max='100' value='"+jug[0].fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+            $.each(data, function(i, field) {
+                eqlocal=eqlocal+ "<tr><td><input type='checkbox' name='jugadoLocal'";
+                if(field.fields.jugado){
+                    eqlocal=eqlocal+" checked";
                 }
+                eqlocal=eqlocal+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rojaLocal'";
+                if(field.fields.roja){
+                    eqlocal=eqlocal+" checked";
+                }
+                eqlocal=eqlocal+ " /></td><td><input name='golLocal' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='golLocalpp' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
             });
         }
     });
 
-    $.ajax({url: '/web/get/jugadores/'+ vis +'/',
+    $.ajax({
+        url: '/web/get/jugadores/' + id + '/' + vis + '/',
         dataType: 'json',
         async: false,
         success: function(data) {
-            $.each(data, function(i, field) { 
-                $.ajax({url: '/web/get/jugador/'+ id +'/'+ field.pk +'/',
-                    dataType: 'json',
-                    async: false,
-                    success: function(data) {
-                        jug=data;
-                    }
-                });
-                if(jug==""){
-                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoVisitante'/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasVisitante' min='0' max='2' value='0' style='width: 5em;'/></td><td>" +
-                    "<input type='checkbox'name='rojaVisitante'/></td><td><input name='golVisitante' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-                    "<td><input name='golVisitantepp' type='number' min='0' max='100' value='0' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
-                }else{
-                    eqvisitante=eqvisitante+  "<tr><td><input type='checkbox' name='jugadoVisitante' checked/></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasVisitante' min='0' max='2' value='"+
-                    jug[0].fields.amarillas+"' style='width: 5em;'/></td><td>" +
-                    "<input type='checkbox'name='rojaVisitante'";
-                    if(jug[0].fields.roja){
-                        eqvisitante=eqvisitante+" checked";
-                    }
-                    eqvisitante=eqvisitante+ "/></td><td><input name='golVisitante' type='number' min='0' max='100' value='"+jug[0].fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td>" +
-                    "<td><input name='golVisitantepp' type='number' min='0' max='100' value='"+jug[0].fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+            $.each(data, function(i, field) {
+                eqvisitante=eqvisitante+ "<tr><td><input type='checkbox' name='jugadoLocal'";
+                if(field.fields.jugado){
+                    eqvisitante=eqvisitante+" checked";
                 }
+                eqvisitante=eqvisitante+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='amarillasLocal' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rojaLocal'";
+                if(field.fields.roja){
+                    eqvisitante=eqvisitante+" checked";
+                }
+                eqvisitante=eqvisitante+ " /></td><td><input name='golLocal' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='golLocalpp' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
             });
         }
     });
@@ -754,7 +733,7 @@ function modifyEq(token) {
         }
     });
 
-    
+
     $("#Name").val($("#media-heading").html());
     $("#newCampo").val($("#campo").html());
     $(".selectable").change(function () {
@@ -817,7 +796,7 @@ function modifyJug(token) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            $.each(data, function(i, field) { 
+            $.each(data, function(i, field) {
                 eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>";
             });
         }
@@ -855,7 +834,7 @@ function modifyJug(token) {
                         dataType: 'json',
                         async: false,
                         success: function(data) {
-                            $.each(data, function(i, field) { 
+                            $.each(data, function(i, field) {
                                 dor.push(field.fields.dorsal);
                             });
                         }
