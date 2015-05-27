@@ -30,7 +30,7 @@
           <h2 id="media-heading" class="media-heading name">{{ jugador.nombre }}</h2>
           <hr>
           <h4 class="name">Equipo actual:</h4>
-          <span class="informacion"><a href="{% url 'web:equipo' jugador.equipo.id %}">{{ jugador.equipo.nombre }}</a></span>
+          <span class="informacion"><a href="{% url 'web:equipo' jugador.equipo.id %}" id="equipo">{{ jugador.equipo.nombre }}</a></span>
           <h4 class="name">Posición:</h4>
           <span class="informacion">{{ jugador.get_posicion_display }}</span>
           <h4 class="name">Dorsal:</h4>
