@@ -227,7 +227,7 @@ def registro(request):
 def competiciones(request, pagina=1):
     tmpContext = {}
 
-    if request.POST:
+    if request.POST and request.user.is_authenticated():
         nNombre = nTemporada = nImagen = nEquipos = None
         nPrivada = False
 
@@ -310,7 +310,7 @@ def competiciones_privadas(request, pagina=1):
                         (reverse('web:login'), request.get_full_path()))
     tmpContext = {}
 
-    if request.POST:
+    if request.POST and request.user.is_authenticated():
         nNombre = nTemporada = nImagen = nEquipos = None
         nPrivada = False
 
@@ -473,7 +473,8 @@ def competicion(request, id_competicion, pagina=1):
 def equipos(request, pagina=1):
     tmpContext = {}
 
-    if request.POST:
+    if request.POST and request.user.is_authenticated() \
+       and request.user.is_superuser:
         nNombre = nCampo = nImagen = None
 
         if 'nombre' in request.POST:
@@ -565,7 +566,8 @@ def equipo(request, id_equipo, pagina=1):
 def jugadores(request, pagina=1, posicion=None):
     tmpContext = {}
 
-    if request.POST:
+    if request.POST and request.user.is_authenticated() \
+       and request.user.is_superuser:
         nNombre = nEquipo = nPosicion = nDorsal = nImagen = None
 
         if 'name' in request.POST:
@@ -651,7 +653,8 @@ def jugador(request, id_jugador, pagina=1):
     else:
         tmpContext = {}
 
-        if request.POST:
+        if request.POST and request.user.is_authenticated() \
+           and request.user.is_superuser:
             if 'nombre' in request.POST:
                 jug.nombre = request.POST['nombre']
 
@@ -691,7 +694,10 @@ def jugador(request, id_jugador, pagina=1):
             .order_by('partido__jornada')[inicio:fin]
         }
 
+        context.update(tmpContext)
+
     context['view'] = 'jugadores'
+
     return render(request, 'jugador.djhtml', context)
 
 
@@ -704,7 +710,7 @@ def partido(request, id_partido):
 
     if (not part or
         (part.competicion.privada and (
-            not request.user.is_authenticated or
+            not request.user.is_authenticated() or
             request.user != part.competicion.administrador))):
         context = {
             'title': 'No se puede mostrar el partido',
@@ -725,7 +731,7 @@ def partido(request, id_partido):
 
 @require_GET
 def get_equipos(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return HttpResponse(serialize('json',
                                       Equipo.objects.all(),
                                       fields=('nombre')))
@@ -735,7 +741,7 @@ def get_equipos(request):
 
 @require_GET
 def get_jugadores(request, id_equipo):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return HttpResponse(serialize('json',
                                       Jugador.objects
                                       .filter(equipo__id=id_equipo),
@@ -747,7 +753,7 @@ def get_jugadores(request, id_equipo):
 
 @require_GET
 def get_dorsales(request, id_equipo):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return HttpResponse(serialize('json',
                                       Jugador.objects
                                       .filter(equipo__id=id_equipo),
@@ -758,7 +764,7 @@ def get_dorsales(request, id_equipo):
 
 @require_GET
 def get_partidos(request, id_competicion, jornada):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return HttpResponse(serialize('json',
                                       Partido.objects
                                       .filter(competicion__id=id_competicion,
