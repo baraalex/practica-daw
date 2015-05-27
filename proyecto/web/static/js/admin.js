@@ -391,7 +391,7 @@ function jornada(id, comp, token) {
     if(document.getElementById('editCompeticion')){
         $(".butt").click(function () {
             var x = $(this)[0].id.split('_');
-            partido(x[0], comp,x[1], $(this)[0].parentNode.childNodes[2].id, $(this)[0].parentNode.childNodes[3].id, token);
+            partido(x[0], x[1], $(this)[0].parentNode.childNodes[2].id, $(this)[0].parentNode.childNodes[3].id, token);
         });
     }
     
@@ -472,7 +472,7 @@ function jornadaVisual(id, comp) {
         });
 }
 
-function partido(id, comp, pos, loc, vis, token) {
+function partido(id, pos, loc, vis, token) {
 
 
     var eq;
@@ -486,7 +486,7 @@ function partido(id, comp, pos, loc, vis, token) {
 
     var localeq ="";
     var viseq ="";
-    for(var j = 0; j<eq.length && (loc =="" || vis =="");j++){
+    for(var j = 0; j<eq.length && (localeq =="" || viseq =="");j++){
             if(loc==eq[j].pk){
                 localeq=eq[j].fields.nombre;
             }else if(vis==eq[j].pk){
@@ -573,7 +573,7 @@ function partido(id, comp, pos, loc, vis, token) {
 
     bootbox.dialog({
         closeButton: false,
-        title: "Partido: "+localeq+ "vs" +viseq,
+        title: "Partido: "+ localeq + "vs" + viseq,
         className: "part-width",
         message: msg,
         buttons: {
