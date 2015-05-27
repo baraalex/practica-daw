@@ -419,15 +419,78 @@ def competicion(request, id_competicion, pagina=1):
            and (request.user.is_superuser or
                 request.user == comp.administrador):
 
-            if 'nombre' in request.POST:
-                comp.nombre = request.POST['nombre']
+            if 'partido' in request.POST:
+                part = Partido.objects.get(id=request.POST['partido'])
+                part.celebrado = True
+                part.goles_loc = 0
+                part.goles_vis = 0
+                part.amarillas_loc = 0
+                part.amarillas_vis = 0
+                part.rojas_loc = 0
+                part.rojas_vis = 0
 
-            if 'imagen' in request.FILES:
-                comp.foto = request.FILES['imagen']
+                Participante.objects.filter(partido=part).delete()
 
-            tmpContext['actualizado'] = True
+                for j in request.POST['jugadores_loc'].split(','):
+                    if 'jloc-' + j in request.POST:
+                        nR = True if 'rloc-' + j in request.POST else False
+                        nA = request.POST['aloc-' + j]
+                        nG = request.POST['gloc-' + j]
+                        nGPP = request.POST['gpploc-' + j]
 
-            comp.save()
+                        nP = Participante(partido=part,
+                                          jugador_id=j,
+                                          equipo=comp.equipo_loc,
+                                          roja=nR,
+                                          amarillas=nA,
+                                          goles=nG,
+                                          goles_pp=nGPP)
+
+                        nP.save()
+
+                        part.goles_loc += nG
+                        part.goles_vis += nGPP
+                        part.amarillas_loc += nA
+                        if nR:
+                            part.rojas_loc += 1
+
+                for j in request.POST['jugadores_vis'].split(','):
+                    if 'jvis-' + j in request.POST:
+                        nR = True if 'rvis-' + j in request.POST else False
+                        nA = request.POST['avis-' + j]
+                        nG = request.POST['gvis-' + j]
+                        nGPP = request.POST['gppvis-' + j]
+
+                        nP = Participante(partido=part,
+                                          jugador_id=j,
+                                          equipo=comp.equipo_vis,
+                                          roja=nR,
+                                          amarillas=nA,
+                                          goles=nG,
+                                          goles_pp=nGPP)
+
+                        nP.save()
+
+                        part.goles_vis += nG
+                        part.goles_loc += nGPP
+                        part.amarillas_vis += nA
+                        if nR:
+                            part.rojas_vis += 1
+
+                part.save()
+
+                tmpContext['partActualizado'] = True
+
+            else:
+                if 'nombre' in request.POST:
+                    comp.nombre = request.POST['nombre']
+
+                if 'imagen' in request.FILES:
+                    comp.foto = request.FILES['imagen']
+
+                comp.save()
+
+                tmpContext['actualizado'] = True
 
         jornadas = {}
 

@@ -16,6 +16,12 @@
         <span class="fa fa-check" aria-hidden="true"></span>
         La competición ha sido actualizada.
       </div>
+    {% elif patActualizado %}
+      <div class="aviso alert alert-success alert-dismissiable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="fa fa-check" aria-hidden="true"></span>
+        El partido ha sido actualizado.
+      </div>
     {% endif %}
     {% if competicion %}
       <div class="well well-lg media">

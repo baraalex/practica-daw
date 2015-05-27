@@ -86,9 +86,6 @@ class Participante(models.Model):
     partido = models.ForeignKey(Partido, null=False)
     jugador = models.ForeignKey(Jugador, null=False)
     equipo = models.ForeignKey(Equipo, null=False)
-    titular = models.BooleanField(default=False)
-    substituye = models.ForeignKey(Jugador, null=True, blank=True,
-                                   related_name='substituye')
     roja = models.BooleanField(default=False)
     amarillas = models.PositiveSmallIntegerField(null=False)
     goles = models.PositiveSmallIntegerField(null=False)
