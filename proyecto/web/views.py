@@ -440,7 +440,7 @@ def competicion(request, id_competicion, pagina=1):
 
                         nP = Participante(partido=part,
                                           jugador_id=j,
-                                          equipo=comp.equipo_loc,
+                                          equipo=part.equipo_loc,
                                           roja=nR,
                                           amarillas=nA,
                                           goles=nG,
@@ -463,7 +463,7 @@ def competicion(request, id_competicion, pagina=1):
 
                         nP = Participante(partido=part,
                                           jugador_id=j,
-                                          equipo=comp.equipo_vis,
+                                          equipo=part.equipo_vis,
                                           roja=nR,
                                           amarillas=nA,
                                           goles=nG,
