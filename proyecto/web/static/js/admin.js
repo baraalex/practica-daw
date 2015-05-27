@@ -238,14 +238,17 @@ function addEquipos(nameLiga, num, token) {
         async: false,
         success: function(data) {
             $.each(data, function(i, field) { 
-                for(var j=0;j<added.length;j++){
+                var esta = false;
+                for(var j=0;j<added.length && !esta;j++){
                     if(added[j].value==field.pk){
                         eq2 = eq2 + "<tr id='" + field.pk + "' name='equipos'><td>" + field.fields.nombre +
                         "</td><td class='butt-danger'><span class='fa fa-minus'></span></td></tr>";
-                        eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt  disabled'><span class='fa fa-plus'></span></td></tr>";
-                    }else{
-                        eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt'><span class='fa fa-plus'></span></td></tr>";
+                        eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt disabled'><span class='fa fa-plus'></span></td></tr>";
+                        esta = true;
                     }
+                }
+                if(!esta){
+                        eq = eq + "<tr id='add" + field.pk + "'><td>" + field.fields.nombre + "</td><td class='butt'><span class='fa fa-plus'></span></td></tr>";
                 }
             });
         }
