@@ -36,6 +36,9 @@ $( document ).ready(function() {
         jornadaVisual($(this).data("jornada"),$(this).data("competicion"));
     }
     });
+
+   $(".old")[0].addClass('active');
+
 });
 
 
