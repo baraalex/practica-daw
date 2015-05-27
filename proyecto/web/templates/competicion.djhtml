@@ -1,7 +1,7 @@
 {% extends 'base_sidebar.djhtml' %}
 {% block navegacion %}
   <ul class="nav nav-pills nav-stacked">
-    <li{% if not user.is_authenticated or  not user == competicion.administrador or not user.is_superuser%} class="disabled"{% endif %}>
+    <li{% if not user.is_authenticated or not user == competicion.administrador and not user.is_superuser %} class="disabled"{% endif %}>
       <a{% if user.is_authenticated and user == competicion.administrador or user.is_superuser %} id="editCompeticion" data-token="{{ csrf_token }}"{% endif %} href="#">
         <span class="fa fa-pencil"></span> Editar competición
       </a>
@@ -35,18 +35,13 @@
                   </thead>
                   <tbody id="jornadastable">
                     <tr>
-                      {% with ''|center:competicion.jornadas as range %}
-                        {% for _ in range %}
-                          <td class="day" data-competicion="{{ competicion.id }}" data-jornada="{{ forloop.counter }}">{{ forloop.counter }}</td>
-
-                          {% if forloop.counter != competicion.jornadas %}
-                            {% if forloop.counter|divisibleby:5 %}
+                      {% for jornada, pendientes in jornadas.items %}
+                        <td class="day{% if pendientes %} old{% endif %}" data-competicion="{{ competicion.id }}" data-jornada="{{ jornada }}">{{ jornada }}</td>
+                        {% if jornada != competicion.jornadas and jornada|divisibleby:5 %}
                     </tr>
                     <tr>
-                            {% endif %}
-                          {% endif %}
-                        {% endfor %}
-                      {% endwith %}
+                        {% endif %}
+                      {% endfor %}
                     </tr>
                   </tbody>
                 </table>
