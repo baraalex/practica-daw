@@ -37,7 +37,7 @@ $( document ).ready(function() {
     }
     });
 
-   $(".old")[0].addClass('active');
+   $('.old')[0].setAttribute("class", $('.old')[0].getAttribute("class")+" active");
 
 });
 
