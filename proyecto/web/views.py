@@ -743,46 +743,34 @@ def partido(request, id_partido):
 
 @require_GET
 def get_equipos(request):
-    if request.user.is_authenticated():
-        return HttpResponse(serialize('json',
-                                      Equipo.objects.all(),
-                                      fields=('nombre')))
-    else:
-        return HttpResponseBadRequest('')
+    return HttpResponse(serialize('json',
+                                  Equipo.objects.all(),
+                                  fields=('nombre')))
 
 
 @require_GET
 def get_jugadores(request, id_equipo):
-    if request.user.is_authenticated():
-        return HttpResponse(serialize('json',
-                                      Jugador.objects
-                                      .filter(equipo__id=id_equipo),
-                                      fields=('nombre', 'dorsal',
-                                              'posicion')))
-    else:
-        return HttpResponseBadRequest('')
+    return HttpResponse(serialize('json',
+                                  Jugador.objects
+                                  .filter(equipo__id=id_equipo),
+                                  fields=('nombre', 'dorsal',
+                                          'posicion')))
 
 
 @require_GET
 def get_dorsales(request, id_equipo):
-    if request.user.is_authenticated():
-        return HttpResponse(serialize('json',
-                                      Jugador.objects
-                                      .filter(equipo__id=id_equipo),
-                                      fields=('dorsal')))
-    else:
-        return HttpResponseBadRequest('')
+    return HttpResponse(serialize('json',
+                                  Jugador.objects
+                                  .filter(equipo__id=id_equipo),
+                                  fields=('dorsal')))
 
 
 @require_GET
 def get_partidos(request, id_competicion, jornada):
-    if request.user.is_authenticated():
-        return HttpResponse(serialize('json',
-                                      Partido.objects
-                                      .filter(competicion__id=id_competicion,
-                                              jornada=jornada),
-                                      fields=('equipo_loc', 'equipo_vis',
-                                              'goles_loc', 'goles_vis',
-                                              'celebrado')))
-    else:
-        return HttpResponseBadRequest('')
+    return HttpResponse(serialize('json',
+                                  Partido.objects
+                                  .filter(competicion__id=id_competicion,
+                                          jornada=jornada),
+                                  fields=('equipo_loc', 'equipo_vis',
+                                          'goles_loc', 'goles_vis',
+                                          'celebrado')))
