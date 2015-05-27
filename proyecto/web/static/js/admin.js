@@ -381,7 +381,7 @@ function jornada(id, comp, token) {
     if(document.getElementById('editCompeticion')){
         $(".butt").click(function () {
             var x = $(this)[0].id.split('_');
-            partido(x[0], comp,x[1], $(this).parentNode.childNodes[2].id, $(this).parentNode.childNodes[3].id, token);
+            partido(x[0], comp,x[1], $(this)[0].parentNode.childNodes[2].id, $(this)[0].parentNode.childNodes[3].id, token);
         });
     }
     
