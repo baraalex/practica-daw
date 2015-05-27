@@ -551,8 +551,7 @@ function partido(id, pos, loc, vis, token) {
         "</div><div class='col-md-6'><span><h4>Visitante : "+ viseq +"</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+
-        token+"' required=''/></form>";
+        "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+token+"' required=''/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -797,7 +796,12 @@ function modifyJug(token) {
         async: false,
         success: function(data) {
             $.each(data, function(i, field) {
+                if(field.fields.nombre==$("#equipo").html()){
+                eq = eq + "<option value='"+field.pk + "' selected>"+field.fields.nombre + "</option>";
+                }
+                else{
                 eq = eq + "<option value='"+field.pk + "'>"+field.fields.nombre + "</option>";
+                }
             });
         }
     });
@@ -810,7 +814,7 @@ function modifyJug(token) {
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/></div>"+
         "<div class='row row-right'><div class='col-md-4'><h4>Equipo :</h4></span>"+
-        "<select id='equipo' name='equipo'>"+eq+"</select></div>"+
+        "<select id='newEquipo' name='equipo'>"+eq+"</select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'/></div></div><span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
@@ -826,7 +830,7 @@ function modifyJug(token) {
                 className: "btn-success",
                 callback: function () {
                     var name = $("#Name").val();
-                    var equipo = $("#equipo").val();
+                    var equipo = $("#newEquipo").val();
                     var dorsal = $("#newDorsal").val();
                     var dor = [];
 
@@ -842,7 +846,7 @@ function modifyJug(token) {
 
                     var disp = true;
                     for(var i =0;i<dor.length && disp;i++){
-                        if(dor[i]==dorsal){
+                        if(dor[i]==dorsal && dorsal !=$("#dorsal").html()){
                             disp = false;
                         }
                     }
