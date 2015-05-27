@@ -43,7 +43,7 @@
                   <tbody id="jornadastable">
                     <tr>
                       {% for jornada, pendientes in jornadas.items %}
-                        <td class="day{% if pendientes %} old{% endif %}" data-competicion="{{ competicion.id }}" data-jornada="{{ jornada }}">{{ jornada }}</td>
+                        <td class="day{% if pendientes %} old{% endif %}" data-competicion="{{ competicion.id }}" data-jornada="{{ jornada }} " data-token="{{ csrf_token }}">{{ jornada }}</td>
                         {% if jornada != competicion.jornadas and jornada|divisibleby:5 %}
                     </tr>
                     <tr>

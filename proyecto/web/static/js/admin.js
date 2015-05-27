@@ -572,8 +572,7 @@ function partido(id, pos, loc, vis, token) {
         "</div><div class='col-md-6'><span><h4>Visitante : "+ viseq +"</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
-        "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+
-        token+"' required=''/></form>";
+        "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+token+"' required=''/></form>";
 
     bootbox.dialog({
         closeButton: false,
