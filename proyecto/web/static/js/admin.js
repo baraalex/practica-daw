@@ -510,11 +510,14 @@ function partido(id, pos, loc, vis, token) {
                 if(field.fields.jugado){
                     eqlocal=eqlocal+" checked";
                 }
-                eqlocal=eqlocal+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='aloc-"+field.pk+"' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rloc-"+field.pk+"'";
+                eqlocal=eqlocal+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='aloc-"+field.pk+
+                "' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rloc-"+field.pk+"'";
                 if(field.fields.roja){
                     eqlocal=eqlocal+" checked";
                 }
-                eqlocal=eqlocal+ " /></td><td><input name='gloc-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='gpploc-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                eqlocal=eqlocal+ " /></td><td><input name='gloc-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles+
+                "' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='gpploc-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles_pp+
+                "' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
             });
             eqlocal=eqlocal+ "<input name='jugadores_loc' type='hidden' value='"+jug_loc.join(',')+"' />";
         }
@@ -532,11 +535,14 @@ function partido(id, pos, loc, vis, token) {
                 if(field.fields.jugado){
                     eqvisitante=eqvisitante+" checked";
                 }
-                eqvisitante=eqvisitante+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='avis-"+field.pk+"' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rvis-"+field.pk+"'";
+                eqvisitante=eqvisitante+ " /></td><td>"+field.fields.nombre+"</td><td>"+field.fields.dorsal+"</td><td><input type='number' name='avis-"+field.pk+
+                "' min='0' max='2' value='"+field.fields.amarillas+"' style='width: 5em;'/></td><td><input type='checkbox'name='rvis-"+field.pk+"'";
                 if(field.fields.roja){
                     eqvisitante=eqvisitante+" checked";
                 }
-                eqvisitante=eqvisitante+ " /></td><td><input name='gvis-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles+"' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='gppvis-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles_pp+"' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
+                eqvisitante=eqvisitante+ " /></td><td><input name='gvis-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles+
+                "' style='width: 5em;' onchange='calcGol();'required=''/></td><td><input name='gppvis-"+field.pk+"' type='number' min='0' max='100' value='"+field.fields.goles_pp+
+                "' style='width: 5em;' onchange='calcGol();'required=''></td></tr>";
             });
             eqvisitante=eqvisitante+ "<input name='jugadores_vis' type='hidden' value='"+jug_vis.join(',')+"' />";
         }
@@ -549,7 +555,7 @@ function partido(id, pos, loc, vis, token) {
         "<div class='name'>Error!</div>Deben jugar entre 11 y 15 jugadores en el equipo local</div><div  id ='alert3' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>Deben jugar entre 11 y 15 jugadores en el equipo visitante</div>" +
-        "<form id='formulario' method='POST' enctype='multipart/form-data' action='"+document.location.pathname+
+        "<form id='formulario' method='POST' action='"+document.location.pathname+
         "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local : "+ localeq +"</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
         "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
