@@ -411,6 +411,15 @@ def competicion(request, id_competicion, pagina=1):
             'noperm': True,
         }
     else:
+        jornadas = {}
+
+        for jornada in range(1, comp.jornadas + 1):
+            jornadas[jornada] = Partido.objects \
+                                       .filter(competicion__id=id_competicion,
+                                               jornada=jornada,
+                                               celebrado=False) \
+                                       .exists()
+
         clasificacion = []
 
         for equipo in comp.participantes.all():
@@ -459,10 +468,13 @@ def competicion(request, id_competicion, pagina=1):
                                   ganados, empatados, perdidos,
                                   goles_favor, goles_contra))
 
+            clasificacion.sort(key=lambda e: e[1])
+
         context = {
             'title': 'Competición: ' + comp.nombre,
             'competicion': comp,
             'clasificacion': clasificacion,
+            'jornadas': jornadas,
         }
 
     context['view'] = 'competiciones'
