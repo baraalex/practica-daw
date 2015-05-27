@@ -863,7 +863,7 @@ function modifyJug(token) {
 
                     var disp = true;
                     for(var i =0;i<dor.length && disp;i++){
-                        if(dor[i]==dorsal){
+                        if(dor[i]==dorsal && dorsal !=$("#dorsal").html()){
                             disp = false;
                         }
                     }
