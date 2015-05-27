@@ -428,9 +428,15 @@ function jornadaVisual(id, comp) {
                             vis=eq[j].fields.nombre;
                         }
                 }
+                var res = "";
+                if(field.fields.celebrado){
+                    res=field.fields.goles_loc + "-"+ field.fields.goles_vis;
+                }else{
+                    res="No celebrado"
+                }
                 partidos=partidos+"<tr><td class='butt-visual' id='"+ field.pk+
-                "'><span class='fa fa-eye'></span></td><td>"+ loc + "</td><td>"+
-                vis + "</td><td id='res0'>"+ field.fields.goles_loc + "-"+ field.fields.goles_vis + "</td></tr>";
+                "'><span class='fa fa-eye'></span></td><td id='"+ field.fields.equipo_loc +"'>"+ loc + 
+                "</td><td id='"+ field.fields.equipo_vis +"'>"+ vis + "</td><td id='res0'>"+ res + "</td></tr>";
             });
         }
     });
