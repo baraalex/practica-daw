@@ -35,7 +35,7 @@
               <h4 class="name">Administrador:</h4>
               <span class="informacion">{{ competicion.administrador.first_name }} {{ competicion.administrador.last_name }}</span>
               <h4 class="name">Privada:</h4>
-              <span class="informacion">{% if competicion.privada %}Sí{% else %}No{% endif %}</span>
+              <span class="informacion" id="privada">{% if competicion.privada %}Sí{% else %}No{% endif %}</span>
             </div>
             <div class="col-md-8">
               <h4 class="name">Calendario de jornadas</h4>
