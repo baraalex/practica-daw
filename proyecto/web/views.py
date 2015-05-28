@@ -253,6 +253,8 @@ def competiciones(request, pagina=1):
             if Competicion.objects.filter(nombre=nNombre,
                                           temporada=nTemporada).exists():
                 tmpContext['error'] = 'existe'
+                tmpContext['errorComp'] = nNombre
+                tmpContext['errorTemp'] = nTemporada
             else:
                 nJornadas, nPartidos = calc_matchs(nEquipos)
 
