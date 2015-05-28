@@ -10,6 +10,9 @@ def paginate(number, current, total):
     if end > total:
         end = int(total)
 
+    if max_page == 0:
+        max_page = 1
+
     return (start, end, max_page)
 
 
