@@ -486,6 +486,8 @@ def competicion(request, id_competicion, pagina=1):
                 if 'nombre' in request.POST:
                     comp.nombre = request.POST['nombre']
 
+                comp.privada = 'privada' in request.POST
+
                 if 'imagen' in request.FILES:
                     comp.foto = request.FILES['imagen']
 
