@@ -196,3 +196,71 @@
     <2015-05-15 vie>--<2015-05-27 mié>
   * Pruebas sobre el fornted y el backend
     <2015-05-14 jue>--<2015-05-28 jue>
+
+* Manual de instalación
+** Requisitos
+  Para instalar nuestra aplicación se necesita tener instalado /Python/, dando igual si es
+  versión /2.x/ o /3.x/, y /Django/ versión /1.8.x/.
+
+  Si queremos usar /MySQL/ o /MariaDB/ necesitaremos instalar también /MySQL-python[fn::
+  https://pypi.python.org/pypi/MySQL-python]/ si usamos /Python 2.x/ o /mysqlclient[fn::
+  https://pypi.python.org/pypi/mysqlclient]/ si usamos /Python 3.x/.
+
+** Configuración
+  Una vez se cumplen los requisitos anteriores en la carpeta proyecto editamos el fichero
+  =proyecto/settings.py=. La parte que nos interesa ajustar es =DATABASES=.
+
+  Si queremos usar la aplicación web con /MySQL/ o /MariaDB/ debemos ajustar la variable así:
+  #+BEGIN_SRC python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'NOMBRE DE LA BASE DE DATOS',
+        'USER': 'USUARIO DE LA BASE DE DATOS',
+        'PASSWORD': 'PASSWORD DE LA BASE DE DATOS',
+        'HOST': 'localhost O HOST/IP DE LA BASE DE DATOS',
+        'PORT': '3306',
+    },
+}
+  #+END_SRC
+
+  Otra opción sería usar /PostgreSQL[fn::http://www.postgresql.org/]/ o incluso /Oracle[fn::https://www.oracle.com/database/]/,
+  que aunque no lo hemos probado debería funcionar sin problemas la aplicación.
+  Para ello debemos ajustar la sección =ENGINE= de la configuración anterior a uno de los
+  siguientes valores teniendo /psycopg2[fn::http://initd.org/psycopg/]/ o /cx_Oracle [fn::http://cx-oracle.sourceforge.net/]/
+  instalado respectivamente:
+  * =django.db.backends.postgresql_psycopg2=
+  * =django.db.backends.oracle=
+
+  Por último, si preferimos simplificarlo, podemos usar /sqlite3/, aunque no es recomendable ya
+  que no hemos probado la aplicación con el y podría fallar debido a sus limitaciones.
+  Si aún así deseamos intentarlo bastaría con ajustar la variable de la siguiente forma:
+  #+BEGIN_SRC python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+  #+END_SRC
+
+** Inicialización de la aplicación web
+  Una vez ajustados los parámetros de la base de datos debemos ir a una terminal, situarnos
+  en la carpeta /proyecto/, donde se encuentra el fichero =manage.py= y ejecutar
+  =python manage.py migrate=. Esto creará la base de datos.
+
+  Tras crear la base de datos necesitamos crear el primer usuario administrador ejecutando
+  =python manage.py createsuperuser=.
+
+** Servir la aplicación web
+  Ya tendríamos la aplicación lista para usar, ahora tenemos dos modos de ejecutarla:
+
+  * El primero es el más sencillo, que es con el servidor de desarrollo de /Django/. Esto es
+    suficiente para probar la aplicación pero no serviría para el uso público y continuado.
+
+  * El segundo método, y el apropiado para publicar la aplicación, sería utilizar un servidor
+    web tal como /Apache[fn::http://httpd.apache.org/]/ o /Nginx[fn::http://nginx.org/]/.
+    Para ello debemos seguir las siguiente guías:
+    * /Guía para Apache/: https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/modwsgi/
+    * /Guía para Nginx/: https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/uwsgi/ y
+      https://uwsgi.readthedocs.org/en/latest/tutorials/Django_and_nginx.html
