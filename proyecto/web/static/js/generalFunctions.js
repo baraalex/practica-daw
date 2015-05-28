@@ -4,19 +4,19 @@
 
 $( document ).ready(function() {
    $("#addEquipo").click(function () {
-        addEquipo($(this).data("token"));
+      addEquipo($(this).data("token"));
     });
    
    $("#addCompeticion").click(function () {
-        addLiga($(this).data("token"));
+      addLiga($(this).data("token"));
     });
 
    $("#editEquipo").click(function () {
-        modifyEq($(this).data("token"));
+      modifyEq($(this).data("token"));
     });
 
    $("#editCompeticion").click(function () {
-        modifyComp($(this).data("token"));
+      modifyComp($(this).data("token"));
     });
 
    $("#editJugador").click(function () {
@@ -24,20 +24,22 @@ $( document ).ready(function() {
     });
 
    $("#addJugador").click(function () {
-        addJugador($(this).data("token"));
+      addJugador($(this).data("token"));
     });
    
    $(".day").click(function () {
     $('.day').removeClass('active');
     $(this).addClass('active');
     if(document.getElementById('editCompeticion')){
-        jornada($(this).data("jornada"),$(this).data("competicion"),$(this).data("token"));
+      jornada($(this).data("jornada"),$(this).data("competicion"),$(this).data("token"));
     }else{
-        jornadaVisual($(this).data("jornada"),$(this).data("competicion"));
+       jornadaVisual($(this).data("jornada"),$(this).data("competicion"));
     }
     });
 
-   $('.old')[0].setAttribute("class", $('.old')[0].getAttribute("class")+" active");
+   if($('.old').length > 0){
+      $('.old')[0].setAttribute("class", $('.old')[0].getAttribute("class")+" active");
+   }
 
 });
 
