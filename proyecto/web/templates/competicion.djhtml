@@ -40,7 +40,7 @@
             <div class="col-md-8">
               <h4 class="name">Calendario de jornadas</h4>
               <div class="jornadapicker table-responsive">
-                <table class="table table-condensed">
+                <table class="table table-condensed table-striped">
                   <thead>
                     <tr>
                       <th colspan="5" class="text-center name">Jornadas</th>

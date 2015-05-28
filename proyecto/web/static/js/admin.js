@@ -558,11 +558,11 @@ function partido(id, pos, loc, vis, token) {
         "<form id='formulario' method='POST' action='"+document.location.pathname+
         "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local : "+ localeq +"</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
-        "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
+        "<div class='table-responsive jornada'><table class='table-striped'><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody>"+eqlocal+"</tbody></table></div></li>" +
         "</div><div class='col-md-6'><span><h4>Visitante : "+ viseq +"</h4></span>" +
         "<li>Goles: <span id='golVisitanteTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
-        "<div class='table-responsive jornada'><table><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
+        "<div class='table-responsive jornada'><table class='table-striped'><thead><tr><th>Jug</th><th>Nombre</th><th>Dorsal</th><th>Amarillas</th><th>Rojas</th><th>Goles</th><th>Goles PP</th></tr></thead>" +
         "<tbody>"+eqvisitante+"</tbody></table></div></li></div></div><input type='hidden' name='csrfmiddlewaretoken' value='"+token+"' />" +
         "<input type='hidden' name='partido' value='"+id+"' /></form>";
 
