@@ -49,28 +49,28 @@
             <tr>
               <th>Competición</th>
               <th>Equipo</th>
-              <!-- <th>Titular</th> -->
+              <th>Jugados</th>
               <th>Amarillas</th>
-              <th>Roja</th>
+              <th>Rojas</th>
               <th>Goles</th>
               <th>Goles P.P.</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            {% for partido in partidos %}
+            {% for competicion in competiciones %}
               <tr>
-                {% if not partido.partido.competicion.privada or user.is_authenticated and user == partido.partido.competicion.administrador %}
-                  <td><a href="{% url 'web:competicion' partido.partido.competicion.id %}">{{ partido.partido.competicion.nombre }}</a></td>
-                  <td><a href="{% url 'web:equipo' partido.equipo.id %}">{{ partido.equipo.nombre }}</a></td>
-                  <!-- <td>{% if partido.titular %}Sí{% else %}No{% endif %}</td> -->
-                  <td>{{ partido.amarillas }}</td>
-                  <td>{% if partido.roja %}Sí{% else %}No{% endif %}</td>
-                  <td>{{ partido.goles }}</td>
-                  <td>{{ partido.goles_pp }}</td>
-                  <td><a href="{% url 'web:partido' partido.partido.id %}">Ver datos</a></td>
+                {% if not competicion.0.privada or
+                user.is_authenticated and user == competicion.0.administrador
+                or user.is_authenticated and user.is_superuser  %}
+                  <td><a href="{% url 'web:competicion' competicion.0.id %}">{{ competicion.0.nombre }}</a></td>
+                  <td><a href="{% url 'web:equipo' competicion.1.id %}">{{ competicion.1.nombre }}</a></td>
+                  <td>{{ competicion.2 }}</td>
+                  <td>{{ competicion.3 }}</td>
+                  <td>{{ competicion.4 }}</td>
+                  <td>{{ competicion.5 }}</td>
+                  <td>{{ competicion.6 }}</td>
                 {% else %}
-                  <td class="privado" colspan="7">Partido disputado en competición privada.</td>
+                  <td class="privado" colspan="6">Competición privada.</td>
                 {% endif %}
               </tr>
             {% endfor %}

@@ -807,8 +807,33 @@ def jugador(request, id_jugador, pagina=1):
         if pagina == 0:
             return redirect('web:jugador', id_jugador=id_jugador)
 
-        total = Participante.objects.filter(jugador__id=id_jugador).count()
+        compsId = []
+        for p in Participante.objects.filter(jugador=jug):
+            if p.partido.competicion.id not in compsId:
+                compsId.append((p.partido.competicion, p.equipo))
 
+        comps = []
+        for c, e in compsId:
+            ps = Partido.objects.filter(Q(equipo_loc=e) |
+                                        Q(equipo_vis=e),
+                                        competicion=c,
+                                        celebrado=True)
+
+            sJugados = sAmarillas = sRojas = sGoles = sGolesPP = 0
+
+            for p in ps:
+                for j in Participante.objects.filter(partido=p, jugador=jug):
+                    sJugados += 1
+                    sAmarillas += j.amarillas
+                    if j.roja:
+                        sRojas += 1
+                    sGoles += j.goles
+                    sGolesPP += j.goles_pp
+
+            comps.append((c, e, sJugados, sAmarillas,
+                          sRojas, sGoles, sGolesPP))
+
+        total = len(comps)
         inicio, fin, pagina_max = paginate(10, pagina, total)
 
         if inicio > total:
@@ -820,8 +845,7 @@ def jugador(request, id_jugador, pagina=1):
             'jugador': jug,
             'pagina': pagina,
             'pagina_max': pagina_max,
-            'partidos': Participante.objects.filter(jugador__id=id_jugador)
-            .order_by('partido__jornada')[inicio:fin]
+            'competiciones': comps[inicio:fin]
         }
 
         context.update(tmpContext)
