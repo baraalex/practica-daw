@@ -860,7 +860,7 @@ function modifyJug(token) {
         "<select id='newEquipo' name='equipo'>"+eq+"</select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
         "<input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'/></div>"+
-        "<div class='col-md-4'><h4>Equipo :</h4></span><select id='newPosicion' name='posicion'>"+pos+"</select></div></div>"+
+        "<div class='col-md-4'><h4>Posicion :</h4></span><select id='newPosicion' name='posicion'>"+pos+"</select></div></div>"+
         "<span><h4>Foto :</h4></span><input type='file' id='foto' accept='image/*' class='selectable' name='imagen'/>"+
         "<img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+ token +"' required=''/></form>";
 
