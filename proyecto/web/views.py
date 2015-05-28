@@ -441,6 +441,9 @@ def competicion(request, id_competicion, pagina=1):
                         nG = request.POST['gloc-' + j]
                         nGPP = request.POST['gpploc-' + j]
 
+                        if j == 70:
+                            import ipdb; ipdb.set_trace()
+
                         nP = Participante(partido=part,
                                           jugador_id=j,
                                           equipo=part.equipo_loc,
