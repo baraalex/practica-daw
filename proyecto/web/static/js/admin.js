@@ -818,6 +818,30 @@ function modifyJug(token) {
         }
     });
 
+    var pos="";
+    var posicion = $("#posicion").html();
+
+    pos = pos+"<option value='po'";
+    if(posicion=="Portero"){
+        pos = pos+" selected";
+    }
+    pos = pos+">Portero</option><option value='df'";
+
+    if(posicion=="Defensa"){
+        pos = pos+" selected";
+    }
+    pos = pos+">Defensa</option><option value='ce'";
+
+    if(posicion=="Mediocentro"){
+        pos = pos+" selected";
+    }
+    pos = pos+">Mediocentro</option><option value='dl'";
+
+    if(posicion=="Delantero"){
+        pos = pos+" selected";
+    }
+    pos = pos+">Delantero</option>";
+
     var msg = "<div  id ='alert'  class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>El nombre del jugador no puede estar vacio y el dorsal debe ser valido</div>" +
@@ -828,9 +852,10 @@ function modifyJug(token) {
         "<div class='row row-right'><div class='col-md-4'><h4>Equipo :</h4></span>"+
         "<select id='newEquipo' name='equipo'>"+eq+"</select></div>"+
         "<div class='col-md-4'><span><h4>Dorsal :</h4></span>" +
-        "<input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'/></div></div><span><h4>Foto :</h4></span><input type='file' " +
-        "id='foto' accept='image/*' class='selectable' name='imagen'/><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
-        token+"' required=''/></form>";
+        "<input type='number' id='newDorsal' name='dorsal' min='1' max='99' value='1'/></div>"+
+        "<div class='col-md-4'><h4>Equipo :</h4></span><select id='newPosicion' name='posicion'>"+pos+"</select></div></div>"+
+        "<span><h4>Foto :</h4></span><input type='file' id='foto' accept='image/*' class='selectable' name='imagen'/>"+
+        "<img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+ token +"' required=''/></form>";
 
     bootbox.dialog({
         closeButton: false,
@@ -888,7 +913,6 @@ function modifyJug(token) {
 
     $("#Name").val($("#media-heading").html());
     $("#newDorsal").val($("#dorsal").html());
-
 
     $(".selectable").change(function () {
         readURL(this);
