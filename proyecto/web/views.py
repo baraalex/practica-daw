@@ -436,8 +436,8 @@ def competicion(request, id_competicion, pagina=1):
 
                 for j in request.POST['jugadores_loc'].split(','):
                     if 'jloc-' + j in request.POST:
-                        nR = True if 'rloc-' + j in request.POST else False
                         nA = request.POST['aloc-' + j]
+                        nR = nA == 2 or 'rloc-' + j in request.POST
                         nG = request.POST['gloc-' + j]
                         nGPP = request.POST['gpploc-' + j]
 
@@ -459,8 +459,8 @@ def competicion(request, id_competicion, pagina=1):
 
                 for j in request.POST['jugadores_vis'].split(','):
                     if 'jvis-' + j in request.POST:
-                        nR = True if 'rvis-' + j in request.POST else False
                         nA = request.POST['avis-' + j]
+                        nR = nA == 2 or 'rvis-' + j in request.POST
                         nG = request.POST['gvis-' + j]
                         nGPP = request.POST['gppvis-' + j]
 
