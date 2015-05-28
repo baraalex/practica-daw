@@ -94,7 +94,7 @@
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           <a href="{% if pagina != 1 %}{% url 'web:equipo' equipo.id pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
         </li>
-        <li>Página {{ pagina }}/{{ pagina_max }}</li>
+        <li><span class="hidden-xs">Página </span>{{ pagina }}/{{ pagina_max }}</li>
         <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
           <a href="{% if pagina != pagina_max %}{% url 'web:equipo' equipo.id pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
         </li>
