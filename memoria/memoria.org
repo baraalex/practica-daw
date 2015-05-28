@@ -17,9 +17,7 @@
 |--------------+------------------------------------------------|
 | Alumnos:     | Alejandro Barahona Álvarez                     |
 |              | Sergio Conde Gómez                             |
-|              | Dan Huang                                      |
 |              | Ismael Vázquez Fernández                       |
-|              | Yixuan Wu                                      |
 |--------------+------------------------------------------------|
 | Contacto:    | sconde@dilmun.ls.fi.upm.es                     |
 | Repositorio: | https://github.com/skgsergio/practica-daw      |
@@ -31,9 +29,9 @@
 {\em Última modificación: \\
 \today}
 \end{center}
-#+END_LaTeX
 
-#+LaTeX: \newpage
+\newpage
+#+END_LaTeX
 
 * Especificaciones de la práctica
   Nuestra idea es crear un sistema de gestión y administración de ligas y copas de fútbol.
@@ -76,7 +74,7 @@
    rápido, intuitivo y guiado para el usuario con una carga importante en la parte cliente.
 
 ** Tecnologías
-*** Parte servidor
+*** Parte servidor /propuesta/
     * *PHP 5*
     * *SQL*
 
@@ -85,12 +83,20 @@
     El requisito mínimo será un servidor web estándar con soporte para PHP y una instalación de
     un servidor SQL compatible con MySQL (MariaDB, Percona, ...).
 
+*** Parte servidor /final/
+    * *Python 3[fn::https://www.python.org/]*, con compatibilidad con *Python 2*
+    * *Django 1.8[fn::https://www.djangoproject.com/]*, framework MVC para python orientado a web
+    * *MariaDB 10.0[fn::https://mariadb.org/]*
+
 *** Parte cliente
     * *HTML 5*
     * *CSS 3*
-    * *JavaScript:* Con uso del framework jQuery
-
-    Se valorará el uso de frameworks y librerías como Boostrap, Bootbox, Font Awesome, ...
+    * *Bootstrap 3[fn::http://getbootstrap.com/]*, con el tema /Cosmo/[fn::https://bootswatch.com/cosmo/]
+    * *jQuery 1.11[fn::https://jquery.com/]*
+    * *Bootbox 4.3.0[fn::http://bootboxjs.com/]*, con el estilo (CSS) modificado por nosotros
+    * *Sorttable 0.5.0[fn::http://github.hubspot.com/sortable/]*, con el estilo (CSS) modificado
+    por nosotros
+    * *Font Awesome 4.3.0[fn::http://fortawesome.github.io/Font-Awesome/]*
 
 *** Entornos de programación
     Debido a la costumbre de cada uno en su entorno de trabajo usaremos distintos entornos. Por
@@ -101,7 +107,7 @@
     * *InteliJ IDEA*
     * *Eclipse* con WTP (Web Tools Platform)
 
-** Reparto de responsabilidades
+** Reparto de tareas /propuesto/
    Hemos decidido que todos vamos a intentar colaborar en todas las partes que conformarán la
    práctica, sin embargo a continuación detallamos los principales responsables de cada parte a
    modo de reparto:
@@ -118,16 +124,75 @@
    * *Diseño de pruebas*
    * *Documentación*
 
+** Reparto de tareas /final/
+   Aunque se ha tratado colaborar entre todos en todas las partes los encargados principales
+   de cada parte se dividen de la siguiente forma:
+
+   * *Parte servidor:*
+     * *Diseño de la BBDD:* Alejandro Barahona, Sergio Conde e Ismael Vázquez.
+     * *Programación (Python 2/3, Django 1.8):* Sergio Conde.
+   * *Parte cliente:*
+     * *Diseño de la interfaz*: Alejandro Barahona e Ismael Vázquez.
+     * *Programación de vistas (HTML, CSS):* Alejandro Barahona.
+     * *Funcionalidad (JavaScript)* Alejandro Barahona.
+   * *Testing de frontend y backend:* Ismael Vázquez.
+   * *Oras tareas:*
+     * *Memoria:* Alejandro Barahona, Sergio Conde e Ismael Vázquez.
+     * *Manual de instalación:* Sergio Conde.
+     * *Manual de usuario:* Ismael Vázquez.
+
 * Problemas durante el desarrollo de la práctica
 ** Cambio de tecnología para la parte del servidor
-  Llegado el momento de desarrollar la parte servidora nos hemos encontrado con dificultades
-  en el aprendizaje del uso de Symfony. Ante tal problema y viendo que no íbamos a llegar a
-  tiempo de tener la practica finalizada hemos solicitado al tutor el cambio de esta tecnología
-  por Django y Python ya que nos ha sido más fácil su aprendizaje.
+   Llegado el momento de desarrollar la parte servidora nos hemos encontrado con dificultades
+   en el aprendizaje del uso de Symfony. Ante tal problema y viendo que no íbamos a llegar a
+   tiempo de tener la practica finalizada hemos solicitado al tutor el cambio de esta tecnología
+   por Django y Python ya que nos ha sido más fácil su aprendizaje.
 
-  Finalmente las tecnologías usadas en la parte del servidor son Python, haciendo uso del
-  framework Django en su versión 1.8.
+   Finalmente las tecnologías usadas en la parte del servidor son Python, haciendo uso del
+   framework Django en su versión 1.8.
 
-** TODO Problemas internos del grupo
+** Problemas internos del grupo
+   Llegado el momento de colaborar todos en la práctica dos compañeros, /Dan Huang/ y /Yixuan Wu/,
+   no dieron señales de vida. El resto ante tal falta de interés y el retaso causado en la practica
+   debido a ser dos menos y lo expuesto en el punto anterior hablamos con el tutor acerca de este
+   problema el día 12 de Mayo.
 
-** TODO Reparto real de las tareas realizadas
+   El tutor se encargó de enviar un correo a ambos para que diesen su versión de los hechos y
+   hasta donde tenemos conocimiento nunca se pusieron en contacto con el. Sin embargo si se
+   pusieron en contacto con Sergio Conde a través de WhatsApp ese mismo día tratando de
+   resolver el problema. Se les informó del estado de la practica, de los problemas que habíamos
+   tenido con Symfony y del cambio a Django y se les asigno las tareas de testing de frontend y
+   backend.
+
+   Se puso una versión de la web con todo el mostrado de datos, tablas, paginación, etc... y tras
+   4 días sin noticias se quito la versión. El mismo día que la quitamos contactaron con nosotros
+   diciendo que no había fallos y que ya no podían entrar. Se les respondió indicándoles que un
+   miembro del grupo había encontrado un fallo que cuando se pulsaba en cualquier tabla para ver
+   la siguiente página aparecía un error a pantalla completa de Python (por un problema de versiones
+   ya que desarrollábamos en Python 3 y el servidor estaba con Python 2). Tras esto y tras ese mismo
+   día el tutor hablar con nosotros para decirnos que aún no habían hablado con el decidimos
+   retirarles de la práctica.
+
+* Calendario de desarrollo
+  * Diseño de bajo nivel de interfaces
+    <2015-03-16 lun>--<2015-03-26 jue>
+  * Diseño de la base de datos
+    <2015-03-23 lun>
+  * Paso a tablas de la base de datos (descartado)
+    <2015-03-23 lun>
+  * Codificación de las interfaces en HTML y CSS
+    <2015-03-26 jue>--<2015-05-14 jue>
+  * Paso a objetos de la base de datos (ORM)
+    <2015-04-01 mié>
+  * Programación del backend en Symfony/PHP (Abandonado)
+    <2015-04-01 mié>--<2015-05-08 vie>
+  * Pruebas de Django/Python
+    <2015-05-04 lun>--<2015-05-08 vie>
+  * Reunión con el tutor para cambiar PHP/Symfony por Django/Python
+    <2015-05-12 mar>
+  * Programación del backend en Django/Python
+    <2015-05-12 lun>--<2015-05-28 jue>
+  * Programación del Javascript y retoques en el HTML para adaptarlo
+    <2015-05-15 vie>--<2015-05-27 mié>
+  * Pruebas sobre el fornted y el backend
+    <2015-05-14 jue>--<2015-05-28 jue>
