@@ -572,4 +572,5 @@ body {
 .index-page table tr th:first-child,
 .index-page table tr td:first-child{
     padding-right: 1em;
+    text-align: right;
 }
