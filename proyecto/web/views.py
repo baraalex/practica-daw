@@ -807,12 +807,16 @@ def jugador(request, id_jugador, pagina=1):
             return redirect('web:jugador', id_jugador=id_jugador)
 
         compsId = []
+        compsPart = []
         for p in Participante.objects.filter(jugador=jug):
             if p.partido.competicion.id not in compsId:
-                compsId.append((p.partido.competicion, p.equipo))
+                compsId.append(p.partido.competicion.id)
+                compsPart.append((p.partido.competicion, p.equipo))
+
+        del compsId
 
         comps = []
-        for c, e in compsId:
+        for c, e in compsPart:
             ps = Partido.objects.filter(Q(equipo_loc=e) |
                                         Q(equipo_vis=e),
                                         competicion=c,
