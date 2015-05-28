@@ -13,6 +13,9 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse
 
+from json import dumps
+from operator import itemgetter
+
 from .models import Competicion, Equipo, Jugador, Participante, Partido
 from .utils import paginate, calc_matchs
 
@@ -417,15 +420,78 @@ def competicion(request, id_competicion, pagina=1):
            and (request.user.is_superuser or
                 request.user == comp.administrador):
 
-            if 'nombre' in request.POST:
-                comp.nombre = request.POST['nombre']
+            if 'partido' in request.POST:
+                part = Partido.objects.get(id=request.POST['partido'])
+                part.celebrado = True
+                part.goles_loc = 0
+                part.goles_vis = 0
+                part.amarillas_loc = 0
+                part.amarillas_vis = 0
+                part.rojas_loc = 0
+                part.rojas_vis = 0
 
-            if 'imagen' in request.FILES:
-                comp.foto = request.FILES['imagen']
+                Participante.objects.filter(partido=part).delete()
 
-            tmpContext['actualizado'] = True
+                for j in request.POST['jugadores_loc'].split(','):
+                    if 'jloc-' + j in request.POST:
+                        nR = True if 'rloc-' + j in request.POST else False
+                        nA = request.POST['aloc-' + j]
+                        nG = request.POST['gloc-' + j]
+                        nGPP = request.POST['gpploc-' + j]
 
-            comp.save()
+                        nP = Participante(partido=part,
+                                          jugador_id=j,
+                                          equipo=part.equipo_loc,
+                                          roja=nR,
+                                          amarillas=nA,
+                                          goles=nG,
+                                          goles_pp=nGPP)
+
+                        nP.save()
+
+                        part.goles_loc += int(nG)
+                        part.goles_vis += int(nGPP)
+                        part.amarillas_loc += int(nA)
+                        if nR:
+                            part.rojas_loc += 1
+
+                for j in request.POST['jugadores_vis'].split(','):
+                    if 'jvis-' + j in request.POST:
+                        nR = True if 'rvis-' + j in request.POST else False
+                        nA = request.POST['avis-' + j]
+                        nG = request.POST['gvis-' + j]
+                        nGPP = request.POST['gppvis-' + j]
+
+                        nP = Participante(partido=part,
+                                          jugador_id=j,
+                                          equipo=part.equipo_vis,
+                                          roja=nR,
+                                          amarillas=nA,
+                                          goles=nG,
+                                          goles_pp=nGPP)
+
+                        nP.save()
+
+                        part.goles_vis += int(nG)
+                        part.goles_loc += int(nGPP)
+                        part.amarillas_vis += int(nA)
+                        if nR:
+                            part.rojas_vis += 1
+
+                part.save()
+
+                tmpContext['partActualizado'] = True
+
+            else:
+                if 'nombre' in request.POST:
+                    comp.nombre = request.POST['nombre']
+
+                if 'imagen' in request.FILES:
+                    comp.foto = request.FILES['imagen']
+
+                comp.save()
+
+                tmpContext['actualizado'] = True
 
         jornadas = {}
 
@@ -484,7 +550,7 @@ def competicion(request, id_competicion, pagina=1):
                                   ganados, empatados, perdidos,
                                   goles_favor, goles_contra))
 
-            clasificacion.sort(key=lambda e: e[1])
+            clasificacion.sort(key=itemgetter(1, 6, 3), reverse=True)
 
         context = {
             'title': 'Competición: ' + comp.nombre,
@@ -800,6 +866,56 @@ def get_jugadores(request, id_equipo):
                                   .filter(equipo__id=id_equipo),
                                   fields=('nombre', 'dorsal',
                                           'posicion')))
+
+
+@require_GET
+def get_jugadores_new(request, id_partido, id_equipo):
+    jugadores = Jugador.objects.filter(equipo__id=id_equipo).order_by('dorsal')
+    participantes = Participante.objects.filter(partido__id=id_partido,
+                                                equipo__id=id_equipo)
+
+    jugs = []
+    jugsId = []
+    for jugador in jugadores:
+        jugsId.append(jugador.id)
+        jugs.append({
+            'pk': jugador.id,
+            'fields': {
+                'nombre': jugador.nombre,
+                'dorsal': jugador.dorsal,
+                'posicion': jugador.get_posicion_display(),
+                'amarillas': 0,
+                'roja': False,
+                'goles': 0,
+                'goles_pp': 0,
+                'jugado': False,
+            }
+        })
+
+    for participante in participantes:
+        if participante.jugador.id in jugsId:
+            idx = jugsId.index(participante.jugador.id)
+            jugs[idx]['fields']['amarillas'] = participante.amarillas
+            jugs[idx]['fields']['roja'] = participante.roja
+            jugs[idx]['fields']['goles'] = participante.goles
+            jugs[idx]['fields']['goles_pp'] = participante.goles_pp
+            jugs[idx]['fields']['jugado'] = True
+        else:
+            jugs.append({
+                'pk': participante.jugador.id,
+                'fields': {
+                    'nombre': participante.jugador.nombre,
+                    'dorsal': participante.jugador.dorsal,
+                    'posicion': participante.jugador.get_posicion_display(),
+                    'amarillas': participante.amarillas,
+                    'roja': participante.roja,
+                    'goles': participante.goles,
+                    'goles_pp': participante.goles_pp,
+                    'jugado': True,
+                }
+            })
+
+    return HttpResponse(dumps(jugs))
 
 
 @require_GET

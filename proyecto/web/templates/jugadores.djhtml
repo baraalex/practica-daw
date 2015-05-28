@@ -26,7 +26,7 @@
         <span class="fa fa-futbol-o"></span> Delanteros
       </a>
     </li>
-     <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
+    <li{% if not user.is_authenticated %} class="disabled"{% endif %}>
       <a{% if user.is_authenticated %} id="addJugador" data-token="{{ csrf_token }}"{% endif %} href="#">
         <span class="fa fa-plus-circle"></span> Crear jugador
       </a>
@@ -84,11 +84,11 @@
       </div>
       <ul class="pager">
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
-          <a href="{% if pagina != 1 %}{% url 'web:jugadores' pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
+          <a href="{% if pagina != 1 %}{% if posicion %}{% url 'web:jugadores' posicion pagina|add:-1 %}{% else %}{% url 'web:jugadores' pagina|add:-1 %}{% endif %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
         </li>
         <li>Página {{ pagina }}/{{ pagina_max }}</li>
         <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
-          <a href="{% if pagina != pagina_max %}{% url 'web:jugadores' pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
+          <a href="{% if pagina != pagina_max %}{% if posicion %}{% url 'web:jugadores' posicion pagina|add:1 %}{% else %}{% url 'web:jugadores' pagina|add:1 %}{% endif %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
         </li>
       </ul>
     {% else %}
