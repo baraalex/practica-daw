@@ -10,24 +10,33 @@
         <span class="informacion">Si no estas identificado podras ver todas las estadisticas de los equipos y jugadores ademas de las competiciones publicas. Si estas identificado y eres un usuario normal podras ver ademas las competiciones privadas y sus estadisticas, siempre y cuando tu las hayas creado. Si ademas de estar identificado eres administrador del sistema podras ver todos los datos de la aplicacion asi como administrar los usuarios.</span>
         <h4 class="name">Estadisticas del sistema:</h4>
         <div class="row">
-        	<ul class="level1">
-        		<div class="col-md-4"><li><span class="fa fa-trophy"></span> Numero de competiciones: <span class="badge">0</span><br>
-        			<ul class="level2">
-	                    <li class="listado">Publicas: <span class="badge">0</span></li>
-	                    <li class="listado">Privadas: <span class="badge">0</span></li>
-	                </ul>
-	            </li></div>
-	            <div class="col-md-4"><li><span class="fa fa-group"></span> Numero de equipos: <span class="badge">0</span></li></div>
-	            <div class="col-md-4"> <li><span class="fa fa-futbol-o"></span> Numero de jugadores: <span class="badge">0</span><br>
-	            	<ul class="level2">
-	                    <li class="listado">Numero de Porteros: <span class="badge">0</span></li>
-	                    <li class="listado">Numero de Defensas: <span class="badge">0</span></li>
-	                    <li class="listado">Numero de Centrocampistas: <span class="badge">0</span></li>
-	                    <li class="listado">Numero de Delanteros: <span class="badge">0</span></li>
-	                </ul>
-	            </li></div>
-	        </ul>
-	    </div>
+        		<div class="col-md-4 index-page">
+              <table>
+                <thead><tr><th><span class="fa fa-trophy"></span> Numero de competiciones: </th><th><span class="badge">0</span></th><th></th></tr></thead>
+                <tbody>
+                      <tr class="listado"><td>Publicas:</td><td><span class="badge">0</span></td></tr>
+                      <tr class="listado"><td>Privadas: </td><td><span class="badge">0</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+	            <div class="col-md-4 index-page"><table>
+                <thead><tr><th><span class="fa fa-trophy"></span> Numero de equipos: </th><th><span class="badge">0</span></th><th></th></tr></thead>
+                <tbody/>
+                  </table>
+                </div>
+	            <div class="col-md-4 index-page">
+                <table>
+                  <thead><tr><th><span class="fa fa-trophy"></span> Numero de Jugadores: </th><th><span class="badge">0</span></th><th></th></tr></thead>
+                  <tbody>
+                    <tr class="listado"><td>Numero de Porteros: </td><td><span class="badge">0</span></td></tr>
+                    <tr class="listado"><td>Numero de Defensas: </td><td><span class="badge">0</span></td></tr>
+                    <tr class="listado"><td>Numero de Centrocampistas: </td><td><span class="badge">0</span></td></tr>
+                    <tr class="listado"><td>Numero de Delanteros: </td><td><span class="badge">0</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        </div>
       </div>
       <div class="media-right">
       </div>
