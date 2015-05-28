@@ -550,7 +550,7 @@ def competicion(request, id_competicion, pagina=1):
                                   ganados, empatados, perdidos,
                                   goles_favor, goles_contra))
 
-            clasificacion.sort(key=itemgetter(1, 2, 6, 3), reverse=True)
+            clasificacion.sort(key=itemgetter(1, 6, 3, 2), reverse=True)
 
         context = {
             'title': 'Competición: ' + comp.nombre,
