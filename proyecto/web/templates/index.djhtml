@@ -11,19 +11,19 @@
         <h4 class="name">Estadisticas del sistema:</h4>
         <div class="row">
         	<ul class="level1">
-        		<div class="col-md-4"><li><span class="fa fa-trophy"></span> Numero de competiciones:<span class="informacion"></span><br>
+        		<div class="col-md-4"><li><span class="fa fa-trophy"></span> Numero de competiciones: <span class="informacion">0</span><br>
         			<ul class="level2">
-	                    <li>Numero de ligas publicas: <span class="informacion"></span></li>
-	                    <li>Numero de ligas privadas: <span class="informacion"></span></li>
+	                    <li class="listado">Numero de ligas publicas: <span class="informacion">0</span></li>
+	                    <li class="listado">Numero de ligas privadas: <span class="informacion">0</span></li>
 	                </ul>
 	            </li></div>
-	            <div class="col-md-4"><li><span class="fa fa-group"></span> Numero de equipos:<span class="informacion"></span></li></div>
-	            <div class="col-md-4"> <li><span class="fa fa-futbol-o"></span> Numero de jugadores:<span class="informacion"></span><br>
+	            <div class="col-md-4"><li><span class="fa fa-group"></span> Numero de equipos: <span class="informacion">0</span></li></div>
+	            <div class="col-md-4"> <li><span class="fa fa-futbol-o"></span> Numero de jugadores: <span class="informacion">0</span><br>
 	            	<ul class="level2">
-	                    <li>Numero de Porteros: <span class="informacion"></span></li>
-	                    <li>Numero de Defensas: <span class="informacion"></span></li>
-	                    <li>Numero de Centrocampistas:<span class="informacion"></span></li>
-	                    <li>Numero de Delanteros:<span class="informacion"></span></li>
+	                    <li class="listado">Numero de Porteros: <span class="informacion">0</span></li>
+	                    <li class="listado">Numero de Defensas: <span class="informacion">0</span></li>
+	                    <li class="listado">Numero de Centrocampistas: <span class="informacion">0</span></li>
+	                    <li class="listado">Numero de Delanteros: <span class="informacion">0</span></li>
 	                </ul>
 	            </li></div>
 	        </ul>
