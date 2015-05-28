@@ -72,7 +72,7 @@
                   <td>{{ competicion.5 }}</td>
                   <td>{{ competicion.6 }}</td>
                 {% else %}
-                  <td class="privado" colspan="6">Competición privada.</td>
+                  <td class="privado" colspan="9">Competición privada.</td>
                 {% endif %}
               </tr>
             {% endfor %}
