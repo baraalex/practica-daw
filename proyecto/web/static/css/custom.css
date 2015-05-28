@@ -564,3 +564,7 @@ body {
 .table.sortable-theme-bootstrap > thead > tr > th {
   vertical-align: baseline !important;
 }
+
+.listado{
+    margin-top: 0.5em;
+}
