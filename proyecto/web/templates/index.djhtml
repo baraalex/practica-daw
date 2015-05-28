@@ -3,7 +3,7 @@
   <div id="tabla">
     <div class="well well-lg media">
       <div class="media-body">
-        <h2 id="media-heading" class="media-heading name">Gesticom</h2>
+        <h2 id="media-heading" class="media-heading name">Bienvenido a <em>Gesticom</em></h2>
         <hr />
         <p>Esta web es un sistema de gestión de competiciones de fútbol online. Aquí podrás crear nuevos equipos y jugadores y una vez creados podrás crear competiciones con ellos y gestionar los resultados de esta misma.</p>
         <p>Si no estas identificado podrás ver todas las estadísticas de los equipos y jugadores así como las competiciones publicas. Si estas identificado y eres un usuario normal podrás ver también las competiciones privadas que hayas creado y administrarlas. Si además eres un administrador del sistema podrás ver todos los datos que la aplicación contenga así como administrar los usuarios, los jugadores, los equipos y cualquier competición.</p>
