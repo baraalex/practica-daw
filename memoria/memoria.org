@@ -152,26 +152,26 @@
    framework Django en su versión 1.8.
 
 ** Problemas internos del grupo
-   Llegado el momento de colaborar todos en la práctica dos compañeros, /Dan Huang/ y /Yixuan Wu/,
-   no dieron señales de vida. El resto ante tal falta de interés y el retaso causado en la practica
-   debido a ser dos menos y lo expuesto en el punto anterior hablamos con el tutor acerca de este
-   problema el día 12 de Mayo.
+   Llegado el momento de colaborar todos en la práctica, dos compañeros, /Dan Huang/ y /Yixuan Wu/,
+   no dieron señales de vida. El resto, ante tal falta de interés, el retraso causado en la práctica
+   al ser dos menos en el equipo y lo expuesto en el punto anterior, hablamos con el tutor acerca
+   de este problema el día 12 de mayo.
 
-   El tutor se encargó de enviar un correo a ambos para que diesen su versión de los hechos y
-   hasta donde tenemos conocimiento nunca se pusieron en contacto con el. Sin embargo si se
+   El tutor se encargó de enviar un correo a ambos para que diesen su versión de los hechos y,
+   hasta donde tenemos conocimiento, nunca se pusieron en contacto con él. Sin embargo, sí se
    pusieron en contacto con Sergio Conde a través de WhatsApp ese mismo día tratando de
-   resolver el problema. Se les informó del estado de la practica, de los problemas que habíamos
-   tenido con Symfony y del cambio a Django y se les asigno las tareas de testing de frontend y
+   resolver el problema. Se les informó del estado de la práctica, de los problemas que habíamos
+   tenido con Symfony y del cambio a Django y se les asignó las tareas de testing de frontend y
    backend.
 
-   Se puso una versión de la web con todo el mostrado de datos, tablas, paginación, etc... y tras
-   4 días sin noticias se quito la versión. El mismo día que la quitamos contactaron con nosotros
+   Se puso una versión de la web con todo el mostrado de datos, tablas, paginación, etc. y tras
+   4 días sin noticias, se quitó la versión. El mismo día que la quitamos contactaron con nosotros
    diciendo que no había fallos y que ya no podían entrar. Se les respondió indicándoles que un
-   miembro del grupo había encontrado un fallo que cuando se pulsaba en cualquier tabla para ver
-   la siguiente página aparecía un error a pantalla completa de Python (por un problema de versiones
-   ya que desarrollábamos en Python 3 y el servidor estaba con Python 2). Tras esto y tras ese mismo
-   día el tutor hablar con nosotros para decirnos que aún no habían hablado con el decidimos
-   retirarles de la práctica.
+   miembro del grupo había encontrado un fallo por el cual cuando se pulsaba en cualquier tabla
+   para ver la siguiente página aparecía un error a pantalla completa de Python (por un problema
+   de versiones, ya que desarrollábamos en Python 3 y el servidor estaba con Python 2). Tras esto
+   y después de que ese mismo día el tutor hablara con nosotros para decirnos que aún no habían
+   hablado con él, decidimos retirarles de la práctica.
 
 * Calendario de desarrollo
   * Diseño de bajo nivel de interfaces
