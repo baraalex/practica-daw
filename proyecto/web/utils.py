@@ -49,10 +49,10 @@ def calc_matchs(teams):
 
     return num_days*2, match_calendar
 
+
 def order_classification(team_stats):
     points = team_stats[1]
     goals_scored = team_stats[6]
     goals_conceded = team_stats[7]
-    goal_avg = goals_scored / goals_conceded
     goal_diff = goals_scored - goals_conceded
-    return (points, goal_avg, goal_diff, goals_scored)
+    return (points, goal_diff, goals_scored)
