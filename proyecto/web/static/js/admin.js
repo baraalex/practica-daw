@@ -760,14 +760,14 @@ function modifyComp(token) {
         "'><span><h4>Nombre :</h4></span><div class='input-group'><span class='input-group-addon' id='sizing-addon2'>"+
         "<span class='fa fa-font' aria-hidden='true'></span></span>"+
         "<input id='Name' name='nombre' type='text' class='form-control' placeholder='Enter name' aria-describedby='sizing-addon2' maxlength='64'/></div>"+
-        "<div class='row'><div class='col-md-4'><span><h4>Liga Privada :</h4></span>" +
+        "<div class='row'><div class='col-md-3'><span><h4>Liga Privada :</h4></span>" +
         "<input type='checkbox' id='newPrivada' name='privada'";
         
         if($("#privada").html()=="Sí"){
             msg = msg + " checked";
         }
 
-        msg = msg +"/></div><div class='col-md-4'><span><h4>Foto :</h4></span><input type='file' " +
+        msg = msg +"/></div><div class='col-md-9'><span><h4>Foto :</h4></span><input type='file' " +
         "id='foto' accept='image/*' class='selectable' name='imagen' /></div></div><img id='preview' src='#' alt='' class='imagePrev'/><input type='hidden' name='csrfmiddlewaretoken' value='"+
         token+"' required=''/></form>";
 
