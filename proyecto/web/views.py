@@ -24,6 +24,15 @@ def home(request):
     context = {
         'view': 'inicio',
         'title': 'Inicio',
+        'ncomp': Competicion.objects.count(),
+        'ncomppub': Competicion.objects.filter(privada=False).count(),
+        'ncomppriv': Competicion.objects.filter(privada=True).count(),
+        'nequip': Equipo.objects.count(),
+        'njug': Jugador.objects.count(),
+        'njugpor': Jugador.objects.filter(posicion='po').count(),
+        'njugdef': Jugador.objects.filter(posicion='df').count(),
+        'njugcen': Jugador.objects.filter(posicion='ce').count(),
+        'njugdel': Jugador.objects.filter(posicion='dl').count(),
     }
 
     return render(request, 'index.djhtml', context)

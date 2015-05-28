@@ -1,45 +1,74 @@
 {% extends 'base_simple.djhtml' %}
 {% block contenido %}
-<div id="tabla">
+  <div id="tabla">
     <div class="well well-lg media">
       <div class="media-body">
         <h2 id="media-heading" class="media-heading name">Gesticom</h2>
-        <hr>
-        <span class="informacion">Esta web es un sistema de gestion de competiciones de futbol online. Aqui podras crear nuevos equipos y jugadores y una vez creados podras crear competiciones con ellos y gestionar los resultados de esta misma.</span>
-        <br>
-        <span class="informacion">Si no estas identificado podras ver todas las estadisticas de los equipos y jugadores ademas de las competiciones publicas. Si estas identificado y eres un usuario normal podras ver ademas las competiciones privadas y sus estadisticas, siempre y cuando tu las hayas creado. Si ademas de estar identificado eres administrador del sistema podras ver todos los datos de la aplicacion asi como administrar los usuarios.</span>
-        <h4 class="name">Estadisticas del sistema:</h4>
-        <div class="row">
-        		<div class="col-md-4 index-page">
-              <table>
-                <thead><tr><th><span class="fa fa-trophy"></span> Numero de competiciones: </th><th><span class="badge">0</span></th><th></th></tr></thead>
-                <tbody>
-                      <tr class="listado"><td>Publicas:</td><td><span class="badge">0</span></td></tr>
-                      <tr class="listado"><td>Privadas: </td><td><span class="badge">0</span></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-	            <div class="col-md-4 index-page"><table>
-                <thead><tr><th><span class="fa fa-trophy"></span> Numero de equipos: </th><th><span class="badge">0</span></th><th></th></tr></thead>
-                <tbody/>
-                  </table>
-                </div>
-	            <div class="col-md-4 index-page">
-                <table>
-                  <thead><tr><th><span class="fa fa-trophy"></span> Numero de Jugadores: </th><th><span class="badge">0</span></th><th></th></tr></thead>
-                  <tbody>
-                    <tr class="listado"><td>Numero de Porteros: </td><td><span class="badge">0</span></td></tr>
-                    <tr class="listado"><td>Numero de Defensas: </td><td><span class="badge">0</span></td></tr>
-                    <tr class="listado"><td>Numero de Centrocampistas: </td><td><span class="badge">0</span></td></tr>
-                    <tr class="listado"><td>Numero de Delanteros: </td><td><span class="badge">0</span></td></tr>
-                  </tbody>
-                </table>
-              </div>
-        </div>
+        <hr />
+        <p>Esta web es un sistema de gestión de competiciones de fútbol online. Aquí podrás crear nuevos equipos y jugadores y una vez creados podrás crear competiciones con ellos y gestionar los resultados de esta misma.</p>
+        <p>Si no estas identificado podrás ver todas las estadísticas de los equipos y jugadores así como las competiciones publicas. Si estas identificado y eres un usuario normal podrás ver también las competiciones privadas que hayas creado y administrarlas. Si además eres un administrador del sistema podrás ver todos los datos que la aplicación contenga así como administrar los usuarios, los jugadores, los equipos y cualquier competición.</p>
+        <h4 class="name">Estadísticas del sistema:</h4>
+        <div class="row index-page">
+          <div class="col-md-4">
+            <table>
+              <thead>
+                <tr>
+                  <th><span class="fa fa-trophy"></span>Número de competiciones:</th>
+                  <th><span class="badge">{{ ncomp }}</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="listado">
+                  <td>Publicas:</td>
+                  <td><span class="badge">{{ ncomppub }}</span></td>
+                </tr>
+                <tr class="listado">
+                  <td>Privadas:</td>
+                  <td><span class="badge">{{ ncomppriv }}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-4">
+            <table>
+              <thead>
+                <tr>
+                  <th><span class="fa fa-user"></span>Número de equipos:</th>
+                  <th><span class="badge">{{ nequip }}</span></th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="col-md-4">
+            <table>
+              <thead>
+                <tr>
+                  <th><span class="fa fa-futbol-o"></span>Número de Jugadores:</th>
+                  <th><span class="badge">{{ njug }}</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="listado">
+                  <td>Porteros:</td>
+                  <td><span class="badge">{{ njugpor }}</span></td>
+                </tr>
+                <tr class="listado">
+                  <td>Defensas:</td>
+                  <td><span class="badge">{{ njugdef }}</span></td>
+                </tr>
+                <tr class="listado">
+                  <td>Centrocampistas:</td>
+                  <td><span class="badge">{{ njugcen }}</span></td>
+                </tr>
+                <tr class="listado">
+                  <td>Delanteros:</td>
+                  <td><span class="badge">{{ njugdel }}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="media-right">
-      </div>
-
+    </div>
   </div>
 {% endblock %}
