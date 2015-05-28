@@ -568,3 +568,7 @@ body {
 .listado{
     margin-top: 0.5em;
 }
+
+.index-page table tr:first-child{
+    padding-right: 1em;
+}
