@@ -47,6 +47,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
+              <th style="width: 50px;"></th>
               <th>Competición</th>
               <th>Equipo</th>
               <th>Jugados</th>
@@ -60,6 +61,7 @@
             {% for competicion in competiciones %}
               <tr>
                 {% if not competicion.0.privada or user.is_authenticated and user == competicion.0.administrador or user.is_authenticated and user.is_superuser  %}
+                  <td><img src="{{ competicion.foto.url }}" style="height: 50px;" /></td>
                   <td><a href="{% url 'web:competicion' competicion.0.id %}">{{ competicion.0.nombre }}</a></td>
                   <td><a href="{% url 'web:equipo' competicion.1.id %}">{{ competicion.1.nombre }}</a></td>
                   <td>{{ competicion.2 }}</td>
