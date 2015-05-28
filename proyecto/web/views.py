@@ -785,6 +785,9 @@ def jugador(request, id_jugador, pagina=1):
                 except ObjectDoesNotExist:
                     tmpContext['error'] = 'equipo'
 
+            if 'posicion' in request.POST:
+                jug.posicion = request.POST['posicion']
+
             if 'dorsal' in request.POST:
                 jug.dorsal = request.POST['dorsal']
 
