@@ -569,6 +569,7 @@ body {
     margin-top: 0.5em;
 }
 
-.index-page table tr:first-child{
+.index-page table tr th:first-child,
+.index-page table tr td:first-child{
     padding-right: 1em;
 }
