@@ -86,7 +86,8 @@
         <li class="previous{% if pagina == 1 %} disabled{% endif %}">
           <a href="{% if pagina != 1 %}{% if posicion %}{% url 'web:jugadores' posicion pagina|add:-1 %}{% else %}{% url 'web:jugadores' pagina|add:-1 %}{% endif %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
         </li>
-        <li><span class="hidden-xs">Página </span>{{ pagina }}/{{ pagina_max }}</li>
+        <li class="hidden-xs">Página</li>
+        <li>{{ pagina }}/{{ pagina_max }}</li>
         <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
           <a href="{% if pagina != pagina_max %}{% if posicion %}{% url 'web:jugadores' posicion pagina|add:1 %}{% else %}{% url 'web:jugadores' pagina|add:1 %}{% endif %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
         </li>

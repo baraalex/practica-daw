@@ -76,7 +76,8 @@
             <a href="{% if pagina != 1 %}{% url 'web:competiciones_privadas' pagina|add:-1 %}{% else %}#{% endif %}"><span aria-hidden="true">&larr;</span> Anteriores</a>
           {% endif %}
         </li>
-        <li><span class="hidden-xs">Página </span>{{ pagina }}/{{ pagina_max }}</li>
+        <li class="hidden-xs">Página</li>
+        <li>{{ pagina }}/{{ pagina_max }}</li>
         <li class="next{% if pagina == pagina_max %} disabled{% endif %}">
           {% if tipo == 'pub' %}
             <a href="{% if pagina != pagina_max %}{% url 'web:competiciones' pagina|add:1 %}{% else %}#{% endif %}">Siguientes <span aria-hidden="true">&rarr;</span></a>
