@@ -91,7 +91,7 @@
 *** Parte cliente
     * *HTML 5*
     * *CSS 3*
-    * *Bootstrap 3[fn::http://getbootstrap.com/]*, con el tema /Cosmo/[fn::https://bootswatch.com/cosmo/]
+    * *Bootstrap 3[fn::http://getbootstrap.com/]*, con el tema /Cosmo[fn::https://bootswatch.com/cosmo/]/
     * *jQuery 1.11[fn::https://jquery.com/]*
     * *Bootbox 4.3.0[fn::http://bootboxjs.com/]*, con el estilo (CSS) modificado por nosotros
     * *Sorttable 0.5.0[fn::http://github.hubspot.com/sortable/]*, con el estilo (CSS) modificado
