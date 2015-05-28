@@ -95,7 +95,7 @@
     * *jQuery 1.11[fn::https://jquery.com/]*
     * *Bootbox 4.3.0[fn::http://bootboxjs.com/]*, con el estilo (CSS) modificado por nosotros
     * *Sorttable 0.5.0[fn::http://github.hubspot.com/sortable/]*, con el estilo (CSS) modificado
-    por nosotros
+      por nosotros
     * *Font Awesome 4.3.0[fn::http://fortawesome.github.io/Font-Awesome/]*
 
 *** Entornos de programación
@@ -257,6 +257,8 @@ DATABASES = {
 
   * El primero es el más sencillo, que es con el servidor de desarrollo de /Django/. Esto es
     suficiente para probar la aplicación pero no serviría para el uso público y continuado.
+    Para hacerlo de esta forma basta con ejecutar =python manage.py runserver= y abrir en el
+    navegador http://localhost:8000/.
 
   * El segundo método, y el apropiado para publicar la aplicación, sería utilizar un servidor
     web tal como /Apache[fn::http://httpd.apache.org/]/ o /Nginx[fn::http://nginx.org/]/.
