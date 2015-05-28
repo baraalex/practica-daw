@@ -33,7 +33,7 @@
             <table>
               <thead>
                 <tr>
-                  <th><span class="fa fa-user"></span>Número de equipos:</th>
+                  <th><span class="fa fa-group"></span>Número de equipos:</th>
                   <th><span class="badge">{{ nequip }}</span></th>
                 </tr>
               </thead>
