@@ -14,10 +14,9 @@ from django.db.models import Q
 from django.http import HttpResponse
 
 from json import dumps
-from operator import itemgetter
 
 from .models import Competicion, Equipo, Jugador, Participante, Partido
-from .utils import paginate, calc_matchs
+from .utils import paginate, calc_matchs, order_classification
 
 
 @require_GET
@@ -554,7 +553,7 @@ def competicion(request, id_competicion, pagina=1):
                                   ganados, empatados, perdidos,
                                   goles_favor, goles_contra))
 
-            clasificacion.sort(key=itemgetter(1, 6, 3, 2), reverse=True)
+            clasificacion.sort(key=order_classification, reverse=True)
 
         context = {
             'title': 'Competición: ' + comp.nombre,
