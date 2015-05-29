@@ -552,9 +552,9 @@ function partido(id, pos, loc, vis, token) {
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
         "<div class='name'>Error!</div>goles negativos</div><div  id ='alert2' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-        "<div class='name'>Error!</div>Deben jugar entre 11 y 15 jugadores en el equipo local</div><div  id ='alert3' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
+        "<div class='name'>Error!</div>Deben jugar entre 11 y 14 jugadores en el equipo local</div><div  id ='alert3' class='alert alert-danger alert-dismissible alerta' role='alert'>" +
         "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-        "<div class='name'>Error!</div>Deben jugar entre 11 y 15 jugadores en el equipo visitante</div>" +
+        "<div class='name'>Error!</div>Deben jugar entre 11 y 14 jugadores en el equipo visitante</div>" +
         "<form id='formulario' method='POST' action='"+document.location.pathname+
         "'><div class='row row-right'><div class='col-md-6'> <span><h4>Local : "+ localeq +"</h4></span>" +
         "<li>Goles: <span id='golLocalTotal' class='badge gol'>0</span></li><li>Estadisticas:" +
@@ -631,12 +631,12 @@ function partido(id, pos, loc, vis, token) {
                         }
                     }
 
-                    if(nl<11 || nl>15){
+                    if(nl<11 || nl>14){
                             $("#alert2").css({"display": "block"});
                             e.preventDefault();
                             return false;
                     }
-                    if(nv<11 || nv>15){
+                    if(nv<11 || nv>14){
                             $("#alert3").css({"display": "block"});
                             e.preventDefault();
                             return false;
