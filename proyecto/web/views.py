@@ -903,16 +903,7 @@ def get_equipos(request):
 
 
 @require_GET
-def get_jugadores(request, id_equipo):
-    return HttpResponse(serialize('json',
-                                  Jugador.objects
-                                  .filter(equipo__id=id_equipo),
-                                  fields=('nombre', 'dorsal',
-                                          'posicion')))
-
-
-@require_GET
-def get_jugadores_new(request, id_partido, id_equipo):
+def get_jugadores(request, id_partido, id_equipo):
     jugadores = Jugador.objects.filter(equipo__id=id_equipo).order_by('dorsal')
     participantes = Participante.objects.filter(partido__id=id_partido,
                                                 equipo__id=id_equipo)
@@ -978,13 +969,3 @@ def get_partidos(request, id_competicion, jornada):
                                   fields=('equipo_loc', 'equipo_vis',
                                           'goles_loc', 'goles_vis',
                                           'celebrado')))
-
-
-@require_GET
-def get_jugador(request, id_partido, id_jugador):
-    return HttpResponse(serialize('json',
-                                  Participante.objects
-                                  .filter(partido__id=id_partido,
-                                          jugador__id=id_jugador),
-                                  fields=('amarillas', 'roja',
-                                          'goles', 'goles_pp')))

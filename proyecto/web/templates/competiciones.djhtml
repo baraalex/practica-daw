@@ -64,9 +64,9 @@
                 {% if user.is_authenticated %}
                   <td class="admin">
                     {% if user == competicion.administrador %}
-                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                      <span class="fa fa-check" aria-hidden="true"></span>
                     {% else %}
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      <span class="fa fa-times" aria-hidden="true"></span>
                     {% endif %}
                   </td>
                 {% endif %}
